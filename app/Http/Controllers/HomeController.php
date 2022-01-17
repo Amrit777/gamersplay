@@ -83,7 +83,6 @@ class HomeController extends Controller
     public function search(Request $request) {
         if($request->ajax() == false) {
             return redirect('/');
-            die();
         }
         $usersJSON = array();
         $users = User::where('name','LIKE',"%".$request->q."%")->get()->take(10);
