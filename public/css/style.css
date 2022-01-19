@@ -16,6 +16,7 @@
     --color-primary: #581C87;
     --color-darker: #581C87;
     --color-secondary: #9333ea;
+    --color-secondary-gp: #9333ea;
     --color-background: #581C87;
     --color-success: #2ecc71;
     --color-dark: #262626;
@@ -27,6 +28,7 @@
 
 body {
     background: #FAF5FF !important;
+    font-family: 'Poppins', sans-serif;
 }
 
 .nav_avatar_container {
@@ -105,7 +107,7 @@ p {
 
 
 .badge-points {
-    background-color: var(--color-secondary);
+    background-color: var(--color-secondary-gp);
     color: #fff;
     padding: 5px 15px;
     vertical-align: middle;
