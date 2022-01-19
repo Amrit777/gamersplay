@@ -70,7 +70,7 @@
         .fa-round-border-left {
             border: 1px solid;
             border-radius: 10px;
-            padding-left: 2.1em;
+            padding-left: 28px;
         }
 
         .fa-round-border-right {
@@ -95,6 +95,10 @@
 
         .col-3.fa-round-border-right.btn-custm-icon-hover:hover a {
             color: var(--color-light) !important;
+        }
+
+        .hr-dotted-2px {
+            border-top: 2px dashed var(--color-lighter-primary);
         }
 
     </style>
@@ -147,16 +151,25 @@
 
                             <!-- END: Service Social button -->
                             <div class="profile-info mt-2 px-2 mb-2 profile-name-top">
-                                <h3 class="profile-name text-center text-style-3 mb-4 profile-name-game">
+                                <h3 class="profile-name text-center text-style-3 mb-2 profile-name-game">
                                     {{ $service->user->name }}
                                 </h3>
+                                {{-- <div class="row">
+                                  <div class="col-6">
+                                    {{ $service->user->gender }} |  {{ $service->user->getAge() }}
+                                  </div>
+                                  <div class="col-6">
+                                    {{ $service->user->primary_language }}
+                                  </div>
+                                </div> --}}
 
                                 <div class="profile-about">
                                     <h4 class="profile-name text-style-4 color-primary head-style-fst">
                                         About Me
                                     </h4>
                                     <p class="more-description"> {{ $service->user->description }} </p>
-                                    <div class="body-fluid row">
+                                    <hr class="hr-dotted-2px">
+                                    <div class="body-fluid row mt-1">
                                         <div class="text-name col-6 text-style-5 text-start info-game-name">
                                             Gender
                                         </div>
@@ -181,6 +194,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr class="hr-dotted-2px">
                                 <div class="profile-about mt-3">
                                     <h4 class="profile-name text-style-4 color-primary head-style-fst">
                                         Socials
@@ -706,8 +720,8 @@
                                                                                         class="fas fa-address-card"></i>Boost
                                                                                     This Post</li>
                                                                                 <!-- <li><i class="fas fa-clock"></i>Schedule Post</li>
-                                                                                                <li><i class="fab fa-wpexplorer"></i>Select as featured</li>
-                                                                                                <li><i class="fas fa-bell-slash"></i>Turn off Notifications</li> -->
+                                                                                                        <li><i class="fab fa-wpexplorer"></i>Select as featured</li>
+                                                                                                        <li><i class="fas fa-bell-slash"></i>Turn off Notifications</li> -->
                                                                             </ul>
                                                                         </div>
                                                                     </div>
@@ -731,10 +745,10 @@
                                                                     </div>
 
                                                                     <!-- <ul class="like-dislike">
-                                                                                            <li><a href="#" title="Save to Pin Post"><i class="fa fa-thumb-tack"></i></a></li>
-                                                                                            <li><a href="#" title="Like Post"><i class="fas fa-thumbs-up"></i></a></li>
-                                                                                            <li><a href="#" title="dislike Post"><i class="fas fa-thumbs-down"></i></a></li>
-                                                                                          </ul> -->
+                                                                                                    <li><a href="#" title="Save to Pin Post"><i class="fa fa-thumb-tack"></i></a></li>
+                                                                                                    <li><a href="#" title="Like Post"><i class="fas fa-thumbs-up"></i></a></li>
+                                                                                                    <li><a href="#" title="dislike Post"><i class="fas fa-thumbs-down"></i></a></li>
+                                                                                                  </ul> -->
                                                                     <div class="we-video-info">
                                                                         <ul>
                                                                             <li>
@@ -759,13 +773,13 @@
                                                                             </li>
 
                                                                             <!-- <li>
-                                                                                                <span>
-                                                                                                  <a class="share-pst" href="#" title="Share">
-                                                                                                    <i class="fa fa-share-alt"></i>
-                                                                                                  </a>
-                                                                                                  <ins>20</ins>
-                                                                                                </span>	
-                                                                                              </li> -->
+                                                                                                        <span>
+                                                                                                          <a class="share-pst" href="#" title="Share">
+                                                                                                            <i class="fa fa-share-alt"></i>
+                                                                                                          </a>
+                                                                                                          <ins>20</ins>
+                                                                                                        </span>	
+                                                                                                      </li> -->
                                                                         </ul>
                                                                         <div class="users-thumb-list">
                                                                             <a data-toggle="tooltip" title="Anderw" href="#"
