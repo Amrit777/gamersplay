@@ -101,6 +101,43 @@
             border-top: 2px dashed var(--color-lighter-primary);
         }
 
+        .card-box-shadow {
+            box-shadow: rgb(0 0 0 / 30%) 0px 19px 38px, rgb(0 0 0 / 22%) 0px 15px 12px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .btn-right-50 {
+                float: unset;
+                width: 100% !important;
+            }
+
+            .margin-bottom-1rem {
+                margin-bottom: 1rem !important;
+            }
+
+            .col-sm-12.col-md-6.font-weight-600 h1 {
+                font-size: 24px !important;
+                text-align: center;
+            }
+        }
+
+        @-moz-document url-prefix() {
+            .margin-top-9px {
+                margin-top: 9px;
+            }
+
+            @media screen and (max-width: 768px) {
+                .margin-top-9px {
+                    margin-top: unset;
+                }
+            }
+        }
+
+        .table th,
+        .table td {
+            border-top: unset !important;
+        }
+
     </style>
 @endsection
 @section('content')
@@ -118,7 +155,7 @@
                 <!-- START: Service Profile Side bar -->
                 <div class="col-lg-3 col-sm-12 profileBar">
                     <!-- START: Service Profile Side bar First Card -->
-                    <div class="card">
+                    <div class="card card-box-shadow">
                         <div class="card-body p-0 m-0">
                             <div class="profile-image-part">
                                 <div class="profile-background">
@@ -132,7 +169,7 @@
                                 <div class="row justify-content-between img-two-btns-row">
                                     <div class="col-3 fa-round-border-left btn-custm-icon-hover">
                                         <a class="btn-cust share-btn-game" type="button">
-                                            <i class="fas fa-user-plus"></i>
+                                            <i class="fas fa-user-plus margin-top-9px"></i>
                                         </a>
                                     </div>
                                     <div class="col-6">
@@ -143,14 +180,14 @@
                                     </div>
                                     <div class="col-3 fa-round-border-right btn-custm-icon-hover">
                                         <a class="btn-cust message-btn-game" type="button">
-                                            <i class="fas fa-comment"></i>
+                                            <i class="fas fa-comment margin-top-9px"></i>
                                         </a>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- END: Service Social button -->
-                            <div class="profile-info mt-2 px-2 mb-2 profile-name-top">
+                            <div class="profile-info mt-2 px-3 mb-2 profile-name-top">
                                 <h3 class="profile-name text-center text-style-3 mb-2 profile-name-game">
                                     {{ $service->user->name }}
                                 </h3>
@@ -167,8 +204,8 @@
                                     <h4 class="profile-name text-style-4 color-primary head-style-fst">
                                         About Me
                                     </h4>
-                                    <p class="more-description"> {{ $service->user->description }} </p>
-                                    <hr class="hr-dotted-2px">
+                                    <p class="more-description text-justify"> {{ $service->user->description }} </p>
+                                    <hr class="hr-dotted-2px mt-5">
                                     <div class="body-fluid row mt-1">
                                         <div class="text-name col-6 text-style-5 text-start info-game-name">
                                             Gender
@@ -194,7 +231,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <hr class="hr-dotted-2px">
+                                <hr class="hr-dotted-2px mb-5">
                                 <div class="profile-about mt-3">
                                     <h4 class="profile-name text-style-4 color-primary head-style-fst">
                                         Socials
@@ -225,33 +262,36 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card mt-4 mb-4">
+                    <div class="card mt-4 mb-4 card-box-shadow">
                         <div class="card">
                             <div class="profile-info-counters">
                                 <div class="social">
                                     <div class="item">
+                                        <div class="count">16</div>
+                                        <div class="socialName">Posts</div>
+                                    </div>
+                                    <div class="item">
                                         <div class="count">610</div>
-                                        <div class="socialName">Follower</div>
+                                        <div class="socialName">Followers</div>
                                     </div>
                                     <div class="item">
                                         <div class="count">29</div>
                                         <div class="socialName">Following</div>
                                     </div>
                                     <div class="item">
-                                        <div class="count">4.5K</div>
-                                        <div class="socialName">Visitor</div>
-                                    </div>
-                                    <div class="item">
                                         <div class="count">1</div>
-                                        <div class="socialName">Medal</div>
+                                        <div class="socialName">Badge</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- END: Service Profile Side bar First Card -->
-                    <div class="card mt-4 mb-4">
+                    <div class="card mt-4 mb-4 card-box-shadow">
                         <div class="card table-card">
+                            <h4 class="profile-name text-style-4 color-primary head-style-fst">
+                                Available Time
+                            </h4>
                             <div class="table-responsive">
                                 <table class="table timeline-table" style="text-align: center">
                                     <tr>
@@ -422,22 +462,21 @@
 
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="card mt-2 p-0">
+                            <div class="card mt-2 p-3">
                                 <div class="card-body">
                                     <div class="service-main-body-content">
                                         <div class="row">
-                                            <div class="col-sm-6 font-weight-600">
+                                            <div class="col-sm-12 col-md-6 font-weight-600 margin-bottom-1rem">
                                                 <h1>{{ $service->name }}</h1>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6 margin-bottom-1rem ">
                                                 <button id="buyBtn" class="btn btn-block btn-primary btn-right-50">Order
-                                                    ({{ $service->price }}
-                                                    GP)</button>
+                                                    ({{ $service->price }} GP)
+                                                </button>
                                             </div>
                                         </div>
                                         <div class="row">
-
-                                            <div class="col-sm-12 col-md-7 mt-3 text-justify">
+                                            <div class="col-sm-12 col-md-7 mt-3 text-justify margin-bottom-1rem">
                                                 <p>{{ $service->instructions }}</p>
                                             </div>
                                             @if (!empty($service->images))
@@ -451,56 +490,56 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card mt-2 p-0">
+                            <div class="card mt-2 p-3">
                                 <div class="card-body">
                                     <div class="service-main-body-content">
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="card p-0">
-                                                    <span class="d-flex review-header">
-                                                        <h5 class="color-primary fw-bold">Service Review(s)</h5>
-                                                        <span class="line"></span>
-                                                        <!-- <span class="number ms-5 fw-bold">133</span> -->
-                                                        <span class="number-row-card ms-2"><i class="fas fa-star"></i>
-                                                            4.5</span>
-                                                    </span>
-                                                    <ul class="review mt-3 mb-3">
-                                                        <li class="review-body mb-3">
-                                                            <div
-                                                                class="review-head border-bottom-2 d-flex justify-content-between">
-                                                                <span class="review-intro p-3">
-                                                                    <img src="/temp-services/images/profile.jpg" alt="" />
-                                                                    <span class="review-profile">
-                                                                        <p class="fw-bold">Dan Cortese</p>
-                                                                        <p class="color-gray-fst">February 24, 2021
-                                                                        </p>
-                                                                        <span class="review-star mobile-star">
-                                                                            <i class="fas fa-star"></i>
-                                                                            <i class="fas fa-star"></i>
-                                                                            <i class="fas fa-star"></i>
-                                                                            <i class="fas fa-star"></i>
-                                                                            <i class="fas fa-star"></i>
-                                                                        </span>
+
+                                                <span class="d-flex review-header">
+                                                    <h5 class="color-primary fw-bold">Service Review(s)</h5>
+                                                    <span class="line"></span>
+                                                    <!-- <span class="number ms-5 fw-bold">133</span> -->
+                                                    <span class="number-row-card ms-2"><i class="fas fa-star"></i>
+                                                        4.5</span>
+                                                </span>
+                                                <ul class="review mt-3 mb-3">
+                                                    <li class="review-body mb-3">
+                                                        <div
+                                                            class="review-head border-bottom-2 d-flex justify-content-between">
+                                                            <span class="review-intro p-3">
+                                                                <img src="/temp-services/images/profile.jpg" alt="" />
+                                                                <span class="review-profile">
+                                                                    <p class="fw-bold">Dan Cortese</p>
+                                                                    <p class="color-gray-fst">February 24, 2021
+                                                                    </p>
+                                                                    <span class="review-star mobile-star">
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
                                                                     </span>
                                                                 </span>
-                                                                <span class="review-star desktop-star">
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                </span>
-                                                            </div>
-                                                            <div class="review-comment color-gray-fst p-3">
-                                                                Lorem ipsum dolor sit amet consectetur adipisicing
-                                                                elit.
-                                                                Molestiae aliquid quasi deleniti, nesciunt non
-                                                                perspiciatis
-                                                                magnam distinctio fugit tempora ut?
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                                            </span>
+                                                            <span class="review-star desktop-star">
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="review-comment color-gray-fst p-3">
+                                                            Lorem ipsum dolor sit amet consectetur adipisicing
+                                                            elit.
+                                                            Molestiae aliquid quasi deleniti, nesciunt non
+                                                            perspiciatis
+                                                            magnam distinctio fugit tempora ut?
+                                                        </div>
+                                                    </li>
+                                                </ul>
+
                                             </div>
                                         </div>
                                     </div>
@@ -720,8 +759,8 @@
                                                                                         class="fas fa-address-card"></i>Boost
                                                                                     This Post</li>
                                                                                 <!-- <li><i class="fas fa-clock"></i>Schedule Post</li>
-                                                                                                        <li><i class="fab fa-wpexplorer"></i>Select as featured</li>
-                                                                                                        <li><i class="fas fa-bell-slash"></i>Turn off Notifications</li> -->
+                                                                                                                                                        <li><i class="fab fa-wpexplorer"></i>Select as featured</li>
+                                                                                                                                                        <li><i class="fas fa-bell-slash"></i>Turn off Notifications</li> -->
                                                                             </ul>
                                                                         </div>
                                                                     </div>
@@ -745,10 +784,10 @@
                                                                     </div>
 
                                                                     <!-- <ul class="like-dislike">
-                                                                                                    <li><a href="#" title="Save to Pin Post"><i class="fa fa-thumb-tack"></i></a></li>
-                                                                                                    <li><a href="#" title="Like Post"><i class="fas fa-thumbs-up"></i></a></li>
-                                                                                                    <li><a href="#" title="dislike Post"><i class="fas fa-thumbs-down"></i></a></li>
-                                                                                                  </ul> -->
+                                                                                                                                                    <li><a href="#" title="Save to Pin Post"><i class="fa fa-thumb-tack"></i></a></li>
+                                                                                                                                                    <li><a href="#" title="Like Post"><i class="fas fa-thumbs-up"></i></a></li>
+                                                                                                                                                    <li><a href="#" title="dislike Post"><i class="fas fa-thumbs-down"></i></a></li>
+                                                                                                                                                  </ul> -->
                                                                     <div class="we-video-info">
                                                                         <ul>
                                                                             <li>
@@ -773,13 +812,13 @@
                                                                             </li>
 
                                                                             <!-- <li>
-                                                                                                        <span>
-                                                                                                          <a class="share-pst" href="#" title="Share">
-                                                                                                            <i class="fa fa-share-alt"></i>
-                                                                                                          </a>
-                                                                                                          <ins>20</ins>
-                                                                                                        </span>	
-                                                                                                      </li> -->
+                                                                                                                                                        <span>
+                                                                                                                                                          <a class="share-pst" href="#" title="Share">
+                                                                                                                                                            <i class="fa fa-share-alt"></i>
+                                                                                                                                                          </a>
+                                                                                                                                                          <ins>20</ins>
+                                                                                                                                                        </span>	
+                                                                                                                                                      </li> -->
                                                                         </ul>
                                                                         <div class="users-thumb-list">
                                                                             <a data-toggle="tooltip" title="Anderw" href="#"
