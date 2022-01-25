@@ -1042,7 +1042,7 @@ p.card-text {
     margin-top: -15px !important;
 }
 
-.messageErrorLogin {
+#messageErrorLogin {
     text-align: center;
     font-size: 100%;
     margin-top: 0px;
