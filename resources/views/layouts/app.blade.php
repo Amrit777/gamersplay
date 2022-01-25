@@ -66,6 +66,7 @@ $noFooter = true;
     <meta name="robots" content="index, follow">
     <meta name="language" content="English">
     <meta name="revisit-after" content="15 days">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
 
     @yield('style')
 </head>
