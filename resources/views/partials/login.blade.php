@@ -50,6 +50,7 @@
                             </span>
                             <form method="POST" id="loginForm">
                                 @csrf
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
@@ -123,6 +124,7 @@
                             </span>
                             <form method="POST" id="registerFormModal">
                                 @csrf
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="row pb-3">
                                     <div class="col-md-12">
                                         <div class="row">
