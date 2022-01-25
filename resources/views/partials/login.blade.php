@@ -252,7 +252,7 @@
                     headers: {
                         Accept: "application/json"
                     },
-                    url: "{{ url('api/auth/login') }}",
+                    url: "{{ route('auth.login') }}",
                     data: formData,
                     success: (response) => {
                         if (response.code === 200) {
@@ -297,7 +297,7 @@
                     headers: {
                         Accept: "application/json"
                     },
-                    url: "{{ url('api/auth/register') }}",
+                    url: "{{ route('auth.register') }}",
                     data: formData,
                     success: (response) => {
                         if (response.code === 200) {

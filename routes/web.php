@@ -28,8 +28,8 @@ use App\Http\Controllers\StripeController;
 */
 
 // Routes anyone can access.
-// Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
-// Route::post('/auth/register', [AuthController::class, 'signup'])->name('auth.register');
+Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('/auth/register', [AuthController::class, 'signup'])->name('auth.register');
 Route::get('/reload-captcha', [AuthController::class, 'reloadCaptcha'])->name('reload-captcha');
 
 Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
