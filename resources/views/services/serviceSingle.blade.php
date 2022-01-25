@@ -343,7 +343,7 @@
                                             <div class="col-sm-12 col-md-7 mt-1 text-justify margin-bottom-1rem">
                                                 <p>{{ $service->instructions }}</p>
                                             </div>
-                                            @if (!empty($service->images))
+                                            @if (!empty($service->images) && isset($service->images[0]) && !empty($service->images[0]))
                                                 <div class="col-12 col-md-5 ">
                                                     <a href="#" class="pop">
                                                         <img id="img03" src='/{{ $service->images[0]->file_name }}'
