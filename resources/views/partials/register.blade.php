@@ -68,7 +68,7 @@
                                 <label for="password-confirm" class="col-md-12 col-form-label text-center">{{ __('Confirm Password') }}</label>
 
                                 <div class="col-md-12">
-                                    <input id="password-confirm-reg" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                    <input id="password-confirm-register" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                 </div>
                             </div>
                         </div>

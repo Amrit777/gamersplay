@@ -67,9 +67,6 @@ $noFooter = true;
     <meta name="language" content="English">
     <meta name="revisit-after" content="15 days">
 
-
-
-
     @yield('style')
 </head>
 
@@ -135,8 +132,9 @@ $noFooter = true;
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="btn login-btn" id="loginModalBtn" style="cursor: pointer" data-toggle="modal"
-                                        data-target="#loginModal" data-backdrop="static" data-keyboard="false">
+                                    <a href="#loginPanel" class="btn login-btn" id="" style="cursor: pointer"
+                                        data-toggle="modal" data-target="#loginModal" data-backdrop="static"
+                                        data-keyboard="false">
                                         <img src="/imgs/icons/login.svg" style="height:20px;">
                                         {{ __('Login') }}
                                     </a>
@@ -145,8 +143,8 @@ $noFooter = true;
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="btn register-btn" id="registerModalBtn" style="cursor: pointer;"
-                                        data-toggle="modal" data-target="#registerModal" data-backdrop="static"
+                                    <a href="#registerPanel" class="btn register-btn" id="" style="cursor: pointer;"
+                                        data-toggle="modal" data-target="#loginModal" data-backdrop="static"
                                         data-keyboard="false">
                                         <img src="/imgs/icons/registered.svg" style="height:20px;">
                                         {{ __('Register') }}
@@ -241,8 +239,9 @@ $noFooter = true;
                                         Support
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                                                             document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -263,7 +262,7 @@ $noFooter = true;
         </div>
         @include('partials.login')
         {{-- @include('partials.login2') --}}
-        @include('partials.register')
+        {{-- @include('partials.register') --}}
         <main class="py-4">
             @yield('content')
         </main>
@@ -271,11 +270,11 @@ $noFooter = true;
         @yield('footer')
 
         <script>
-            $('#registerModalBtn').click(function() {
-                $('#loginModal').modal('hide');
-            });
-            $('#loginModalBtn').click(function() {
-                $('#registerModal').modal('hide');
+            $(document).ready(function() {
+                $("#loginModal").on('shown.bs.modal', function(e) {
+                    var tab = e.relatedTarget.hash;
+                    $('.nav-tabs a[href="' + tab + '"]').tab('show');
+                })
             });
         </script>
         @yield('scripts')

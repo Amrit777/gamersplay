@@ -101,11 +101,7 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
-                        @else
-
-
-                    
-               
+                        @else               
                             <li class="nav-item d-block d-sm-none">
                                 <a class="nav-link" href="/admin">Dashboard</a>
                             </li>

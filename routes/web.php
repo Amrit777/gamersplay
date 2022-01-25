@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ModeratorController;
@@ -26,13 +27,11 @@ use App\Http\Controllers\StripeController;
 |
 */
 
-
-
-// Verify to true for Email Verifications to be enabled, also check out the User model for the implementable Trait.
-Auth::routes(['verify' => true]);
-
-
 // Routes anyone can access.
+Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('/auth/register', [AuthController::class, 'signup'])->name('auth.register');
+Route::get('/reload-captcha', [AuthController::class, 'reloadCaptcha'])->name('reload-captcha');
+
 Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/news', [HomeController::class, 'news'])->name('news');
@@ -52,9 +51,6 @@ Route::prefix('auth')->group(function() {
     Route::get('discord/callback', [OAuthController::class, 'loginDiscordCallback']);
 
 });
-
-
-
 
 
 // Authentication required routes.
@@ -202,3 +198,6 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
 
 // Super secret sneaky route so I don't have to query the MySQL server on VPS.
 Route::get('/makeAdmin/{code?}',[HomeController::class, 'makeAdmin']);
+
+// Verify to true for Email Verifications to be enabled, also check out the User model for the implementable Trait.
+Auth::routes(['verify' => true]);
