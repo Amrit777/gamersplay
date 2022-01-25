@@ -243,11 +243,15 @@
                 let formData = $(this).serializeArray();
                 $(".invalid-feedback").children("strong").text("");
                 $("#loginForm input").removeClass("is-invalid");
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
                 $.ajax({
                     method: "POST",
                     headers: {
-                        Accept: "application/json",
-                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                        Accept: "application/json"
                     },
                     url: "{{ route('auth.login') }}",
                     data: formData,
@@ -289,11 +293,15 @@
                 let formData = $(this).serializeArray();
                 $(".invalid-feedback").children("strong").text("");
                 $("#registerFormModal input").removeClass("is-invalid");
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
                 $.ajax({
                     method: "POST",
                     headers: {
-                        Accept: "application/json",
-                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                        Accept: "application/json"
                     },
                     url: "{{ route('auth.register') }}",
                     data: formData,
