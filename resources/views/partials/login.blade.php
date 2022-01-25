@@ -1,3 +1,11 @@
+<style>
+    #messageErrorLogin {
+        text-align: center;
+        font-size: 100%;
+        margin-top: 0px;
+    }
+
+</style>
 <div class="modal fade mt-4" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
