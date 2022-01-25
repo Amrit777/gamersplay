@@ -913,3 +913,139 @@ table th {
     font-size: 80%;
     color: var(--color-secondary) !important;
 }
+
+/* custom css : Amit Singh */
+
+.header-img-modal-login-center.custom-set {
+    display: inline-flex;
+    height: 120px;
+    padding: 20px;
+    margin-left: 120px;
+    margin-right: 120px;
+    text-align: center;
+}
+
+h1.login-heading {
+    margin-left: -31px;
+    margin-top: 50px;
+    font-size: 25px;
+}
+
+.img-modal-login-center {
+    height: 110px !important;
+    margin-top: -14px !important;
+}
+
+ul.nav.nav-tabs.md-tabs.tabs-2.light-blue.darken-3 {
+    height: 47px;
+    /* margin-top: -26px; */
+    margin-bottom: 0;
+
+}
+
+ul.nav.nav-tabs.md-tabs.tabs-2.light-blue.darken-3 li {
+    width: 50%;
+    padding-right: 0px;
+
+}
+
+.login-modal-tabs li.nav-item a.nav-link.active {
+    background: #7E22CE !important;
+    color: #fff !important;
+}
+
+.login-modal-tabs {
+    border-bottom: 2px dashed var(--color-background);
+}
+
+.login-modal-tabs .nav-link:hover,
+.login-modal-tabs .nav-link:focus {
+    border-color: unset;
+}
+
+.login-modal-tabs .nav-link {
+    border: unset;
+}
+
+li.nav-item {
+    margin-top: 6px !important;
+}
+
+.modal-close-btn {
+    margin-bottom: 63px !important;
+}
+
+
+.modal-header.header-page.login-header.rounded-top {
+    padding: 0px;
+    padding-bottom: 0;
+}
+
+p.card-text {
+    color: #000;
+}
+
+.login-body .form-group h6 {
+    color: #000;
+}
+
+.modal-close-btn {
+    margin-bottom: -4px !important;
+    font-size: 33px;
+    z-index: 9999;
+    margin-left: 17px;
+}
+
+.modal-close-btn button.close {
+    color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+    .img-modal-login-center {
+        /* margin-left: 0px; */
+    }
+}
+
+.discord-img-height {
+    height: 32px;
+}
+
+.login-checkbox-gp {
+    width: initial !important;
+}
+
+.link-forget-pwd a {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--font-color-4);
+    line-height: 0px;
+    margin-top: 0px;
+    cursor: pointer;
+    padding: 0px;
+}
+
+
+.navs-icons-modal {
+    width: 20px;
+    height: 20px;
+}
+
+#reg-submit-btn:disabled {
+    background: #f3f3f4;
+    border: 1px solid #f3f3f4;
+    color: var(--color-darker);
+}
+
+.password-reg-error-msg {
+    margin-top: -15px !important;
+}
+
+.messageErrorLogin {
+    text-align: center;
+    font-size: 100%;
+    margin-top: 0px;
+}
+
+/* custom css : Amit Singh */

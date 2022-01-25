@@ -135,7 +135,7 @@ $noFooter = true;
                                     <a href="#loginPanel" class="btn login-btn" id="" style="cursor: pointer"
                                         data-toggle="modal" data-target="#loginModal" data-backdrop="static"
                                         data-keyboard="false">
-                                        <img src="/imgs/icons/login.svg" style="height:20px;">
+                                        <img src="{{ asset('temp-services/images/formslogo/login.png') }}" style="height:20px;">
                                         {{ __('Login') }}
                                     </a>
                                 </li>
@@ -146,7 +146,7 @@ $noFooter = true;
                                     <a href="#registerPanel" class="btn register-btn" id="" style="cursor: pointer;"
                                         data-toggle="modal" data-target="#loginModal" data-backdrop="static"
                                         data-keyboard="false">
-                                        <img src="/imgs/icons/registered.svg" style="height:20px;">
+                                        <img src="{{ asset('temp-services/images/formslogo/triangle.png') }}" style="height:20px;">
                                         {{ __('Register') }}
                                     </a>
                                 </li>

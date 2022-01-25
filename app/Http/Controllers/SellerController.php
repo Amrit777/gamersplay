@@ -166,9 +166,8 @@ class SellerController extends Controller
             'menu' => 'numeric|required|exists:menus,id',
             'category' => 'numeric|required|exists:categories,id',
             'price' => 'numeric|required',
-            'instructions' => 'nullable',
-            'description' => 'nullable',
-            'description' => 'string|nullable',
+            'instructions' => 'nullable|string|max:240',
+            'description' => 'string|nullable|max:64',
             'monday_from' => 'string|nullable',
             'monday_to' => 'string|nullable',
             'tuesday_from' => 'string|nullable',
@@ -236,8 +235,8 @@ class SellerController extends Controller
 
         $validated = $request->validate([
             'price' => 'numeric|max:99999',
-            'description' => 'nullable',
-            'instructions' => 'nullable',
+            'description' => 'nullable|string|max:64',
+            'instructions' => 'nullablestring|max:240',
             'name' => 'string|max:100',
         ]);
 

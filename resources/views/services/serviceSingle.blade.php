@@ -2,153 +2,7 @@
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('css/slick-theme.css') }}">
-    <style>
-        .timeline-table th {
-            background: var(--color-background);
-            color: white;
-        }
-
-        .morecontent span {
-            display: none;
-        }
-
-        .profile-info-counters {
-            padding: 0px;
-            border-radius: 8px;
-            margin-top: 0px;
-            position: relative;
-            z-index: 2;
-            margin-bottom: 0px;
-            overflow: hidden;
-            /* box-shadow: 0 0 8px 0 rgb(0 0 0 / 20%); */
-        }
-
-        .profile-info-counters .social {
-            background: var(red);
-            border-radius: 4px;
-            display: flex;
-            padding: 12px 0;
-            margin-top: 16px;
-        }
-
-        .profile-info-counters .social .item {
-            flex: 1 1;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .profile-info-counters .social .item .count {
-            height: 21px;
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--font-color-1);
-            line-height: 21px;
-            margin-bottom: 4px;
-        }
-
-        .profile-info-counters .social .item .socialName {
-            height: 17px;
-            font-size: 12px;
-            font-weight: 400;
-            color: var(--font-color-2);
-            line-height: 17px;
-        }
-
-        .btn-right-50 {
-            float: right;
-            width: 50% !important;
-        }
-
-        .body-fluid.row.justify-content-start.ps-4 {
-            margin-left: 0px;
-        }
-
-        .font-weight-600 h1 {
-            font-weight: 600
-        }
-
-        .fa-round-border-left {
-            border: 1px solid;
-            border-radius: 10px;
-            padding-left: 28px;
-        }
-
-        .fa-round-border-right {
-            border: 1px solid;
-            border-radius: 10px;
-            padding-left: 26px;
-        }
-
-        .img-two-btns-row {
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-
-        .btn-custm-icon-hover:hover {
-            background-color: var(--color-secondary) !important;
-            color: var(--color-light) !important;
-        }
-
-        .col-3.fa-round-border-left.btn-custm-icon-hover:hover a {
-            color: var(--color-light) !important;
-        }
-
-        .col-3.fa-round-border-right.btn-custm-icon-hover:hover a {
-            color: var(--color-light) !important;
-        }
-
-        .hr-dotted-2px {
-            border-top: 2px dashed var(--color-lighter-primary);
-        }
-
-        .card-box-shadow {
-            box-shadow: rgb(0 0 0 / 30%) 0px 19px 38px, rgb(0 0 0 / 22%) 0px 15px 12px;
-        }
-
-        @media screen and (max-width: 768px) {
-            .btn-right-50 {
-                float: unset;
-                width: 100% !important;
-            }
-
-            .margin-bottom-1rem {
-                margin-bottom: 1rem !important;
-            }
-
-            .col-sm-12.col-md-6.font-weight-600 h1 {
-                font-size: 24px !important;
-                text-align: center;
-            }
-        }
-
-        @-moz-document url-prefix() {
-            .margin-top-9px {
-                margin-top: 9px;
-            }
-
-            @media screen and (max-width: 768px) {
-                .margin-top-9px {
-                    margin-top: unset;
-                }
-            }
-        }
-
-        .table th,
-        .table td {
-            border-top: unset !important;
-        }
-
-        .profile-section-two {
-            background: var(--color-lighter-primary-opacity) !important;
-            border-radius: var(--border-radius) !important;
-            border: none !important;
-            padding-top: 18px;
-            padding-bottom: 20px;
-            padding-left: 12px;
-            padding-right: 12px;
-        }
-
-    </style>
+    
 @endsection
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -169,8 +23,10 @@
                         <div class="card-body p-0 m-0">
                             <div class="profile-image-part">
                                 <div class="profile-background">
-                                    <img src="/temp-services/images/2728343.jpg" alt=""
-                                        class="img-fluid profile-background-image boder-top-left-right-radius" />
+                                    <a href="#" class="pop">
+                                        <img id="img01" src="/temp-services/images/2728343.jpg" alt=""
+                                            class="img-fluid profile-background-image boder-top-left-right-radius zoom-clicked-img" />
+                                    </a>
                                 </div>
                             </div>
                             <!-- START: Service Social button -->
@@ -184,8 +40,10 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="profile-mian-image-v2 border-radius-img-v2">
-                                            <img src='{{ $service->user->getProfilePicture() }}' alt=""
-                                                class="img-fluid profile-image-v2" />
+                                            <a href="#" class="pop">
+                                                <img id="img02" src='{{ $service->user->getProfilePicture() }}' alt=""
+                                                    class="img-fluid profile-image-v2 zoom-clicked-img" />
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="col-3 fa-round-border-right btn-custm-icon-hover">
@@ -482,13 +340,16 @@
                                             </div>
                                         </div>
                                         <div class="row mt-4">
-                                            <div class="col-sm-12 col-md-7 mt-3 text-justify margin-bottom-1rem">
+                                            <div class="col-sm-12 col-md-7 mt-1 text-justify margin-bottom-1rem">
                                                 <p>{{ $service->instructions }}</p>
                                             </div>
                                             @if (!empty($service->images))
                                                 <div class="col-12 col-md-5 ">
-                                                    <img src='/{{ $service->images[0]->file_name }}' alt=""
-                                                        class="img-fluid border-radius-30 service-big-image" />
+                                                    <a href="#" class="pop">
+                                                        <img id="img03" src='/{{ $service->images[0]->file_name }}'
+                                                            alt=""
+                                                            class="img-fluid border-radius-30 service-big-image zoom-clicked-img" />
+                                                    </a>
                                                 </div>
                                             @endif
 
@@ -765,8 +626,8 @@
                                                                                         class="fas fa-address-card"></i>Boost
                                                                                     This Post</li>
                                                                                 <!-- <li><i class="fas fa-clock"></i>Schedule Post</li>
-                                                                                                                                                                        <li><i class="fab fa-wpexplorer"></i>Select as featured</li>
-                                                                                                                                                                        <li><i class="fas fa-bell-slash"></i>Turn off Notifications</li> -->
+                                                                                                                                                                                                                                                                                                            <li><i class="fab fa-wpexplorer"></i>Select as featured</li>
+                                                                                                                                                                                                                                                                                                            <li><i class="fas fa-bell-slash"></i>Turn off Notifications</li> -->
                                                                             </ul>
                                                                         </div>
                                                                     </div>
@@ -790,10 +651,10 @@
                                                                     </div>
 
                                                                     <!-- <ul class="like-dislike">
-                                                                                                                                                                    <li><a href="#" title="Save to Pin Post"><i class="fa fa-thumb-tack"></i></a></li>
-                                                                                                                                                                    <li><a href="#" title="Like Post"><i class="fas fa-thumbs-up"></i></a></li>
-                                                                                                                                                                    <li><a href="#" title="dislike Post"><i class="fas fa-thumbs-down"></i></a></li>
-                                                                                                                                                                  </ul> -->
+                                                                                                                                                                                                                                                                                                        <li><a href="#" title="Save to Pin Post"><i class="fa fa-thumb-tack"></i></a></li>
+                                                                                                                                                                                                                                                                                                        <li><a href="#" title="Like Post"><i class="fas fa-thumbs-up"></i></a></li>
+                                                                                                                                                                                                                                                                                                        <li><a href="#" title="dislike Post"><i class="fas fa-thumbs-down"></i></a></li>
+                                                                                                                                                                                                                                                                                                      </ul> -->
                                                                     <div class="we-video-info">
                                                                         <ul>
                                                                             <li>
@@ -818,13 +679,13 @@
                                                                             </li>
 
                                                                             <!-- <li>
-                                                                                                                                                                        <span>
-                                                                                                                                                                          <a class="share-pst" href="#" title="Share">
-                                                                                                                                                                            <i class="fa fa-share-alt"></i>
-                                                                                                                                                                          </a>
-                                                                                                                                                                          <ins>20</ins>
-                                                                                                                                                                        </span>	
-                                                                                                                                                                      </li> -->
+                                                                                                                                                                                                                                                                                                            <span>
+                                                                                                                                                                                                                                                                                                              <a class="share-pst" href="#" title="Share">
+                                                                                                                                                                                                                                                                                                                <i class="fa fa-share-alt"></i>
+                                                                                                                                                                                                                                                                                                              </a>
+                                                                                                                                                                                                                                                                                                              <ins>20</ins>
+                                                                                                                                                                                                                                                                                                            </span>	
+                                                                                                                                                                                                                                                                                                          </li> -->
                                                                         </ul>
                                                                         <div class="users-thumb-list">
                                                                             <a data-toggle="tooltip" title="Anderw" href="#"
@@ -980,6 +841,19 @@
             </div>
         </section>
         <!-- END: Service Section  -->
+
+        <div class="modal fade modal-body-custom" id="imagemodal" tabindex="-1" role="dialog"
+            aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" data-dismiss="modal">
+                <div class="modal-content modal-content-custom">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-bs-dismiss="modal"><span
+                                aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <img src="" class="imagepreview">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -1044,6 +918,10 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+            $('.pop').find('img').each(function() {
+                var imgClass = (this.width / this.height > 1) ? 'wide' : 'tall';
+                $(this).addClass(imgClass);
+            })
             var showChar = 100;
             var ellipsestext = "...";
             var moretext = "more";
@@ -1075,19 +953,17 @@
                 $(this).prev().toggle();
                 return false;
             });
+
+            $(function() {
+                $('.pop').on('click', function() {
+                    $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                    $('#imagemodal').modal('show');
+                });
+            });
+
+
+
         });
-
-        @if (\Session::has('success'))
-            Swal.fire('Success','{{ \Session::get('success') }}','success');
-            {{ \Session::forget('success') }}
-        @endif
-
-        @if (\Session::has('error'))
-            Swal.fire('Error','{{ \Session::get('error') }}','error');
-            {{ \Session::forget('error') }}
-        @endif
-
-
         $('#imageCarousel').slick();
 
         $('#buyBtn').click(function(e) {
@@ -1097,8 +973,15 @@
                 Swal.fire('Error', 'You do not have enough GP to order this service.', 'error');
                 e.preventDefault();
             }
-
-
         });
+        @if (\Session::has('success'))
+            Swal.fire('Success','{{ \Session::get('success') }}','success');
+            {{ \Session::forget('success') }}
+        @endif
+
+        @if (\Session::has('error'))
+            Swal.fire('Error','{{ \Session::get('error') }}','error');
+            {{ \Session::forget('error') }}
+        @endif
     </script>
 @endsection

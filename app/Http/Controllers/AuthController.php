@@ -25,16 +25,11 @@ class AuthController extends Controller
 
         $messages = [
             'captcha.required' => "The captcha field is required.",
-            'captcha.captcha' => "Captcha enterd is not correct."
+            'captcha.captcha' => "Captcha entered is not correct."
 
         ];
         $this->validate($request, $rules, $messages);
-        // $request->validate([
-        //     'email' => 'required|string|email',
-        //     'password' => 'required|string',
-        //     'remember_me' => 'boolean',
-        //     'captcha' => 'required|captcha'
-        // ]);
+
         try {
             $credentials = request([
                 'email',
@@ -90,7 +85,7 @@ class AuthController extends Controller
                 'real_name' => $request->real_name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'tnc' => $request->tnc
+                'tnc' => 1
             ]);
             Auth::login($user);
             return response()->json([

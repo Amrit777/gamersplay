@@ -1,125 +1,3 @@
-<style>
-    .header-img-modal-login-center.custom-set {
-        /* display: inline-flex;
-        height: 128px; */
-        display: inline-flex;
-        height: 120px;
-        padding: 20px;
-        margin-left: 120px;
-        margin-right: 120px;
-        text-align: center;
-    }
-
-    h1.login-heading {
-        margin-left: -31px;
-        margin-top: 50px;
-        font-size: 25px;
-    }
-
-    .img-modal-login-center {
-        height: 110px !important;
-        margin-top: -14px !important;
-    }
-
-    ul.nav.nav-tabs.md-tabs.tabs-2.light-blue.darken-3 {
-        height: 47px;
-        /* margin-top: -26px; */
-        margin-bottom: 0;
-
-    }
-
-    ul.nav.nav-tabs.md-tabs.tabs-2.light-blue.darken-3 li {
-        width: 50%;
-        padding-right: 0px;
-
-    }
-
-    .login-modal-tabs li.nav-item a.nav-link.active {
-        background: #7E22CE !important;
-        color: #fff !important;
-    }
-
-    .login-modal-tabs {
-        border-bottom: 2px dashed var(--color-background);
-    }
-
-    .login-modal-tabs .nav-link:hover,
-    .login-modal-tabs .nav-link:focus {
-        border-color: unset;
-    }
-
-    .login-modal-tabs .nav-link {
-        border: unset;
-    }
-
-    li.nav-item {
-        margin-top: 6px !important;
-    }
-
-    .modal-close-btn {
-        margin-bottom: 63px !important;
-    }
-
-
-    .modal-header.header-page.login-header.rounded-top {
-        padding: 0px;
-        padding-bottom: 0;
-    }
-
-    p.card-text {
-        color: #000;
-    }
-
-    .login-body .form-group h6 {
-        color: #000;
-    }
-
-    .modal-close-btn {
-        margin-bottom: -4px !important;
-        font-size: 33px;
-        z-index: 9999;
-        margin-left: 17px;
-    }
-
-    button.close {
-        color: #fff;
-    }
-
-    @media screen and (max-width: 768px) {
-        .img-modal-login-center {
-            /* margin-left: 0px; */
-        }
-    }
-
-    .discord-img-height {
-        height: 32px;
-    }
-
-    .login-checkbox-gp {
-        width: initial !important;
-    }
-
-    .link-forget-pwd a {
-        display: flex;
-        justify-content: space-between;
-        font-size: 12px;
-        font-weight: 400;
-        color: var(--font-color-4);
-        line-height: 0px;
-        margin-top: 0px;
-        cursor: pointer;
-        padding: 0px;
-    }
-
-
-    .navs-icons-modal {
-        width: 20px;
-        height: 20px;
-    }
-
-</style>
-
-
 <div class="modal fade mt-4" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -148,7 +26,7 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#registerPanel" role="tab">
                             <img class="navs-icons-modal"
-                                src="{{ asset('temp-services/images/formslogo/register.png') }}">
+                                src="{{ asset('temp-services/images/formslogo/triangle.png') }}">
                             Register
                         </a>
                     </li>
@@ -237,7 +115,7 @@
                             </span>
                             <form method="POST" id="registerFormModal">
                                 @csrf
-                                <div class="row pb-3" {{-- style="padding-bottom:20px" --}}>
+                                <div class="row pb-3">
                                     <div class="col-md-12">
                                         <div class="row">
                                             <div class="col-md-12">
@@ -280,9 +158,6 @@
                                                     <h6>Password</h6>
                                                     <input id="password-reg" type="password" name="password" required
                                                         autocomplete="new-password">
-                                                    <span class="invalid-feedback" role="alert" id="password-reg-error">
-                                                        <strong></strong>
-                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -293,12 +168,16 @@
                                                         autocomplete="new-cnf-password">
                                                 </div>
                                             </div>
+                                            <div class="col-md-12 password-reg-error-msg">
+                                                <span class="invalid-feedback" role="alert" id="password-reg-error">
+                                                    <strong></strong>
+                                                </span>
+                                            </div>
                                         </div>
                                         <div class="row row mt-3 mb-3">
                                             <div class="col-1 ">
                                                 <input class="mb-1 mr-1" type="checkbox" name="tnc"
-                                                    id="register-tnc" {{ old('tnc') ? 'checked' : '' }}
-                                                    {{-- style="width:initial; margin-right:10px;margin-bottom: 7px;" --}}>
+                                                    id="register-tnc" {{ old('tnc') ? 'checked' : '' }}>
                                             </div>
                                             <div class="col-10">
                                                 <div class="form-group">
@@ -312,7 +191,7 @@
 
                                         <div class="row ">
                                             <div class="col-md-12 ">
-                                                <button class="button-primary w-100" type="submit"
+                                                <button class="button-primary w-100 " type="submit"
                                                     id="reg-submit-btn">Create
                                                     Account</button>
                                             </div>
@@ -387,8 +266,14 @@
                                     $("#" + key + "-login-error").children(
                                         "strong").text(errors[key][0]);
                                 });
+                            } else if (response.status === 500) {
+                                $("#messageErrorLogin").addClass("is-invalid d-block")
+                                    .children(
+                                        "strong")
+                                    .text(
+                                        response.responseJSON.errors);
                             } else {
-                                // window.location.reload();
+                                window.location.reload();
                             }
                         }
                     })
@@ -419,14 +304,19 @@
                                     $("#" + key + "-reg-error").children(
                                         "strong").text(errors[key][0]);
                                 });
-                            }
-                            console.log("errorrrr", response)
-                            if (response.responseJSON.code === 401) {
+                            } else if (response.responseJSON.code === 401) {
                                 $("#messageErrorRegister").addClass(
                                         "is-invalid d-block").children(
                                         "strong")
                                     .text(
                                         response.responseJSON.message);
+                            } else if (response.status === 500) {
+                                $("#messageErrorRegister").addClass(
+                                        "is-invalid d-block")
+                                    .children(
+                                        "strong")
+                                    .text(
+                                        response.responseJSON.errors);
                             } else {
                                 window.location.reload();
                             }

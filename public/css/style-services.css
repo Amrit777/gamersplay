@@ -2431,3 +2431,169 @@ form button {
     transform: scale(3) translateX(30px) rotateZ(25deg) translateY(50px);
   }
 }
+
+/* custom css : Amit Singh */
+.timeline-table th {
+  background: var(--color-background);
+  color: white;
+}
+
+.morecontent span {
+  display: none;
+}
+
+.profile-info-counters {
+  padding: 0px;
+  border-radius: 8px;
+  margin-top: 0px;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 0px;
+  overflow: hidden;
+  /* box-shadow: 0 0 8px 0 rgb(0 0 0 / 20%); */
+}
+
+.profile-info-counters .social {
+  background: var(red);
+  border-radius: 4px;
+  display: flex;
+  padding: 12px 0;
+  margin-top: 16px;
+}
+
+.profile-info-counters .social .item {
+  flex: 1 1;
+  text-align: center;
+  cursor: pointer;
+}
+
+.profile-info-counters .social .item .count {
+  height: 21px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--font-color-1);
+  line-height: 21px;
+  margin-bottom: 4px;
+}
+
+.profile-info-counters .social .item .socialName {
+  height: 17px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--font-color-2);
+  line-height: 17px;
+}
+
+.btn-right-50 {
+  float: right;
+  width: 50% !important;
+}
+
+.body-fluid.row.justify-content-start.ps-4 {
+  margin-left: 0px;
+}
+
+.font-weight-600 h1 {
+  font-weight: 600
+}
+
+.fa-round-border-left {
+  border: 1px solid;
+  border-radius: 10px;
+  padding-left: 28px;
+}
+
+.fa-round-border-right {
+  border: 1px solid;
+  border-radius: 10px;
+  padding-left: 26px;
+}
+
+.img-two-btns-row {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.btn-custm-icon-hover:hover {
+  background-color: var(--color-secondary) !important;
+  color: var(--color-light) !important;
+}
+
+.col-3.fa-round-border-left.btn-custm-icon-hover:hover a {
+  color: var(--color-light) !important;
+}
+
+.col-3.fa-round-border-right.btn-custm-icon-hover:hover a {
+  color: var(--color-light) !important;
+}
+
+.hr-dotted-2px {
+  border-top: 2px dashed var(--color-lighter-primary);
+}
+
+.card-box-shadow {
+  box-shadow: rgb(0 0 0 / 30%) 0px 19px 38px, rgb(0 0 0 / 22%) 0px 15px 12px;
+}
+
+@media screen and (max-width: 768px) {
+  .btn-right-50 {
+    float: unset;
+    width: 100% !important;
+  }
+
+  .margin-bottom-1rem {
+    margin-bottom: 1rem !important;
+  }
+
+  .col-sm-12.col-md-6.font-weight-600 h1 {
+    font-size: 24px !important;
+    text-align: center;
+  }
+
+  .modal-body-custom {
+    top: 20%;
+  }
+}
+
+@-moz-document url-prefix() {
+  .margin-top-9px {
+    margin-top: 9px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .margin-top-9px {
+      margin-top: unset;
+    }
+  }
+}
+
+.table th,
+.table td {
+  border-top: unset !important;
+}
+
+.profile-section-two {
+  background: var(--color-lighter-primary-opacity) !important;
+  border-radius: var(--border-radius) !important;
+  border: none !important;
+  padding-top: 18px;
+  padding-bottom: 20px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+#myImageModal {
+  width: 100px;
+  height: 100px;
+}
+
+.modal-content-custom {
+  background-color: unset;
+}
+
+.service-big-image {
+  height: 210px;
+  width: 365px;
+  object-fit: contain;
+}
+/* custom css : Amit Singh */
