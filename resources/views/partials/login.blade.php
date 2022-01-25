@@ -213,125 +213,123 @@
     </div>
 </div>
 
-@section('scripts')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            console.log("indidede");
-            const regbutton = $('#reg-submit-btn'); // The submit input id 
-            regbutton.attr('disabled', 'disabled');
-            regbutton.css("cursor", "not-allowed");
-            $('#register-tnc').change(function() { // The checkbox id 
-                if (this.checked) {
-                    regbutton.removeAttr('disabled')
-                        .css("cursor", "pointer");
-                } else {
-                    regbutton.attr('disabled', 'disabled')
-                        .css("cursor", "not-allowed");
+<script type="text/javascript">
+    $(document).ready(function() {
+        console.log("indidede");
+        const regbutton = $('#reg-submit-btn'); // The submit input id 
+        regbutton.attr('disabled', 'disabled');
+        regbutton.css("cursor", "not-allowed");
+        $('#register-tnc').change(function() { // The checkbox id 
+            if (this.checked) {
+                regbutton.removeAttr('disabled')
+                    .css("cursor", "pointer");
+            } else {
+                regbutton.attr('disabled', 'disabled')
+                    .css("cursor", "not-allowed");
+            }
+        });
+
+        $(function() {
+            $('#loginForm').submit(function(e) {
+                e.preventDefault();
+                let formData = $(this).serializeArray();
+                $(".invalid-feedback").children("strong").text("");
+                $("#loginForm input").removeClass("is-invalid");
+                $.ajax({
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json"
+                    },
+                    url: "{{ route('auth.login') }}",
+                    data: formData,
+                    success: (response) => {
+                        if (response.code === 200) {
+                            window.location.assign("{{ route('home') }}")
+                        }
+                    },
+                    error: (response) => {
+                        console.log("error1", response);
+                        if (response.status === 401) {
+                            $("#messageErrorLogin").addClass("is-invalid d-block")
+                                .children(
+                                    "strong")
+                                .text(
+                                    response.responseJSON.message);
+                        } else if (response.status === 422) {
+                            let errors = response.responseJSON.errors;
+                            Object.keys(errors).forEach(function(key) {
+                                $("#" + key + "-login-error").addClass(
+                                    "is-invalid d-block");
+                                $("#" + key + "-login-error").children(
+                                    "strong").text(errors[key][0]);
+                            });
+                        } else if (response.status === 500) {
+                            $("#messageErrorLogin").addClass("is-invalid d-block")
+                                .children(
+                                    "strong")
+                                .text(
+                                    response.responseJSON.errors);
+                        } else {
+                            window.location.reload();
+                        }
+                    }
+                })
+            });
+            $('#registerFormModal').submit(function(e) {
+                e.preventDefault();
+                let formData = $(this).serializeArray();
+                $(".invalid-feedback").children("strong").text("");
+                $("#registerFormModal input").removeClass("is-invalid");
+                $.ajax({
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json"
+                    },
+                    url: "{{ route('auth.register') }}",
+                    data: formData,
+                    success: (response) => {
+                        if (response.code === 200) {
+                            window.location.assign("{{ route('home') }}")
+                        }
+                    },
+                    error: (response) => {
+                        if (response.status === 422) {
+                            let errors = response.responseJSON.errors;
+                            Object.keys(errors).forEach(function(key) {
+                                $("#" + key + "-reg-error").addClass(
+                                    "is-invalid d-block");
+                                $("#" + key + "-reg-error").children(
+                                    "strong").text(errors[key][0]);
+                            });
+                        } else if (response.responseJSON.code === 401) {
+                            $("#messageErrorRegister").addClass(
+                                    "is-invalid d-block").children(
+                                    "strong")
+                                .text(
+                                    response.responseJSON.message);
+                        } else if (response.status === 500) {
+                            $("#messageErrorRegister").addClass(
+                                    "is-invalid d-block")
+                                .children(
+                                    "strong")
+                                .text(
+                                    response.responseJSON.errors);
+                        } else {
+                            window.location.reload();
+                        }
+                    }
+                })
+            });
+        })
+
+        $('#reload').click(function() {
+            $.ajax({
+                type: 'GET',
+                url: 'reload-captcha',
+                success: function(data) {
+                    $(".captcha span").html(data.captcha);
                 }
             });
-
-            $(function() {
-                $('#loginForm').submit(function(e) {
-                    e.preventDefault();
-                    let formData = $(this).serializeArray();
-                    $(".invalid-feedback").children("strong").text("");
-                    $("#loginForm input").removeClass("is-invalid");
-                    $.ajax({
-                        method: "POST",
-                        headers: {
-                            Accept: "application/json"
-                        },
-                        url: "{{ route('auth.login') }}",
-                        data: formData,
-                        success: (response) => {
-                            if (response.code === 200) {
-                                window.location.assign("{{ route('home') }}")
-                            }
-                        },
-                        error: (response) => {
-                            console.log("error1", response);
-                            if (response.status === 401) {
-                                $("#messageErrorLogin").addClass("is-invalid d-block")
-                                    .children(
-                                        "strong")
-                                    .text(
-                                        response.responseJSON.message);
-                            } else if (response.status === 422) {
-                                let errors = response.responseJSON.errors;
-                                Object.keys(errors).forEach(function(key) {
-                                    $("#" + key + "-login-error").addClass(
-                                        "is-invalid d-block");
-                                    $("#" + key + "-login-error").children(
-                                        "strong").text(errors[key][0]);
-                                });
-                            } else if (response.status === 500) {
-                                $("#messageErrorLogin").addClass("is-invalid d-block")
-                                    .children(
-                                        "strong")
-                                    .text(
-                                        response.responseJSON.errors);
-                            } else {
-                                window.location.reload();
-                            }
-                        }
-                    })
-                });
-                $('#registerFormModal').submit(function(e) {
-                    e.preventDefault();
-                    let formData = $(this).serializeArray();
-                    $(".invalid-feedback").children("strong").text("");
-                    $("#registerFormModal input").removeClass("is-invalid");
-                    $.ajax({
-                        method: "POST",
-                        headers: {
-                            Accept: "application/json"
-                        },
-                        url: "{{ route('auth.register') }}",
-                        data: formData,
-                        success: (response) => {
-                            if (response.code === 200) {
-                                window.location.assign("{{ route('home') }}")
-                            }
-                        },
-                        error: (response) => {
-                            if (response.status === 422) {
-                                let errors = response.responseJSON.errors;
-                                Object.keys(errors).forEach(function(key) {
-                                    $("#" + key + "-reg-error").addClass(
-                                        "is-invalid d-block");
-                                    $("#" + key + "-reg-error").children(
-                                        "strong").text(errors[key][0]);
-                                });
-                            } else if (response.responseJSON.code === 401) {
-                                $("#messageErrorRegister").addClass(
-                                        "is-invalid d-block").children(
-                                        "strong")
-                                    .text(
-                                        response.responseJSON.message);
-                            } else if (response.status === 500) {
-                                $("#messageErrorRegister").addClass(
-                                        "is-invalid d-block")
-                                    .children(
-                                        "strong")
-                                    .text(
-                                        response.responseJSON.errors);
-                            } else {
-                                window.location.reload();
-                            }
-                        }
-                    })
-                });
-            })
-
-            $('#reload').click(function() {
-                $.ajax({
-                    type: 'GET',
-                    url: 'reload-captcha',
-                    success: function(data) {
-                        $(".captcha span").html(data.captcha);
-                    }
-                });
-            });
         });
-    </script>
-@endsection
+    });
+</script>

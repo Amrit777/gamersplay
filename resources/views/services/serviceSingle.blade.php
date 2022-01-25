@@ -2,7 +2,7 @@
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('css/slick-theme.css') }}">
-    
+
 @endsection
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -626,8 +626,8 @@
                                                                                         class="fas fa-address-card"></i>Boost
                                                                                     This Post</li>
                                                                                 <!-- <li><i class="fas fa-clock"></i>Schedule Post</li>
-                                                                                                                                                                                                                                                                                                            <li><i class="fab fa-wpexplorer"></i>Select as featured</li>
-                                                                                                                                                                                                                                                                                                            <li><i class="fas fa-bell-slash"></i>Turn off Notifications</li> -->
+                                                                                                                                                                                                                                                                                                                <li><i class="fab fa-wpexplorer"></i>Select as featured</li>
+                                                                                                                                                                                                                                                                                                                <li><i class="fas fa-bell-slash"></i>Turn off Notifications</li> -->
                                                                             </ul>
                                                                         </div>
                                                                     </div>
@@ -651,10 +651,10 @@
                                                                     </div>
 
                                                                     <!-- <ul class="like-dislike">
-                                                                                                                                                                                                                                                                                                        <li><a href="#" title="Save to Pin Post"><i class="fa fa-thumb-tack"></i></a></li>
-                                                                                                                                                                                                                                                                                                        <li><a href="#" title="Like Post"><i class="fas fa-thumbs-up"></i></a></li>
-                                                                                                                                                                                                                                                                                                        <li><a href="#" title="dislike Post"><i class="fas fa-thumbs-down"></i></a></li>
-                                                                                                                                                                                                                                                                                                      </ul> -->
+                                                                                                                                                                                                                                                                                                            <li><a href="#" title="Save to Pin Post"><i class="fa fa-thumb-tack"></i></a></li>
+                                                                                                                                                                                                                                                                                                            <li><a href="#" title="Like Post"><i class="fas fa-thumbs-up"></i></a></li>
+                                                                                                                                                                                                                                                                                                            <li><a href="#" title="dislike Post"><i class="fas fa-thumbs-down"></i></a></li>
+                                                                                                                                                                                                                                                                                                          </ul> -->
                                                                     <div class="we-video-info">
                                                                         <ul>
                                                                             <li>
@@ -679,13 +679,13 @@
                                                                             </li>
 
                                                                             <!-- <li>
-                                                                                                                                                                                                                                                                                                            <span>
-                                                                                                                                                                                                                                                                                                              <a class="share-pst" href="#" title="Share">
-                                                                                                                                                                                                                                                                                                                <i class="fa fa-share-alt"></i>
-                                                                                                                                                                                                                                                                                                              </a>
-                                                                                                                                                                                                                                                                                                              <ins>20</ins>
-                                                                                                                                                                                                                                                                                                            </span>	
-                                                                                                                                                                                                                                                                                                          </li> -->
+                                                                                                                                                                                                                                                                                                                <span>
+                                                                                                                                                                                                                                                                                                                  <a class="share-pst" href="#" title="Share">
+                                                                                                                                                                                                                                                                                                                    <i class="fa fa-share-alt"></i>
+                                                                                                                                                                                                                                                                                                                  </a>
+                                                                                                                                                                                                                                                                                                                  <ins>20</ins>
+                                                                                                                                                                                                                                                                                                                </span>	
+                                                                                                                                                                                                                                                                                                              </li> -->
                                                                         </ul>
                                                                         <div class="users-thumb-list">
                                                                             <a data-toggle="tooltip" title="Anderw" href="#"
@@ -910,13 +910,7 @@
         //     $('.coment-area').toggleClass('d-block');
         //   }
     </script>
-
-    {{-- NEW CONTENT END --}}
-@endsection
-
-
-@section('scripts')
-    <script>
+    <script type="text/javascript">
         $(document).ready(function() {
             $('.pop').find('img').each(function() {
                 var imgClass = (this.width / this.height > 1) ? 'wide' : 'tall';
@@ -984,4 +978,11 @@
             {{ \Session::forget('error') }}
         @endif
     </script>
+
+    {{-- NEW CONTENT END --}}
+@endsection
+
+
+@section('scripts')
+
 @endsection
