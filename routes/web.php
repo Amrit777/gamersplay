@@ -36,7 +36,7 @@ Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/news', [HomeController::class, 'news'])->name('news');
 Route::get('/news/{post}', [HomeController::class, 'post'])->name('post');
-Route::get('/users', [HomeController::class, 'news'])->name('news');
+Route::get('/users', [HomeController::class, 'news'])->name('users');
 Route::get('/frequently-asked-questions', [HomeController::class, 'faq'])->name('faq');
 Route::get('/terms-of-service', [HomeController::class, 'tos'])->name('tos');
 Route::get('/privacy-policy', [HomeController::class, 'privacy_policy'])->name('privacy_policy');
