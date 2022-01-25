@@ -247,7 +247,7 @@
                     method: "POST",
                     headers: {
                         Accept: "application/json",
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
                     },
                     url: "{{ route('auth.login') }}",
                     data: formData,
@@ -293,7 +293,7 @@
                     method: "POST",
                     headers: {
                         Accept: "application/json",
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
                     },
                     url: "{{ route('auth.register') }}",
                     data: formData,
