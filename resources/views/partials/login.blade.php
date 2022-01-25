@@ -246,7 +246,8 @@
                 $.ajax({
                     method: "POST",
                     headers: {
-                        Accept: "application/json"
+                        Accept: "application/json",
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     url: "{{ route('auth.login') }}",
                     data: formData,
@@ -291,7 +292,8 @@
                 $.ajax({
                     method: "POST",
                     headers: {
-                        Accept: "application/json"
+                        Accept: "application/json",
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     url: "{{ route('auth.register') }}",
                     data: formData,
