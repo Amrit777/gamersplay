@@ -251,10 +251,11 @@
 
                 $.ajax({
                     type: "POST",
+                    url: "/auth/login",
                     headers: {
                         Accept: "application/json"
                     },
-                    url: "{{ route('auth.login') }}",
+                    // url: "{{ route('auth.auth') }}",
                     data: formData,
                     success: function(response) {
                         if (response.code === 200) {
