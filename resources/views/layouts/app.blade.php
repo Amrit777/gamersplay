@@ -63,7 +63,7 @@ $noFooter = true;
     <meta name="robots" content="index, follow">
     <meta name="language" content="English">
     <meta name="revisit-after" content="15 days">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     @yield('style')
 </head>
@@ -133,7 +133,8 @@ $noFooter = true;
                                     <a href="#loginPanel" class="btn login-btn" id="" style="cursor: pointer"
                                         data-toggle="modal" data-target="#loginModal" data-backdrop="static"
                                         data-keyboard="false">
-                                        <img src="{{ asset('temp-services/images/formslogo/login.png') }}" style="height:20px;">
+                                        <img src="{{ asset('temp-services/images/formslogo/login.png') }}"
+                                            style="height:20px;">
                                         {{ __('Login') }}
                                     </a>
                                 </li>
@@ -144,7 +145,8 @@ $noFooter = true;
                                     <a href="#registerPanel" class="btn register-btn" id="" style="cursor: pointer;"
                                         data-toggle="modal" data-target="#loginModal" data-backdrop="static"
                                         data-keyboard="false">
-                                        <img src="{{ asset('temp-services/images/formslogo/triangle.png') }}" style="height:20px;">
+                                        <img src="{{ asset('temp-services/images/formslogo/triangle.png') }}"
+                                            style="height:20px;">
                                         {{ __('Register') }}
                                     </a>
                                 </li>
@@ -257,7 +259,9 @@ $noFooter = true;
         <div class="spacer" style="height:55px;">
             &nbsp;
         </div>
-        @include('partials.login')
+        @guest
+            @include('partials.login')
+        @endguest
         {{-- @include('partials.login2') --}}
         {{-- @include('partials.register') --}}
         <main class="py-4">
