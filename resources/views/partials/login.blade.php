@@ -233,11 +233,11 @@
                 target = $t[0].href || $t.data("target") || $t.parents('.modal') || [];
 
             $(target)
-                .find("input,textarea,select")
-                .val('')
-                .end()
                 .find("input[type=checkbox], input[type=radio]")
                 .prop("checked", "")
+                .end()
+                .find("input,textarea,select")
+                .val('')
                 .end();
         });
         const regbutton = $('#reg-submit-btn'); // The submit input id 
@@ -297,6 +297,8 @@
                         } else {
                             window.location.reload();
                         }
+                        reloadCaptcha();
+
                     }
                 })
             });
@@ -348,6 +350,10 @@
         })
 
         $('#reload').click(function() {
+            reloadCaptcha();
+        });
+
+        function reloadCaptcha() {
             $.ajax({
                 type: 'GET',
                 url: 'reload-captcha',
@@ -355,6 +361,6 @@
                     $(".captcha span").html(data.captcha);
                 }
             });
-        });
+        }
     });
 </script>
