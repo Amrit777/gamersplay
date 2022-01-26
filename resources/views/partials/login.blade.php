@@ -94,7 +94,7 @@
                                         </div>
                                         <div class="form-group">
                                             <input id="captcha" type="text" class="form-control"
-                                                placeholder="Enter Captcha" name="captcha">
+                                                placeholder="Enter Captcha" name="captcha" required>
                                             <span class="invalid-feedback" role="alert" id="captcha-login-error">
                                                 <strong></strong>
                                             </span>
