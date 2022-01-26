@@ -182,7 +182,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="row row mt-3 mb-3">
+                                        <div class="row mt-3 mb-3">
                                             <div class="col-1 ">
                                                 <input class="mb-1 mr-1" type="checkbox" name="tnc"
                                                     id="register-tnc" {{ old('tnc') ? 'checked' : '' }}>
