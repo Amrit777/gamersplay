@@ -223,7 +223,11 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content');
+            }
+        });
         console.log("indidede");
         const regbutton = $('#reg-submit-btn'); // The submit input id 
         regbutton.attr('disabled', 'disabled');
@@ -244,17 +248,13 @@
                 let formData = $(this).serializeArray();
                 $(".invalid-feedback").children("strong").text("");
                 $("#loginForm input").removeClass("is-invalid");
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content');
-                    }
-                });
+
                 $.ajax({
                     type: "POST",
                     headers: {
                         Accept: "application/json"
                     },
-                    url: "{{ url('/auth/login') }}",
+                    url: "{{ route('/auth/login') }}",
                     data: formData,
                     success: function(response) {
                         if (response.code === 200) {
