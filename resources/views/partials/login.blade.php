@@ -236,7 +236,7 @@
                 .find("input[type=checkbox], input[type=radio]")
                 .prop("checked", "")
                 .end()
-                .find("input,textarea,select")
+                .find("input[type=text],input[type=password],input[type=email]")
                 .val('')
                 .end();
         });
