@@ -223,6 +223,14 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        // clear errors
+        $(".invalid-feedback").children("strong").text("");
+        $(".is-invalid").removeClass("is-invalid");
+
+        const regbutton = $('#reg-submit-btn'); // The submit input id 
+        regbutton.attr('disabled', 'disabled');
+        regbutton.css("cursor", "not-allowed");
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -239,10 +247,12 @@
                 .find("input[type=text],input[type=password],input[type=email]")
                 .val('')
                 .end();
+            regbutton.attr('disabled', 'disabled')
+                .css("cursor", "not-allowed");
+            $(".invalid-feedback").children("strong").text("");
+            $(".is-invalid").removeClass("is-invalid");
         });
-        const regbutton = $('#reg-submit-btn'); // The submit input id 
-        regbutton.attr('disabled', 'disabled');
-        regbutton.css("cursor", "not-allowed");
+
         $('#register-tnc').change(function() { // The checkbox id 
             if (this.checked) {
                 regbutton.removeAttr('disabled')
@@ -257,9 +267,6 @@
             $('#loginForm').submit(function(e) {
                 e.preventDefault();
                 let formData = $(this).serializeArray();
-                $(".invalid-feedback").children("strong").text("");
-                $("#loginForm input").removeClass("is-invalid");
-
                 $.ajax({
                     type: "POST",
                     url: "/auth/login",
@@ -297,16 +304,14 @@
                         } else {
                             window.location.reload();
                         }
+                        $("#captcha").val("");
                         reloadCaptcha();
-
                     }
                 })
             });
             $('#registerFormModal').submit(function(e) {
                 e.preventDefault();
                 let formData = $(this).serializeArray();
-                $(".invalid-feedback").children("strong").text("");
-                $("#registerFormModal input").removeClass("is-invalid");
                 $.ajax({
                     type: "POST",
                     url: "/auth/register",
