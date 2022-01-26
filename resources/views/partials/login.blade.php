@@ -228,7 +228,9 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        console.log("indidede");
+        $('#loginForm').on('hidden.bs.modal', function() {
+            $(this).find('form').trigger('reset');
+        })
         const regbutton = $('#reg-submit-btn'); // The submit input id 
         regbutton.attr('disabled', 'disabled');
         regbutton.css("cursor", "not-allowed");
