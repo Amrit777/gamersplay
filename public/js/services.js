@@ -1,5 +1,3 @@
-
-
 var page = 0;
 var menu_id = 1;
 var category_id = undefined;
@@ -187,7 +185,7 @@ $('body').on('click','.service-box',function (e) {
     if($(e.target).hasClass('service-audio-btn')) { return false };
     e.preventDefault();
     var id = this.dataset.id;
-    window.open('/service/' + id);
+    window.open('/service/' + id,"_self");
 });
 
 $('body').on('click','.service-audio-btn',function (e) { 
