@@ -4,6 +4,7 @@
         font-size: 100%;
         margin-top: 0px;
     }
+
 </style>
 <div class="modal fade mt-4" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -224,7 +225,7 @@
     $(document).ready(function() {
         $.ajaxSetup({
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content');
             }
         });
         console.log("indidede");
@@ -252,7 +253,7 @@
                     headers: {
                         Accept: "application/json"
                     },
-                    url: "{{ route('auth.login') }}",
+                    url: '/auth/login',
                     data: formData,
                     success: (response) => {
                         if (response.code === 200) {
