@@ -295,11 +295,11 @@
                 $(".invalid-feedback").children("strong").text("");
                 $("#registerFormModal input").removeClass("is-invalid");
                 $.ajax({
-                    method: "POST",
+                    type: "POST",
+                    url: "/auth/register",
                     headers: {
                         Accept: "application/json"
                     },
-                    url: "/auth/register",
                     data: formData,
                     success: (response) => {
                         if (response.code === 200) {
