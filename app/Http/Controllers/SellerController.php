@@ -236,7 +236,7 @@ class SellerController extends Controller
         $validated = $request->validate([
             'price' => 'numeric|max:99999',
             'description' => 'nullable|string|max:64',
-            'instructions' => 'nullablestring|max:240',
+            'instructions' => 'nullable|string|max:240',
             'name' => 'string|max:100',
         ]);
 
