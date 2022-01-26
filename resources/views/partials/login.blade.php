@@ -228,8 +228,23 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $('#loginForm').on('hidden.bs.modal', function() {
-            $(this).find('form').trigger('reset');
+        $('#loginForm').on('hidden.bs.modal', function(e) {
+            $(this)
+                .find("input,textarea,select")
+                .val('')
+                .end()
+                .find("input[type=checkbox], input[type=radio]")
+                .prop("checked", "")
+                .end();
+        })
+        $('#registerFormModal').on('hidden.bs.modal', function(e) {
+            $(this)
+                .find("input,textarea,select")
+                .val('')
+                .end()
+                .find("input[type=checkbox], input[type=radio]")
+                .prop("checked", "")
+                .end();
         })
         const regbutton = $('#reg-submit-btn'); // The submit input id 
         regbutton.attr('disabled', 'disabled');
