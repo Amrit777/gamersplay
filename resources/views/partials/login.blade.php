@@ -269,7 +269,7 @@
                     data: formData,
                     success: function(response) {
                         if (response.code === 200) {
-                            window.location.assign("/home")
+                            window.location.reload();
                         }
                     },
                     error: function(response) {
@@ -314,7 +314,7 @@
                     data: formData,
                     success: (response) => {
                         if (response.code === 200) {
-                            window.location.assign("/home")
+                            window.location.reload();
                         }
                     },
                     error: (response) => {
