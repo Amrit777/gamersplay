@@ -223,11 +223,7 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content');
-            }
-        });
+
         console.log("indidede");
         const regbutton = $('#reg-submit-btn'); // The submit input id 
         regbutton.attr('disabled', 'disabled');
@@ -248,19 +244,24 @@
                 let formData = $(this).serializeArray();
                 $(".invalid-feedback").children("strong").text("");
                 $("#loginForm input").removeClass("is-invalid");
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content');
+                    }
+                });
                 $.ajax({
-                    method: "POST",
+                    type: "POST",
                     headers: {
                         Accept: "application/json"
                     },
                     url: '/auth/login',
                     data: formData,
-                    success: (response) => {
+                    success: function(response) {
                         if (response.code === 200) {
-                            window.location.assign("{{ route('home') }}")
+                            window.location.assign("/home")
                         }
                     },
-                    error: (response) => {
+                    error: function(response) {
                         console.log("error1", response);
                         if (response.status === 401) {
                             $("#messageErrorLogin").addClass("is-invalid d-block")
@@ -298,11 +299,11 @@
                     headers: {
                         Accept: "application/json"
                     },
-                    url: "{{ route('auth.register') }}",
+                    url: "/auth/register",
                     data: formData,
                     success: (response) => {
                         if (response.code === 200) {
-                            window.location.assign("{{ route('home') }}")
+                            window.location.assign("/home")
                         }
                     },
                     error: (response) => {
