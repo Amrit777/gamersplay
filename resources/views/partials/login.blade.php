@@ -94,7 +94,7 @@
                                         </div>
                                         <div class="form-group">
                                             <input id="captcha" type="text" class="form-control"
-                                                placeholder="Enter Captcha" name="captcha" required>
+                                                placeholder="Enter Captcha" name="captcha">
                                             <span class="invalid-feedback" role="alert" id="captcha-login-error">
                                                 <strong></strong>
                                             </span>
@@ -357,6 +357,10 @@
         $('#reload').click(function() {
             reloadCaptcha();
         });
+
+        setInterval(() => {
+            reloadCaptcha();
+        }, 60 * 1000);
 
         function reloadCaptcha() {
             $.ajax({
