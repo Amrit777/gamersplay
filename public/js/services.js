@@ -185,6 +185,7 @@ $('body').on('click','.service-box',function (e) {
     if($(e.target).hasClass('service-audio-btn')) { return false };
     e.preventDefault();
     var id = this.dataset.id;
+    console.log("clicked on service");
     window.open('/service/' + id,"_self");
 });
 
