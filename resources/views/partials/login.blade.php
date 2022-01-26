@@ -254,7 +254,7 @@
                     headers: {
                         Accept: "application/json"
                     },
-                    url: "{{ route('/auth/login') }}",
+                    url: "{{ route('auth.login') }}",
                     data: formData,
                     success: function(response) {
                         if (response.code === 200) {
