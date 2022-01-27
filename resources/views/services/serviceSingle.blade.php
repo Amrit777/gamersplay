@@ -31,24 +31,25 @@
                             </div>
                             <!-- START: Service Social button -->
 
-                            <div class="nav-button-side cust-nab-btn mt-2">
-                                <div class="row justify-content-between img-two-btns-row">
-                                    <div class="col-3 fa-round-border-left btn-custm-icon-hover">
-                                        <a class="btn-cust share-btn-game" type="button">
-                                            <i class="fas fa-user-plus margin-top-9px"></i>
+                            <div class="nav-button-side mt-2">
+                                <div class="row img-two-btns-row">
+                                    <div class="col-3 fa-round-border cust-nab-left btn-custm-icon-hover">
+                                        <a class="btn-cust" type="button">
+                                            <i class="fas fa-user-plus fa-margin-top ipad-portrait ipad-landscape"></i>
                                         </a>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="profile-mian-image-v2 border-radius-img-v2">
+                                    <div class="col-6 cust-nab-center">
+                                        <div class="border-radius-img-v2">
                                             <a href="#" class="pop">
                                                 <img id="img02" src='{{ $service->user->getProfilePicture() }}' alt=""
                                                     class="img-fluid profile-image-v2 zoom-clicked-img" />
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="col-3 fa-round-border-right btn-custm-icon-hover">
-                                        <a class="btn-cust message-btn-game" type="button">
-                                            <i class="fas fa-comment margin-top-9px"></i>
+                                    <div class="col-3 fa-round-border cust-nab-right btn-custm-icon-hover">
+                                        <a class="btn-cust" type="button">
+                                            <i class="fas fa-comment fa-margin-top"
+                                            ></i>
                                         </a>
                                     </div>
                                 </div>
@@ -151,6 +152,7 @@
                         </div>
                     </div>
                     <!-- END: Service Profile Side bar First Card -->
+                    <div 
                     <div class="card mt-4 mb-4 card-box-shadow">
                         <div class="card table-card">
                             <h4 class="profile-name text-style-4 color-primary head-style-fst">
@@ -344,7 +346,7 @@
                                                 <p>{{ $service->instructions }}</p>
                                             </div>
                                             @if (!empty($service->images) && isset($service->images[0]) && !empty($service->images[0]))
-                                                <div class="col-12 col-md-5 ">
+                                                <div class="col-12 col-md-5 text-center ">
                                                     <a href="#" class="pop">
                                                         <img id="img03" src='/{{ $service->images[0]->file_name }}'
                                                             alt=""
