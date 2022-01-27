@@ -33,7 +33,7 @@
 
                             <div class="nav-button-side mt-2">
                                 <div class="row img-two-btns-row">
-                                    <div class="col-3 fa-round-border cust-nab-left btn-custm-icon-hover">
+                                    <div class="col-3 fa-round-border cust-nab-left">
                                         <a class="btn-cust" type="button">
                                             <i class="fas fa-user-plus fa-margin-top ipad-portrait ipad-landscape"></i>
                                         </a>
@@ -46,7 +46,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="col-3 fa-round-border cust-nab-right btn-custm-icon-hover">
+                                    <div class="col-3 fa-round-border cust-nab-right">
                                         <a class="btn-cust" type="button">
                                             <i class="fas fa-comment fa-margin-top"
                                             ></i>

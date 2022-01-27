@@ -2500,6 +2500,9 @@ form button {
   color: var(--color-light) !important;
 }
 
+.col-3.fa-round-border:hover a {
+  color: var(--color-light) !important;
+}
 .hr-dotted-2px {
   border-top: 2px dashed var(--color-lighter-primary);
 }
