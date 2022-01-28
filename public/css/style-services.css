@@ -2552,10 +2552,7 @@ form button {
   background: var(--color-lighter-primary-opacity) !important;
   border-radius: var(--border-radius) !important;
   border: none !important;
-  padding-top: 18px;
-  padding-bottom: 20px;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding: 0px;
 }
 
 #myImageModal {
@@ -2563,9 +2560,9 @@ form button {
   height: 100px;
 }
 
-.modal-content-custom {
+/* .modal-content-custom {
   background-color: unset;
-}
+} */
 
 .service-big-image {
   height: 210px;

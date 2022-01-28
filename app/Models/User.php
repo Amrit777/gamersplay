@@ -72,7 +72,7 @@ class User extends Authenticatable implements MustVerifyEmail
         if (!empty($this->profile_picture)) {
             return $this->profile_picture;
         } else {
-            return "/temp-services/images/profile.jpg";
+            return "/imgs/avatar.svg";
         }
     }
 }

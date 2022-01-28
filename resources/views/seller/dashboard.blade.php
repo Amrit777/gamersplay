@@ -9,7 +9,7 @@
 @section('content')
 
 
-<div class="header-page">
+<div class="header-page rounded">
   <div>
       <h1>Seller Dashboard</h1>
       <p>Here you may find the various resources for our sellers.</p>
@@ -77,7 +77,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12" style="padding:0 25px;">
-          <div class="subheader-page">
+          <div class="subheader-page rounded">
             <h5>Earnings in last 7 days</h5>
           </div>
           <br>

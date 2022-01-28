@@ -56,13 +56,33 @@
                                     {{ $service->user->name }}
                                 </h3>
                                 <div class="profile-about">
+                                    <div class="row mt-1 mb-1 mx-1">
+                                        <div class=" profile-section-two col-12">
+                                            <div class="review-body text-center">
+                                                English
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1 mx-1 mb-5">
+                                        <div class=" profile-section-two col-3 offset-2">
+                                            <div class="review-body text-center">
+                                                {{ $service->user->gender }}
+                                            </div>
+                                        </div>
+                                        <div class="col-2"></div>
+                                        <div class=" profile-section-two col-3">
+                                            <div class="review-body text-center">
+                                                {{ $service->user->getAge() }}
+                                            </div>
+                                        </div>
+                                    </div>
                                     <h4 class="profile-name text-style-4 color-primary head-style-fst">
                                         About Me
                                     </h4>
                                     <p class="more-description text-justify"> {{ $service->user->description }} </p>
                                     {{-- <hr class="hr-dotted-2px mt-5"> --}}
-                                    <div class="mb-5"></div>
-                                    <div class="review-body">
+                                    <div class="mb-3"></div>
+                                    {{-- <div class="review-body">
                                         <div class="profile-section-two">
                                             <div class="body-fluid row mt-1">
                                                 <div class="text-name col-6 text-style-5 text-start info-game-name">
@@ -89,7 +109,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 {{-- <hr class="hr-dotted-2px mb-5"> --}}
                                 <div class="mb-5"></div>
@@ -612,7 +632,8 @@
                                                                         <div class="more-post-optns"><i
                                                                                 class="fas fa-ellipsis-h"></i>
                                                                             <ul>
-                                                                                <li><i class="fas fa-edit"></i>Edit Post
+                                                                                <li><i class="fas fa-edit"></i>Edit
+                                                                                    Post
                                                                                 </li>
                                                                                 <li><i class="fas fa-trash"></i>Delete
                                                                                     Post</li>
@@ -623,12 +644,13 @@
                                                                                         class="fas fa-address-card"></i>Boost
                                                                                     This Post</li>
                                                                                 <!-- <li><i class="fas fa-clock"></i>Schedule Post</li>
-                                                                                                                                                                                                                                                                                                                    <li><i class="fab fa-wpexplorer"></i>Select as featured</li>
-                                                                                                                                                                                                                                                                                                                    <li><i class="fas fa-bell-slash"></i>Turn off Notifications</li> -->
+                                                                                                                                                                                                                                                                                                                                                <li><i class="fab fa-wpexplorer"></i>Select as featured</li>
+                                                                                                                                                                                                                                                                                                                                                <li><i class="fas fa-bell-slash"></i>Turn off Notifications</li> -->
                                                                             </ul>
                                                                         </div>
                                                                     </div>
-                                                                    <ins><a href="time-line.html" title="">Jack Carter</a>
+                                                                    <ins><a href="time-line.html" title="">Jack
+                                                                            Carter</a>
                                                                         share <a href="#" title="">link</a></ins>
                                                                     <span><i class="fa fa-globe"></i> published:
                                                                         january,5 2010 19:PM
@@ -639,19 +661,21 @@
                                                                         <p>
                                                                             World's most beautiful car in Curabitur <a
                                                                                 href="#" title="">#test
-                                                                                drive booking !</a> the most beatuiful car
+                                                                                drive booking !</a> the most beatuiful
+                                                                            car
                                                                             available in america
-                                                                            and the saudia arabia, you can book your test
+                                                                            and the saudia arabia, you can book your
+                                                                            test
                                                                             drive by our official
                                                                             website
                                                                         </p>
                                                                     </div>
 
-                                                                    <!-- <ul class="like-dislike">
-                                                                                                                                                                                                                                                                                                                <li><a href="#" title="Save to Pin Post"><i class="fa fa-thumb-tack"></i></a></li>
-                                                                                                                                                                                                                                                                                                                <li><a href="#" title="Like Post"><i class="fas fa-thumbs-up"></i></a></li>
-                                                                                                                                                                                                                                                                                                                <li><a href="#" title="dislike Post"><i class="fas fa-thumbs-down"></i></a></li>
-                                                                                                                                                                                                                                                                                                              </ul> -->
+                                                                    {{-- <ul class="like-dislike">
+                                                                        <li><a href="#" title="Save to Pin Post"><i class="fa fa-thumb-tack"></i></a></li>
+                                                                        <li><a href="#" title="Like Post"><i class="fas fa-thumbs-up"></i></a></li>
+                                                                        <li><a href="#" title="dislike Post"><i class="fas fa-thumbs-down"></i></a></li>
+                                                                    </ul> --}}
                                                                     <div class="we-video-info">
                                                                         <ul>
                                                                             <li>
@@ -676,13 +700,13 @@
                                                                             </li>
 
                                                                             <!-- <li>
-                                                                                                                                                                                                                                                                                                                    <span>
-                                                                                                                                                                                                                                                                                                                      <a class="share-pst" href="#" title="Share">
-                                                                                                                                                                                                                                                                                                                        <i class="fa fa-share-alt"></i>
-                                                                                                                                                                                                                                                                                                                      </a>
-                                                                                                                                                                                                                                                                                                                      <ins>20</ins>
-                                                                                                                                                                                                                                                                                                                    </span>	
-                                                                                                                                                                                                                                                                                                                  </li> -->
+                                                                                                                                                                                                                                                                                                                                                <span>
+                                                                                                                                                                                                                                                                                                                                                  <a class="share-pst" href="#" title="Share">
+                                                                                                                                                                                                                                                                                                                                                    <i class="fa fa-share-alt"></i>
+                                                                                                                                                                                                                                                                                                                                                  </a>
+                                                                                                                                                                                                                                                                                                                                                  <ins>20</ins>
+                                                                                                                                                                                                                                                                                                                                                </span>	
+                                                                                                                                                                                                                                                                                                                                              </li> -->
                                                                         </ul>
                                                                         <div class="users-thumb-list">
                                                                             <a data-toggle="tooltip" title="Anderw" href="#"
@@ -710,8 +734,8 @@
                                                                                 <img alt=""
                                                                                     src="/temp-services/images/userlist-2.jpg">
                                                                             </a>
-                                                                            <span><strong>You</strong>, <b>Sarah</b> and <a
-                                                                                    href="#" title="">24+ more</a>
+                                                                            <span><strong>You</strong>, <b>Sarah</b> and
+                                                                                <a href="#" title="">24+ more</a>
                                                                                 liked</span>
                                                                         </div>
                                                                     </div>
@@ -728,7 +752,8 @@
                                                                                         borne</a></h5>
                                                                                 <p>we are working for the dance and sing
                                                                                     songs. this video is
-                                                                                    very awesome for the youngster. please
+                                                                                    very awesome for the youngster.
+                                                                                    please
                                                                                     vote this video and
                                                                                     like our channel</p>
                                                                                 <div class="inline-itms">

@@ -23,7 +23,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12" style="text-align:center;">
-            <img src="/imgs/gamersplay-gp-main.png" alt="" style="max-width:100%">
+            <img src="/imgs/gamersplay-gp-main.png" alt="" class="mw-80">
             <h1>Welcome to GamersPlay</h1>
             <p>Your premier destination for finding gamer friends to play with!</p>
             <br>
@@ -95,21 +95,21 @@
     <div class="row">
         <div class="col-md-4">
             <div style="text-align:center">
-                <img src="{{asset('imgs/finish.png')}}" style="max-width:100%;">
+                <img src="{{asset('imgs/finish.png')}}" class="mw-80">
                 <h4 style="text-align:center;">Find</h4>
                 <p>Browse our extensive list of gamers!</p>
             </div>
         </div>
         <div class="col-md-4">
             <div style="text-align:center">
-                <img src="{{asset('imgs/match.png')}}" style="max-width:100%;">
+                <img src="{{asset('imgs/match.png')}}" class="mw-80">
                 <h4 style="text-align:center;">Match</h4>
                 <p>Found your gamer buddy? It's a match!</p>
             </div>
         </div>
         <div class="col-md-4">
             <div style="text-align:center">
-                <img src="{{asset('imgs/gamepad.png')}}" style="max-width:100%;">
+                <img src="{{asset('imgs/gamepad.png')}}" class="mw-80">
                 <h4 style="text-align:center;">Order</h4>
                 <p>Ready, player two?</p>
             </div>

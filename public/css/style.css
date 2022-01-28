@@ -175,9 +175,11 @@ textarea:focus {
 .button-primary:hover,
 .button-primary:focus {
     color: white;
-    background: var(--color-darker);
+    background: var(--color-secondary);
+    background-color: var(--color-secondary);
+    border-color: var(--color-secondary);
+    
 }
-
 .button-outline-primary {
     padding: 10px;
     background-color: transparent;
@@ -1084,16 +1086,12 @@ p.card-text {
         max-width: 1880px;
     }
 }
-
-#login-submit-btn {
-    background: #f3f3f4;
-    border: 1px solid #f3f3f4;
-    color: var(--color-darker);
+.banner-img-home{
+    max-width:80%
 }
 
-#login-submit-btn:hover {
-    color: white;
-    background: var(--color-darker);
+.mw-80{
+    max-width: 80%;
 }
 
 .modal-content .header-page{

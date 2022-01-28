@@ -36,7 +36,7 @@
     </div>
 </div>
 
-<div class="header-page">
+<div class="header-page rounded">
     <div>
         <h1>Service Page - Service #{{$service->id}}</h1>
         <p>Here you may find the various details regarding your service and edit them.</p>
