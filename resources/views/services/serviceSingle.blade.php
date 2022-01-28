@@ -53,26 +53,26 @@
                             <!-- END: Service Social button -->
                             <div class="profile-info mt-2 px-3 mb-2 profile-name-top">
                                 <h3 class="profile-name text-center text-style-3 mb-2 profile-name-game">
-                                    {{ $service->user->name }}
+                                    {{ $service->user->name ?: 'NA' }}
                                 </h3>
                                 <div class="profile-about">
                                     <div class="row mt-1 mb-1 mx-1">
                                         <div class=" profile-section-two col-12">
                                             <div class="review-body text-center">
-                                                English
+                                                {{ $service->user->primary_language ?: 'NA' }}
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row mt-1 mx-1 mb-5">
                                         <div class=" profile-section-two col-3 offset-2">
                                             <div class="review-body text-center">
-                                                {{ $service->user->gender }}
+                                                {{ $service->user->gender ?: 'NA' }}
                                             </div>
                                         </div>
                                         <div class="col-2"></div>
                                         <div class=" profile-section-two col-3">
                                             <div class="review-body text-center">
-                                                {{ $service->user->getAge() }}
+                                                {{ $service->user->getAge() ?: '0' }}
                                             </div>
                                         </div>
                                     </div>
@@ -644,8 +644,8 @@
                                                                                         class="fas fa-address-card"></i>Boost
                                                                                     This Post</li>
                                                                                 <!-- <li><i class="fas fa-clock"></i>Schedule Post</li>
-                                                                                                                                                                                                                                                                                                                                                <li><i class="fab fa-wpexplorer"></i>Select as featured</li>
-                                                                                                                                                                                                                                                                                                                                                <li><i class="fas fa-bell-slash"></i>Turn off Notifications</li> -->
+                                                                                                                                                                                                                                                                                                                                                    <li><i class="fab fa-wpexplorer"></i>Select as featured</li>
+                                                                                                                                                                                                                                                                                                                                                    <li><i class="fas fa-bell-slash"></i>Turn off Notifications</li> -->
                                                                             </ul>
                                                                         </div>
                                                                     </div>
@@ -700,13 +700,13 @@
                                                                             </li>
 
                                                                             <!-- <li>
-                                                                                                                                                                                                                                                                                                                                                <span>
-                                                                                                                                                                                                                                                                                                                                                  <a class="share-pst" href="#" title="Share">
-                                                                                                                                                                                                                                                                                                                                                    <i class="fa fa-share-alt"></i>
-                                                                                                                                                                                                                                                                                                                                                  </a>
-                                                                                                                                                                                                                                                                                                                                                  <ins>20</ins>
-                                                                                                                                                                                                                                                                                                                                                </span>	
-                                                                                                                                                                                                                                                                                                                                              </li> -->
+                                                                                                                                                                                                                                                                                                                                                    <span>
+                                                                                                                                                                                                                                                                                                                                                      <a class="share-pst" href="#" title="Share">
+                                                                                                                                                                                                                                                                                                                                                        <i class="fa fa-share-alt"></i>
+                                                                                                                                                                                                                                                                                                                                                      </a>
+                                                                                                                                                                                                                                                                                                                                                      <ins>20</ins>
+                                                                                                                                                                                                                                                                                                                                                    </span>	
+                                                                                                                                                                                                                                                                                                                                                  </li> -->
                                                                         </ul>
                                                                         <div class="users-thumb-list">
                                                                             <a data-toggle="tooltip" title="Anderw" href="#"
