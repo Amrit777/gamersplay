@@ -962,14 +962,7 @@
         });
         $('#imageCarousel').slick();
 
-        $('#buyBtn').click(function(e) {
-            var userBalance = @json(Auth::user()->points);
-            var serviceCost = parseFloat('{{ $service->price }}');
-            if (parseFloat(userBalance) < serviceCost) {
-                Swal.fire('Error', 'You do not have enough GP to order this service.', 'error');
-                e.preventDefault();
-            }
-        });
+        
         @if (\Session::has('success'))
             Swal.fire('Success','{{ \Session::get('success') }}','success');
             {{ \Session::forget('success') }}
