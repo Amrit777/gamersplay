@@ -52,7 +52,6 @@ Route::prefix('auth')->group(function() {
 
 });
 
-Route::get('/service/{id}', [ServicesController::class, 'service'])->name('service');
 
 // Authentication required routes.
 Route::middleware(['auth','verified'])->group(function () {
@@ -75,9 +74,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/support/new', [TicketController::class, 'new'])->name('newTicket');
     Route::get('/support/ticket/{id}', [TicketController::class, 'show'])->name('showTicket');
     Route::get('/dispute/{id}', [PurchaseController::class, 'disputePage'])->name('disputePage');
-
-    
-
+    Route::get('/service/{id}', [ServicesController::class, 'service'])->name('service');
     Route::post('/profile/{id}/edit', [ProfileController::class, 'editProfile']);
     Route::post('/profile/{id}/editAvatar', [ProfileController::class, 'editAvatar'])->name('edit_avatar');
     Route::post('/seller/apply', [SellerController::class, 'applicationSubmit'])->name('applicationSubmit');
