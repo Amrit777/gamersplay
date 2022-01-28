@@ -1096,4 +1096,8 @@ p.card-text {
     background: var(--color-darker);
 }
 
+.modal-content .header-page{
+    margin-top: 7px !important;
+}
+
 /* custom css : Amit Singh */
