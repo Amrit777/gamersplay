@@ -63,7 +63,7 @@
 
 <div style="margin-left:260px;" id="services_container_responsive">
 
-    <div class="header-page rounded" style="margin-top:10px !important;">
+    <div class="header-page rounded">
         <div>
             <img src="/imgs/icons/puzzle.svg" alt="" srcset="" style="height:64px;">
         </div>

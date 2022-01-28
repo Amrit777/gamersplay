@@ -700,6 +700,7 @@ table th {
     border-bottom: 8px dashed #7E22CE;
     display: flex;
     align-items: center;
+    margin-top: 10px !important;
 }
 
 .subheader-page {
@@ -1053,30 +1054,46 @@ p.card-text {
         max-width: 1360px;
     }
 }
+
 @media (min-width: 1500px) {
     .container-xl, .container-lg, .container-md, .container-sm, .container {
         max-width: 1460px;
     }
 }
+
 @media (min-width: 1700px) {
     .container-xl, .container-lg, .container-md, .container-sm, .container {
         max-width: 1460px;
     }
 }
+
 @media (min-width: 1920px) {
     .container-xl, .container-lg, .container-md, .container-sm, .container {
         max-width: 1800px;
     }
 }
+
 @media (min-width: 2040px) {
     .container-xl, .container-lg, .container-md, .container-sm, .container {
         max-width: 1800px;
     }
 }
+
 @media (min-width: 3600px) {
     .container-xl, .container-lg, .container-md, .container-sm, .container {
         max-width: 1880px;
     }
+}
+
+#login-submit-btn {
+    background: #f3f3f4;
+    border: 1px solid #f3f3f4;
+    color: var(--color-darker);
+}
+
+#login-submit-btn:hover {
+    color: white;
+    background: var(--color-darker);
 }
 
 /* custom css : Amit Singh */

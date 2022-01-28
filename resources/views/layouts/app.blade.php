@@ -264,7 +264,7 @@ $noFooter = true;
         @endguest
         {{-- @include('partials.login2') --}}
         {{-- @include('partials.register') --}}
-        <main class="py-4 container">
+        <main class="py-4 @if(Route::current()->getName() != "welcome") container @endif">
             @yield('content')
         </main>
 

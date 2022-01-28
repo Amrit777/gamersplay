@@ -2531,9 +2531,21 @@ form button {
   }
 }
 
-.table th,
+/* .table th,
 .table td {
   border-top: unset !important;
+} */
+
+.fa-round-border {
+  background: var(--color-lighter-primary-opacity) !important;
+  color: #8f57babf !important;
+  border-radius: var(--border-radius) !important;
+  padding: 0px 0px;
+  font-weight: 500;
+  margin: 0px 0px;
+  border: none !important;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 .profile-section-two {
@@ -2563,15 +2575,6 @@ form button {
 
 
 /* based on % */
-.fa-round-border {
-  border: 1px solid;
-  border-radius: 10px;
-  /* height: 36px !important; */
-}
-
-.fa-margin-top {
-  margin-top: 15%;
-}
 
 .img-two-btns-row {
   margin-left: 2%;
@@ -2580,22 +2583,12 @@ form button {
 
 .btn-cust {
   padding: 5px;
-  margin-left: 32%;
+  margin-left: 25%;
 }
 
 @media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait) {
   .ipad-portrait {
     color: red;
-  }
-/* 
-  #gamePlay {
-    margin-left: 35px;
-    margin-right: 35px;
-  } */
-
-  .fa-margin-top {
-    margin-top: 24% !important;
-    font-size: 200%;
   }
 
   .btn-cust {
@@ -2607,9 +2600,9 @@ form button {
     line-height: 160%;
   }
 
-  .fa-round-border {
+  /* .fa-round-border {
     height: 60px !important;
-  }
+  } */
 }
 
 @media all and (device-width: 1024px) and (device-height: 768px) and (orientation:landscape) {
@@ -2617,34 +2610,12 @@ form button {
     color: blue;
   }
 
-  .fa-margin-top {
-    margin-top: 42% !important;
-    font-size: 125%;
-  }
-
   /* your css rules for ipad landscape */
 }
 
 @media screen and (min-width: 1600px) and (max-width: 3400px) {
-  /* #gamePlay {
-    margin-left: 125px;
-    margin-right: 125px;
-  } */
-
-  .fa-margin-top {
-    margin-top: 41% !important;
-    font-size: 125%;
-  }
-
-  .btn-cust {
-    margin-left: 35%;
-  }
 
   @-moz-document url-prefix() {
-    .fa-margin-top {
-      margin-top: 16% !important;
-      font-size: 125%;
-    }
   }
 
 }

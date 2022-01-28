@@ -34,9 +34,7 @@
                             <div class="nav-button-side mt-2">
                                 <div class="row img-two-btns-row">
                                     <div class="col-3 fa-round-border cust-nab-left">
-                                        <a class="btn-cust" type="button">
-                                            <i class="fas fa-user-plus fa-margin-top ipad-portrait ipad-landscape"></i>
-                                        </a>
+                                        <a class="btn-cust" type="button">Follow</a>
                                     </div>
                                     <div class="col-6 cust-nab-center">
                                         <div class="border-radius-img-v2">
@@ -47,10 +45,7 @@
                                         </div>
                                     </div>
                                     <div class="col-3 fa-round-border cust-nab-right">
-                                        <a class="btn-cust" type="button">
-                                            <i class="fas fa-comment fa-margin-top"
-                                            ></i>
-                                        </a>
+                                        <a class="btn-cust" type="button">Chat</a>
                                     </div>
                                 </div>
                             </div>
@@ -67,30 +62,31 @@
                                     <p class="more-description text-justify"> {{ $service->user->description }} </p>
                                     {{-- <hr class="hr-dotted-2px mt-5"> --}}
                                     <div class="mb-5"></div>
-
-                                    <div class="profile-section-two">
-                                        <div class="body-fluid row mt-1">
-                                            <div class="text-name col-6 text-style-5 text-start info-game-name">
-                                                Gender
+                                    <div class="review-body">
+                                        <div class="profile-section-two">
+                                            <div class="body-fluid row mt-1">
+                                                <div class="text-name col-6 text-style-5 text-start info-game-name">
+                                                    Gender
+                                                </div>
+                                                <div class="text-text col-6 text-style-5 info-game-name">
+                                                    {{ $service->user->gender }}
+                                                </div>
                                             </div>
-                                            <div class="text-text col-6 text-style-5 info-game-name">
-                                                {{ $service->user->gender }}
+                                            <div class="body-fluid row mt-1">
+                                                <div class="text-name col-6 text-style-5 text-start info-game-name ">
+                                                    Age
+                                                </div>
+                                                <div class="text-text col-6 text-style-5 info-game-name">
+                                                    {{ $service->user->getAge() }}
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="body-fluid row mt-1">
-                                            <div class="text-name col-6 text-style-5 text-start info-game-name ">
-                                                Age
-                                            </div>
-                                            <div class="text-text col-6 text-style-5 info-game-name">
-                                                {{ $service->user->getAge() }}
-                                            </div>
-                                        </div>
-                                        <div class="body-fluid row mt-1">
-                                            <div class="text-name col-6 text-style-5 text-start info-game-name">
-                                                Language
-                                            </div>
-                                            <div class="text-text col-6 text-style-5 info-game-name">
-                                                {{ $service->user->primary_language }}
+                                            <div class="body-fluid row mt-1">
+                                                <div class="text-name col-6 text-style-5 text-start info-game-name">
+                                                    Language
+                                                </div>
+                                                <div class="text-text col-6 text-style-5 info-game-name">
+                                                    {{ $service->user->primary_language }}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -152,8 +148,7 @@
                         </div>
                     </div>
                     <!-- END: Service Profile Side bar First Card -->
-                    <div 
-                    <div class="card mt-4 mb-4 card-box-shadow">
+                    <div <div class="card mt-4 mb-4 card-box-shadow">
                         <div class="card table-card">
                             <h4 class="profile-name text-style-4 color-primary head-style-fst">
                                 Available Time
@@ -346,7 +341,7 @@
                                                 <p>{{ $service->instructions }}</p>
                                             </div>
                                             @if (!empty($service->images) && isset($service->images[0]) && !empty($service->images[0]))
-                                                <div class="col-12 col-md-5 text-center ">
+                                                <div class="col-12 col-md-5 text-right ">
                                                     <a href="#" class="pop">
                                                         <img id="img03" src='/{{ $service->images[0]->file_name }}'
                                                             alt=""
@@ -628,8 +623,8 @@
                                                                                         class="fas fa-address-card"></i>Boost
                                                                                     This Post</li>
                                                                                 <!-- <li><i class="fas fa-clock"></i>Schedule Post</li>
-                                                                                                                                                                                                                                                                                                                <li><i class="fab fa-wpexplorer"></i>Select as featured</li>
-                                                                                                                                                                                                                                                                                                                <li><i class="fas fa-bell-slash"></i>Turn off Notifications</li> -->
+                                                                                                                                                                                                                                                                                                                    <li><i class="fab fa-wpexplorer"></i>Select as featured</li>
+                                                                                                                                                                                                                                                                                                                    <li><i class="fas fa-bell-slash"></i>Turn off Notifications</li> -->
                                                                             </ul>
                                                                         </div>
                                                                     </div>
@@ -653,10 +648,10 @@
                                                                     </div>
 
                                                                     <!-- <ul class="like-dislike">
-                                                                                                                                                                                                                                                                                                            <li><a href="#" title="Save to Pin Post"><i class="fa fa-thumb-tack"></i></a></li>
-                                                                                                                                                                                                                                                                                                            <li><a href="#" title="Like Post"><i class="fas fa-thumbs-up"></i></a></li>
-                                                                                                                                                                                                                                                                                                            <li><a href="#" title="dislike Post"><i class="fas fa-thumbs-down"></i></a></li>
-                                                                                                                                                                                                                                                                                                          </ul> -->
+                                                                                                                                                                                                                                                                                                                <li><a href="#" title="Save to Pin Post"><i class="fa fa-thumb-tack"></i></a></li>
+                                                                                                                                                                                                                                                                                                                <li><a href="#" title="Like Post"><i class="fas fa-thumbs-up"></i></a></li>
+                                                                                                                                                                                                                                                                                                                <li><a href="#" title="dislike Post"><i class="fas fa-thumbs-down"></i></a></li>
+                                                                                                                                                                                                                                                                                                              </ul> -->
                                                                     <div class="we-video-info">
                                                                         <ul>
                                                                             <li>
@@ -681,13 +676,13 @@
                                                                             </li>
 
                                                                             <!-- <li>
-                                                                                                                                                                                                                                                                                                                <span>
-                                                                                                                                                                                                                                                                                                                  <a class="share-pst" href="#" title="Share">
-                                                                                                                                                                                                                                                                                                                    <i class="fa fa-share-alt"></i>
-                                                                                                                                                                                                                                                                                                                  </a>
-                                                                                                                                                                                                                                                                                                                  <ins>20</ins>
-                                                                                                                                                                                                                                                                                                                </span>	
-                                                                                                                                                                                                                                                                                                              </li> -->
+                                                                                                                                                                                                                                                                                                                    <span>
+                                                                                                                                                                                                                                                                                                                      <a class="share-pst" href="#" title="Share">
+                                                                                                                                                                                                                                                                                                                        <i class="fa fa-share-alt"></i>
+                                                                                                                                                                                                                                                                                                                      </a>
+                                                                                                                                                                                                                                                                                                                      <ins>20</ins>
+                                                                                                                                                                                                                                                                                                                    </span>	
+                                                                                                                                                                                                                                                                                                                  </li> -->
                                                                         </ul>
                                                                         <div class="users-thumb-list">
                                                                             <a data-toggle="tooltip" title="Anderw" href="#"
@@ -962,7 +957,14 @@
         });
         $('#imageCarousel').slick();
 
-        
+        $('#buyBtn').click(function(e) {
+            var userBalance = @json(Auth::user()->points);
+            var serviceCost = parseFloat('{{ $service->price }}');
+            if (parseFloat(userBalance) < serviceCost) {
+                Swal.fire('Error', 'You do not have enough GP to order this service.', 'error');
+                e.preventDefault();
+            }
+        });
         @if (\Session::has('success'))
             Swal.fire('Success','{{ \Session::get('success') }}','success');
             {{ \Session::forget('success') }}
