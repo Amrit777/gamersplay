@@ -1902,8 +1902,8 @@ form button {
 }
 
 .border-radius-img-v2 img {
-  height: 95% !important;
-  width: 95% !important;
+  height: 90% !important;
+  width: 90% !important;
   margin-top: -70% !important;
   border-radius: 50%;
   margin: auto;
@@ -2587,11 +2587,11 @@ form button {
   .ipad-portrait {
     color: red;
   }
-
+/* 
   #gamePlay {
     margin-left: 35px;
     margin-right: 35px;
-  }
+  } */
 
   .fa-margin-top {
     margin-top: 24% !important;
@@ -2626,10 +2626,10 @@ form button {
 }
 
 @media screen and (min-width: 1600px) and (max-width: 3400px) {
-  #gamePlay {
+  /* #gamePlay {
     margin-left: 125px;
     margin-right: 125px;
-  }
+  } */
 
   .fa-margin-top {
     margin-top: 41% !important;

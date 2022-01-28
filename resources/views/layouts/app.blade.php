@@ -264,7 +264,7 @@ $noFooter = true;
         @endguest
         {{-- @include('partials.login2') --}}
         {{-- @include('partials.register') --}}
-        <main class="py-4">
+        <main class="py-4 container">
             @yield('content')
         </main>
 

@@ -1048,4 +1048,35 @@ p.card-text {
     margin-top: 0px;
 }
 
+@media (min-width: 1400px) {
+    .container-xl, .container-lg, .container-md, .container-sm, .container {
+        max-width: 1360px;
+    }
+}
+@media (min-width: 1500px) {
+    .container-xl, .container-lg, .container-md, .container-sm, .container {
+        max-width: 1460px;
+    }
+}
+@media (min-width: 1700px) {
+    .container-xl, .container-lg, .container-md, .container-sm, .container {
+        max-width: 1460px;
+    }
+}
+@media (min-width: 1920px) {
+    .container-xl, .container-lg, .container-md, .container-sm, .container {
+        max-width: 1800px;
+    }
+}
+@media (min-width: 2040px) {
+    .container-xl, .container-lg, .container-md, .container-sm, .container {
+        max-width: 1800px;
+    }
+}
+@media (min-width: 3600px) {
+    .container-xl, .container-lg, .container-md, .container-sm, .container {
+        max-width: 1880px;
+    }
+}
+
 /* custom css : Amit Singh */
