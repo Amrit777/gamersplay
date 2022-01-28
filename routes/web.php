@@ -52,10 +52,10 @@ Route::prefix('auth')->group(function() {
 
 });
 
+Route::get('/service/{id}', [ServicesController::class, 'service'])->name('service');
 
 // Authentication required routes.
 Route::middleware(['auth','verified'])->group(function () {
-    Route::get('/service/{id}', [ServicesController::class, 'service'])->name('service');
     Route::get('/points', [PurchaseController::class, 'index'])->name('points');
     Route::get('/orders', [PurchaseController::class, 'orders'])->name('orders');
     Route::get('/transactions', [PurchaseController::class, 'transactions'])->name('transactions');
