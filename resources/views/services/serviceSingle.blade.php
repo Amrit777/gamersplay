@@ -37,9 +37,10 @@
                                         <a class="btn-cust" type="button">Follow</a>
                                     </div>
                                     <div class="col-6 cust-nab-center">
-                                        <div class="border-radius-img-v2">
+                                        <div class="">
                                             <a href="#" class="pop">
-                                                <img id="img02" src='{{ $service->user->getProfilePicture() }}' alt=""
+                                                <img id="circle-profile-pic"
+                                                    src='{{ $service->user->getProfilePicture() }}' alt=""
                                                     class="img-fluid profile-image-v2 zoom-clicked-img" />
                                             </a>
                                         </div>
@@ -348,17 +349,17 @@
                                     <div class="service-main-body-content">
                                         <div class="row">
                                             <div class="col-sm-12 col-md-6 font-weight-600 margin-bottom-1rem">
-                                                <h1>{{ $service->name }}</h1>
+                                                <h1>{{ $service->category->name ?: 'NA' }}</h1>
                                             </div>
                                             <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6 margin-bottom-1rem ">
                                                 <button id="buyBtn" class="btn btn-block btn-primary btn-right-50">Order
-                                                    ({{ $service->price }} GP)
+                                                    ({{ $service->price ?: '0' }} GP)
                                                 </button>
                                             </div>
                                         </div>
                                         <div class="row mt-4">
                                             <div class="col-sm-12 col-md-7 mt-1 text-justify margin-bottom-1rem">
-                                                <p>{{ $service->instructions }}</p>
+                                                <p>{{ $service->instructions ?: 'NA' }}</p>
                                             </div>
                                             @if (!empty($service->images) && isset($service->images[0]) && !empty($service->images[0]))
                                                 <div class="col-12 col-md-5 text-right ">
@@ -644,8 +645,8 @@
                                                                                         class="fas fa-address-card"></i>Boost
                                                                                     This Post</li>
                                                                                 <!-- <li><i class="fas fa-clock"></i>Schedule Post</li>
-                                                                                                                                                                                                                                                                                                                                                    <li><i class="fab fa-wpexplorer"></i>Select as featured</li>
-                                                                                                                                                                                                                                                                                                                                                    <li><i class="fas fa-bell-slash"></i>Turn off Notifications</li> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                <li><i class="fab fa-wpexplorer"></i>Select as featured</li>
+                                                                                                                                                                                                                                                                                                                                                                                                                <li><i class="fas fa-bell-slash"></i>Turn off Notifications</li> -->
                                                                             </ul>
                                                                         </div>
                                                                     </div>
@@ -700,13 +701,13 @@
                                                                             </li>
 
                                                                             <!-- <li>
-                                                                                                                                                                                                                                                                                                                                                    <span>
-                                                                                                                                                                                                                                                                                                                                                      <a class="share-pst" href="#" title="Share">
-                                                                                                                                                                                                                                                                                                                                                        <i class="fa fa-share-alt"></i>
-                                                                                                                                                                                                                                                                                                                                                      </a>
-                                                                                                                                                                                                                                                                                                                                                      <ins>20</ins>
-                                                                                                                                                                                                                                                                                                                                                    </span>	
-                                                                                                                                                                                                                                                                                                                                                  </li> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                <span>
+                                                                                                                                                                                                                                                                                                                                                                                                                  <a class="share-pst" href="#" title="Share">
+                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="fa fa-share-alt"></i>
+                                                                                                                                                                                                                                                                                                                                                                                                                  </a>
+                                                                                                                                                                                                                                                                                                                                                                                                                  <ins>20</ins>
+                                                                                                                                                                                                                                                                                                                                                                                                                </span>	
+                                                                                                                                                                                                                                                                                                                                                                                                              </li> -->
                                                                         </ul>
                                                                         <div class="users-thumb-list">
                                                                             <a data-toggle="tooltip" title="Anderw" href="#"
@@ -934,10 +935,56 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('.pop').find('img').each(function() {
-                var imgClass = (this.width / this.height > 1) ? 'wide' : 'tall';
-                $(this).addClass(imgClass);
-            })
+            var originalCircleProfilePic = document.getElementById('circle-profile-pic');
+            console.log("originalCircleProfilePic",originalCircleProfilePic)
+            var tempCircleProfilePic = originalCircleProfilePic;
+            ResizeProfilePic(tempCircleProfilePic);
+            var resizeTimer;
+            $(window).resize(function() {
+            console.log("tempCircleProfilePic",tempCircleProfilePic)
+
+                console.log("resizeddd");
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(ResizeProfilePic(tempCircleProfilePic), 200);
+            });
+
+            function ResizeProfilePic(circleProfilePic) {
+                // resize image based on resolution
+                var circleProfilePicWidth = parseFloat(circleProfilePic.width);
+                var circleProfilePicHeight = parseFloat(circleProfilePic.height);
+                var circleProfilePicDiff = parseFloat(circleProfilePicWidth / circleProfilePicHeight);
+                console.log("width: ", circleProfilePicWidth);
+                console.log("height: ", circleProfilePicHeight);
+                console.log("diff: ", circleProfilePicDiff);
+                var nearbyBtnHeight = parseFloat($(".btn-cust").height());
+                var mainTotal;
+                if (circleProfilePicWidth !== circleProfilePicHeight) {
+                    if (circleProfilePicDiff > 1) {
+                        $(".profile-image-v2").css("height", circleProfilePicWidth + 'px');
+                        $(".profile-image-v2").css("width", circleProfilePicWidth + 'px');
+                        mainTotal = parseFloat(circleProfilePicWidth - nearbyBtnHeight);
+                        console.log("wide image");
+                        console.log("mainTotal: ", mainTotal);
+                    } else {
+                        $(".profile-image-v2").css("height", circleProfilePicHeight + 'px');
+                        $(".profile-image-v2").css("width", circleProfilePicHeight + 'px');
+                        mainTotal = parseFloat(circleProfilePicHeight - nearbyBtnHeight);
+                        console.log("tall image");
+                        console.log("mainTotal: ", mainTotal);
+                    }
+                    $(".profile-image-v2").css("margin-top", "-" + mainTotal + "px");
+                }
+            }
+
+
+            // $('.pop').find('img').each(function() {
+            //     var imgClass = (this.width / this.height > 1) ? 'wide' : 'tall';
+            //     $(this).addClass(imgClass);
+            // })
+            // target.width = ((210 * screen.width) / 1280) + 'px';
+            // target.height = ((99 * screen.height) / 800) + 'px';
+
+
             var showChar = 100;
             var ellipsestext = "...";
             var moretext = "more";

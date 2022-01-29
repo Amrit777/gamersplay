@@ -1098,5 +1098,20 @@ p.card-text {
     margin-top: 7px !important;
 }
 
-
+.table th, .table td {
+    border-top: 1px solid #ffffff;
+}
+.profile-image-v2 {
+    height: 90%;
+    width: 90%;
+    margin-top: -70%;
+    border-radius: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: auto;
+    text-align: center;
+    display: flex;
+    border: 4px solid white;
+  }
+  
 /* custom css : Amit Singh */

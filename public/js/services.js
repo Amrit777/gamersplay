@@ -72,7 +72,7 @@ function generateServiceCSS(service) {
 
     html+= "<div style='text-align:center;'>";
     html += '<h4>'+service['users_name']+'</h4>';
-    html += '<small style="max-width:80%;">'+service['name']+'</small>';
+    html += '<small style="max-width:80%;">'+showLessText(service['description'],28)+'</small>';
     // html += '<small><span style="font-size:20px;">'+service['price']+'</span> GP</small>';
 
     html+="</div>";
@@ -95,6 +95,13 @@ function generateServiceCSS(service) {
     html += '</div>';
     html += '</div>';
     return html;
+}
+function showLessText(data,length) {
+    if(data.length > length){
+        return data.slice(0, length) + "....";
+    }else{
+        return data;
+    }
 }
 
 function updateCategoryID(id) {

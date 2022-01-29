@@ -1919,11 +1919,11 @@ form button {
 }
 
 @media screen and (max-width: 1024px) {
-  .border-radius-img-v2 img {
+  /* .border-radius-img-v2 img {
     height: 100px;
     width: 100px;
     margin-top: -58px;
-  }
+  } */
 
   .friend-name {
     width: 89%;
@@ -1946,11 +1946,11 @@ form button {
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1024px) {
-  .border-radius-img-v2 img {
+  /* .border-radius-img-v2 img {
     height: 50px;
     width: 50px;
     margin-top: -34px;
-  }
+  } */
 
   .info-game-name {
     font-size: 12px;
@@ -1990,11 +1990,11 @@ form button {
 }
 
 @media screen and (max-width: 990px) {
-  .border-radius-img-v2 img {
+  /* .border-radius-img-v2 img {
     height: 200px;
     width: 200px;
     margin-top: -116px;
-  }
+  } */
 
   .col-tab-nav {
     width: 100%;
@@ -2012,11 +2012,11 @@ form button {
 }
 
 @media screen and (max-width: 760px) {
-  .border-radius-img-v2 img {
+  /* .border-radius-img-v2 img {
     height: 200px;
     width: 200px;
     margin-top: -116px;
-  }
+  } */
 
   .col-tab-nav-snd {
     margin-left: 0px !important;
@@ -2063,14 +2063,11 @@ form button {
 }
 
 @media screen and (max-width: 568px) {
-  .border-radius-img-v2 img {
-    /* height: 100px;
-      width: 100px;
-      margin-top: -58px; */
+  /* .border-radius-img-v2 img {
     height: 115px;
     width: 115px;
     margin-top: -86px;
-  }
+  } */
 
   .weeklyReport {
     margin-top: 20px;
@@ -2503,6 +2500,7 @@ form button {
 .col-3.fa-round-border:hover a {
   color: var(--color-light) !important;
 }
+
 .hr-dotted-2px {
   border-top: 2px dashed var(--color-lighter-primary);
 }
@@ -2612,8 +2610,8 @@ form button {
 
 @media screen and (min-width: 1600px) and (max-width: 3400px) {
 
-  @-moz-document url-prefix() {
-  }
+
+  @-moz-document url-prefix() {}
 
 }
 
@@ -2623,5 +2621,6 @@ form button {
     margin-left: 10% !important;
   }
 }
+
 
 /* custom css : Amit Singh */

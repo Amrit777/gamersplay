@@ -175,7 +175,8 @@ class ProfileController extends Controller
     public function editAvatar(Request $request)
     {
         request()->validate([
-            'profile_picture'  => 'required|mimes:jpg,png|max:4096',
+            'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:4096|dimensions:min_width=350,min_height=350',
+            // 'profile_picture'  => 'required|mimes:jpg,png|max:4096',
             'id'  => 'required|numeric',
         ]);
 
@@ -187,9 +188,6 @@ class ProfileController extends Controller
         }
 
         $user = User::whereId($request->id)->first();
-
-
-
         if ($files = $request->profile_picture) {
 
             //store file into document folder
