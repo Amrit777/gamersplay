@@ -935,56 +935,6 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-            var originalCircleProfilePic = document.getElementById('circle-profile-pic');
-            console.log("originalCircleProfilePic",originalCircleProfilePic)
-            var tempCircleProfilePic = originalCircleProfilePic;
-            ResizeProfilePic(tempCircleProfilePic);
-            var resizeTimer;
-            $(window).resize(function() {
-            console.log("tempCircleProfilePic",tempCircleProfilePic)
-
-                console.log("resizeddd");
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(ResizeProfilePic(tempCircleProfilePic), 200);
-            });
-
-            function ResizeProfilePic(circleProfilePic) {
-                // resize image based on resolution
-                var circleProfilePicWidth = parseFloat(circleProfilePic.width);
-                var circleProfilePicHeight = parseFloat(circleProfilePic.height);
-                var circleProfilePicDiff = parseFloat(circleProfilePicWidth / circleProfilePicHeight);
-                console.log("width: ", circleProfilePicWidth);
-                console.log("height: ", circleProfilePicHeight);
-                console.log("diff: ", circleProfilePicDiff);
-                var nearbyBtnHeight = parseFloat($(".btn-cust").height());
-                var mainTotal;
-                if (circleProfilePicWidth !== circleProfilePicHeight) {
-                    if (circleProfilePicDiff > 1) {
-                        $(".profile-image-v2").css("height", circleProfilePicWidth + 'px');
-                        $(".profile-image-v2").css("width", circleProfilePicWidth + 'px');
-                        mainTotal = parseFloat(circleProfilePicWidth - nearbyBtnHeight);
-                        console.log("wide image");
-                        console.log("mainTotal: ", mainTotal);
-                    } else {
-                        $(".profile-image-v2").css("height", circleProfilePicHeight + 'px');
-                        $(".profile-image-v2").css("width", circleProfilePicHeight + 'px');
-                        mainTotal = parseFloat(circleProfilePicHeight - nearbyBtnHeight);
-                        console.log("tall image");
-                        console.log("mainTotal: ", mainTotal);
-                    }
-                    $(".profile-image-v2").css("margin-top", "-" + mainTotal + "px");
-                }
-            }
-
-
-            // $('.pop').find('img').each(function() {
-            //     var imgClass = (this.width / this.height > 1) ? 'wide' : 'tall';
-            //     $(this).addClass(imgClass);
-            // })
-            // target.width = ((210 * screen.width) / 1280) + 'px';
-            // target.height = ((99 * screen.height) / 800) + 'px';
-
-
             var showChar = 100;
             var ellipsestext = "...";
             var moretext = "more";
