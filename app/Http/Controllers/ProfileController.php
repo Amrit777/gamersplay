@@ -174,11 +174,17 @@ class ProfileController extends Controller
 
     public function editAvatar(Request $request)
     {
-        request()->validate([
+        $rules = [
             'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:4096|dimensions:min_width=350,min_height=350',
             // 'profile_picture'  => 'required|mimes:jpg,png|max:4096',
             'id'  => 'required|numeric',
-        ]);
+        ];
+
+        $messages = [
+            'profile_picture.dimensions' => "Please upload atleast (350x350)px image.",
+
+        ];
+        $this->validate($request, $rules, $messages);
 
         if (Auth::id() != $request->id) {
             return Response()->json([
