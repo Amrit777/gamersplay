@@ -277,8 +277,8 @@
 
                 <div class="col-lg-8 col-sm-12 mainBody">
                     <!-- START: First Card mianbody -->
-                    <div class="card">
-                        <div class="card-body">
+                    <div class="card review-body">
+                        <div class="card-body ">
                             <div class="service-game-main-body">
                                 <div class="service-game-nav">
                                     <!-- START: Service main Body nav bar-->
@@ -346,7 +346,7 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <div class="card mt-2 p-3">
-                                <div class="card-body">
+                                <div class="card-body ">
                                     <div class="service-main-body-content">
                                         <div class="row">
                                             <div class="col-sm-12 col-md-6 font-weight-600 margin-bottom-1rem">
@@ -381,7 +381,6 @@
                                     <div class="service-main-body-content">
                                         <div class="row">
                                             <div class="col-sm-12">
-
                                                 <span class="d-flex review-header">
                                                     <h5 class="color-primary fw-bold">Service Review(s)</h5>
                                                     <span class="line"></span>
@@ -425,7 +424,6 @@
                                                         </div>
                                                     </li>
                                                 </ul>
-
                                             </div>
                                         </div>
                                     </div>
