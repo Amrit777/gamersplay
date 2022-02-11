@@ -1142,4 +1142,9 @@ p.card-text {
     border-radius: 8px;
 }
 
+.cust-nab-left .btn-cust {
+    padding: 5px;
+    margin-left: 18%;
+}
+
 /* custom css : Amit Singh */
