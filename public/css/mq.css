@@ -112,3 +112,11 @@
         margin-top: -22px;
     }
 }
+
+@media(min-width:1900px) {
+    
+.cust-nab-left .btn-cust {
+    padding: 5px;
+    margin-left: 23%;
+}
+}
