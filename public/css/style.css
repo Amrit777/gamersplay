@@ -1074,6 +1074,12 @@ p.card-text {
     .container-xl, .container-lg, .container-md, .container-sm, .container {
         max-width: 1800px;
     }
+
+    .cust-nab-left .btn-cust {
+        padding: 5px;
+        margin-left: 23%;
+    }
+
 }
 
 @media (min-width: 2040px) {
