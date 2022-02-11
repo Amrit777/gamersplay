@@ -358,9 +358,9 @@
             reloadCaptcha();
         });
 
-        setInterval(() => {
-            reloadCaptcha();
-        }, 60 * 1000);
+        // setInterval(() => {
+        //     reloadCaptcha();
+        // }, 60 * 1000);
 
         function reloadCaptcha() {
             $.ajax({

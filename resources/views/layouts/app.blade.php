@@ -17,6 +17,7 @@ $noFooter = true;
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/init.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/slick.min.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Fonts -->
