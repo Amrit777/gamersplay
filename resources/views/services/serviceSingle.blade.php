@@ -293,13 +293,13 @@
                                                         Service Details
                                                     </a>
                                                 </li>
-                                                {{-- <li class="nav-item" role="presentation">
+                                                <li class="nav-item" role="presentation">
                                                     <a class="nav-link" id="profile-tab" data-bs-toggle="tab"
                                                         data-bs-target="#profile" type="button" role="tab"
                                                         aria-controls="profile" aria-selected="false">
                                                         Timeline
                                                     </a>
-                                                </li> --}}
+                                                </li>
                                                 {{-- <li class="nav-item" role="presentation">
                                                     <a class="nav-link" id="contact-tab" data-bs-toggle="tab"
                                                         data-bs-target="#contact" type="button" role="tab"
@@ -384,45 +384,44 @@
                                                 <span class="d-flex review-header">
                                                     <h5 class="color-primary fw-bold">Service Review(s)</h5>
                                                     <span class="line"></span>
-                                                    <!-- <span class="number ms-5 fw-bold">133</span> -->
-                                                    <span class="number-row-card ms-2"><i class="fas fa-star"></i>
-                                                        4.5</span>
+                                                    <span class="number-row-card ms-2">
+                                                        <i class="fas fa-star"></i>
+                                                        {{$service->average_rate}}</span>
                                                 </span>
                                                 <ul class="review mt-3 mb-3">
-                                                    <li class="review-body mb-3">
-                                                        <div
-                                                            class="review-head border-bottom-2 d-flex justify-content-between">
-                                                            <span class="review-intro p-3">
-                                                                <img src="/temp-services/images/profile.jpg" alt="" />
-                                                                <span class="review-profile">
-                                                                    <p class="fw-bold">Dan Cortese</p>
-                                                                    <p class="color-gray-fst">February 24, 2021
-                                                                    </p>
-                                                                    <span class="review-star mobile-star">
-                                                                        <i class="fas fa-star"></i>
-                                                                        <i class="fas fa-star"></i>
-                                                                        <i class="fas fa-star"></i>
-                                                                        <i class="fas fa-star"></i>
-                                                                        <i class="fas fa-star"></i>
+                                                    @if(!empty($service->ratings))
+                                                        @foreach($service->ratings as $rating)
+                                                            <li class="review-body mb-3">
+                                                                <div
+                                                                    class="review-head border-bottom-2 d-flex justify-content-between">
+                                                                    <span class="review-intro p-3">
+                                                                        <img src='{{ $rating->user->getProfilePicture() }}'  alt="" />
+                                                                        <span class="review-profile">
+                                                                            <p class="fw-bold">{{$rating->user->name}}</p>
+                                                                            <p class="color-gray-fst">
+                                                                                {{Carbon\Carbon::parse($rating->created_at)->format('F d, Y')}}
+                                                                            </p>
+                                                                            <span class="review-star mobile-star">
+                                                                            {!! str_repeat('<i class="fa fa-star"></i>', $rating->rating) !!}
+                                                                            {!! str_repeat('<i class="fa fa-star-o"></i>', 5 - $rating->rating) !!}
+                                                                            </span>
+                                                                        </span>
                                                                     </span>
-                                                                </span>
-                                                            </span>
-                                                            <span class="review-star desktop-star">
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                            </span>
-                                                        </div>
-                                                        <div class="review-comment color-gray-fst p-3">
-                                                            Lorem ipsum dolor sit amet consectetur adipisicing
-                                                            elit.
-                                                            Molestiae aliquid quasi deleniti, nesciunt non
-                                                            perspiciatis
-                                                            magnam distinctio fugit tempora ut?
-                                                        </div>
-                                                    </li>
+                                                                    <span class="review-star desktop-star">
+                                                                        {!! str_repeat('<i class="fa fa-star"></i>', $rating->rating) !!}
+                                                                        {!! str_repeat('<i class="fa fa-star-o"></i>', 5 - $rating->rating) !!}
+                                                                    </span>
+                                                                </div>
+                                                                <div class="review-comment color-gray-fst p-3">
+                                                                    Lorem ipsum dolor sit amet consectetur adipisicing
+                                                                    elit.
+                                                                    Molestiae aliquid quasi deleniti, nesciunt non
+                                                                    perspiciatis
+                                                                    magnam distinctio fugit tempora ut?
+                                                                </div>
+                                                            </li>
+                                                        @endforeach
+                                                    @endif
                                                 </ul>
                                             </div>
                                         </div>

@@ -15,10 +15,10 @@ class CreateRatingsTable extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
-            $table->integer('service_id');
-            $table->integer('order_id');
-            $table->integer('user_id');
-            $table->integer('rating');
+            $table->integer('service_id')->nullable();
+            $table->integer('order_id')->nullable();
+            $table->integer('user_id')->nullable();
+            $table->integer('rating')->default(0);
             // 0 - false, 1 - true
             $table->integer('anonymous')->default(0);
             $table->string('anonymous_name')->nullable();
