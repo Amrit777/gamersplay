@@ -2,14 +2,13 @@
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('css/slick-theme.css') }}">
-
 @endsection
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{{asset('css/style-services.css?v=').time()}}" />
-    
+    <link rel="stylesheet" href="{{ asset('css/style-services.css?v=') . time() }}" />
+
 
 
     {{-- NEW CONTENT START --}}
@@ -170,7 +169,7 @@
                         </div>
                     </div>
                     <!-- END: Service Profile Side bar First Card -->
-                    <div <div class="card mt-4 mb-4 card-box-shadow">
+                    <div class="card mt-4 mb-4 card-box-shadow">
                         <div class="card table-card">
                             <h4 class="profile-name text-style-4 color-primary head-style-fst">
                                 Available Time
@@ -216,7 +215,6 @@
                                     <tr>
                                         <th>Thursday</th>
                                         @if (isset(explode(':', $service->thursday_from)[1]) && isset(explode(':', $service->thursday_to)[1]))
-
                                             <td>{{ explode(':', $service->thursday_from)[0] . ':' . explode(':', $service->thursday_from)[1] }}
                                             </td>
                                             <td>-</td>
@@ -229,7 +227,6 @@
                                     <tr>
                                         <th>Friday</th>
                                         @if (isset(explode(':', $service->friday_from)[1]) && isset(explode(':', $service->friday_to)[1]))
-
                                             <td>{{ explode(':', $service->friday_from)[0] . ':' . explode(':', $service->friday_from)[1] }}
                                             </td>
                                             <td>-</td>
@@ -242,7 +239,6 @@
                                     <tr>
                                         <th>Saturday</th>
                                         @if (isset(explode(':', $service->saturday_from)[1]) && isset(explode(':', $service->saturday_to)[1]))
-
                                             <td>{{ explode(':', $service->saturday_from)[0] . ':' . explode(':', $service->saturday_from)[1] }}
                                             </td>
                                             <td>-</td>
@@ -255,7 +251,6 @@
                                     <tr>
                                         <th>Sunday</th>
                                         @if (isset(explode(':', $service->sunday_from)[1]) && isset(explode(':', $service->sunday_to)[1]))
-
                                             <td>{{ explode(':', $service->sunday_from)[0] . ':' . explode(':', $service->sunday_from)[1] }}
                                             </td>
                                             <td>-</td>
@@ -386,24 +381,26 @@
                                                     <span class="line"></span>
                                                     <span class="number-row-card ms-2">
                                                         <i class="fas fa-star"></i>
-                                                        {{$service->average_rate}}</span>
+                                                        {{ $service->average_rate }}</span>
                                                 </span>
                                                 <ul class="review mt-3 mb-3">
-                                                    @if(!empty($service->ratings))
-                                                        @foreach($service->ratings as $rating)
+                                                    @if (!empty($service->ratings))
+                                                        @foreach ($service->ratings as $rating)
                                                             <li class="review-body mb-3">
                                                                 <div
                                                                     class="review-head border-bottom-2 d-flex justify-content-between">
                                                                     <span class="review-intro p-3">
-                                                                        <img src='{{ $rating->user->getProfilePicture() }}'  alt="" />
+                                                                        <img src='{{ $rating->user->getProfilePicture() }}'
+                                                                            alt="" />
                                                                         <span class="review-profile">
-                                                                            <p class="fw-bold">{{$rating->user->name}}</p>
+                                                                            <p class="fw-bold">
+                                                                                {{ $rating->user->name }}</p>
                                                                             <p class="color-gray-fst">
-                                                                                {{Carbon\Carbon::parse($rating->created_at)->format('F d, Y')}}
+                                                                                {{ Carbon\Carbon::parse($rating->created_at)->format('F d, Y') }}
                                                                             </p>
                                                                             <span class="review-star mobile-star">
-                                                                            {!! str_repeat('<i class="fa fa-star"></i>', $rating->rating) !!}
-                                                                            {!! str_repeat('<i class="fa fa-star-o"></i>', 5 - $rating->rating) !!}
+                                                                                {!! str_repeat('<i class="fa fa-star"></i>', $rating->rating) !!}
+                                                                                {!! str_repeat('<i class="fa fa-star-o"></i>', 5 - $rating->rating) !!}
                                                                             </span>
                                                                         </span>
                                                                     </span>
@@ -442,174 +439,222 @@
                                                 <!-- START: Create Post -->
                                                 <div class="central-meta postbox">
                                                     <span class="create-post">Create post</span>
-                                                    <div class="new-postbox">
-                                                        <figure>
-                                                            <img src="/temp-services/images/admin.jpg" alt="">
-                                                        </figure>
-                                                        <div class="newpst-input">
-                                                            <form method="post">
-                                                                <textarea rows="2"
+                                                    <form name="add-blog-post-form" id="add-blog-post-form" method="post"
+                                                        action="{{ route('createPost') }}">
+                                                        @csrf
+                                                        <input type="hidden" name="service_id"
+                                                            value="{{ $service->id }}">
+                                                        <div class="new-postbox">
+                                                            <figure>
+                                                                <img src="/temp-services/images/admin.jpg" alt="">
+                                                            </figure>
+                                                            <div class="newpst-input">
+                                                                <textarea rows="2" name="content"
                                                                     placeholder="Share some what you are thinking?"></textarea>
-                                                            </form>
-                                                        </div>
-                                                        <div class="attachments">
-                                                            <ul>
-                                                                <li>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div id="video-holder" class="d-none">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-video">
+                                                                        <polygon points="23 7 16 12 23 17 23 7">
+                                                                        </polygon>
+                                                                        <rect x="1" y="5" width="15" height="14" rx="2"
+                                                                            ry="2"></rect>
+                                                                    </svg>
+                                                                    <input name="video_input" type="hidden" id="video-form"
+                                                                        readonly>
+                                                                    <span id="videofilename"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div id="music-holder" class="d-none">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-music">
+                                                                        <path
+                                                                            d="M9 17H5a2 2 0 0 0-2 2 2 2 0 0 0 2 2h2a2 2 0 0 0 2-2zm12-2h-4a2 2 0 0 0-2 2 2 2 0 0 0 2 2h2a2 2 0 0 0 2-2z">
+                                                                        </path>
+                                                                        <polyline points="9 17 9 5 21 3 21 15">
+                                                                        </polyline>
+                                                                    </svg>
+                                                                    <input name="music_input" type="hidden" id="music-form"
+                                                                        readonly>
+                                                                    <span id="musicfilename"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div id="image-holder"></div>
+                                                            </div>
+                                                            <div class="attachments">
+                                                                <ul>
+                                                                    {{-- <li>
                                                                     <span class="add-loc">
                                                                         <i class="fa fa-map-marker"></i>
                                                                     </span>
-                                                                </li>
-                                                                <li>
-                                                                    <i class="fa fa-music"></i>
-                                                                    <label class="fileContainer">
-                                                                        <input type="file">
-                                                                    </label>
-                                                                </li>
-                                                                <li>
-                                                                    <i class="fa fa-image"></i>
-                                                                    <label class="fileContainer">
-                                                                        <input type="file">
-                                                                    </label>
-                                                                </li>
-                                                                <li>
-                                                                    <i class="fa fa-video-camera"></i>
-                                                                    <label class="fileContainer">
-                                                                        <input type="file">
-                                                                    </label>
-                                                                </li>
-                                                                <li>
+                                                                </li> --}}
+                                                                    <li>
+                                                                        <i class="fa fa-music"></i>
+                                                                        <label class="fileContainer">
+                                                                            <input type="file" id="publisher-music"
+                                                                                name="postMusic" accept="audio/*">
+                                                                        </label>
+                                                                    </li>
+                                                                    <li>
+                                                                        <i class="fa fa-image"></i>
+                                                                        <label class="fileContainer">
+                                                                            <input type="file" id="publisher-photos"
+                                                                                accept="image/x-png, image/gif, image/jpeg"
+                                                                                name="postPhotos[]" multiple="multiple">
+                                                                        </label>
+                                                                    </li>
+                                                                    <li>
+                                                                        <i class="fa fa-video-camera"></i>
+                                                                        <label class="fileContainer">
+                                                                            <input type="file" id="publisher-video"
+                                                                                name="postVideo" accept="video/*">
+                                                                        </label>
+                                                                    </li>
+                                                                    {{-- <li>
                                                                     <i class="fa fa-camera"></i>
                                                                     <label class="fileContainer">
                                                                         <input type="file">
                                                                     </label>
-                                                                </li>
-                                                                <li class="preview-btn">
-                                                                    <button class="post-btn-preview" type="submit"
-                                                                        data-ripple="">Preview</button>
-                                                                </li>
-                                                            </ul>
-                                                            <button class="post-btn" type="submit"
-                                                                data-ripple="">Post</button>
-                                                        </div>
-                                                        <div class="add-location-post">
-                                                            <span>Drag map point to selected area</span>
-                                                            <div class="row">
-
-                                                                <div class="col-lg-6">
-                                                                    <label class="control-label">Lat :</label>
-                                                                    <input type="text" class="" id="us3-lat">
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <label>Long :</label>
-                                                                    <input type="text" class="" id="us3-lon">
-                                                                </div>
+                                                                </li> --}}
+                                                                    {{-- <li class="preview-btn">
+                                                                        <button class="post-btn-preview" type="submit"
+                                                                            data-ripple="">Preview</button>
+                                                                    </li> --}}
+                                                                </ul>
+                                                                <button class="post-btn" type="submit"
+                                                                    data-ripple="">Post</button>
                                                             </div>
-                                                            <!-- map -->
-                                                            <div id="us3" style="position: relative; overflow: hidden;">
-                                                                <div
-                                                                    style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);">
-                                                                    <div style="overflow: hidden;"></div>
-                                                                    <div class="gm-style"
-                                                                        style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px;">
-                                                                        <div tabindex="0" aria-label="Map"
-                                                                            aria-roledescription="map" role="group"
-                                                                            style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;), default; touch-action: pan-x pan-y;">
-                                                                            <div
-                                                                                style="z-index: 1; position: absolute; left: 50%; top: 50%; width: 100%; transform: translate(0px, 0px);">
+                                                            <div class="add-location-post">
+                                                                <span>Drag map point to selected area</span>
+                                                                <div class="row">
+
+                                                                    <div class="col-lg-6">
+                                                                        <label class="control-label">Lat :</label>
+                                                                        <input type="text" class=""
+                                                                            id="us3-lat">
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <label>Long :</label>
+                                                                        <input type="text" class=""
+                                                                            id="us3-lon">
+                                                                    </div>
+                                                                </div>
+                                                                <!-- map -->
+                                                                <div id="us3" style="position: relative; overflow: hidden;">
+                                                                    <div
+                                                                        style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);">
+                                                                        <div style="overflow: hidden;"></div>
+                                                                        <div class="gm-style"
+                                                                            style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px;">
+                                                                            <div tabindex="0" aria-label="Map"
+                                                                                aria-roledescription="map" role="group"
+                                                                                style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;), default; touch-action: pan-x pan-y;">
                                                                                 <div
-                                                                                    style="position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;">
+                                                                                    style="z-index: 1; position: absolute; left: 50%; top: 50%; width: 100%; transform: translate(0px, 0px);">
                                                                                     <div
-                                                                                        style="position: absolute; left: 0px; top: 0px; z-index: 0;">
+                                                                                        style="position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;">
                                                                                         <div
-                                                                                            style="position: absolute; z-index: 985; transform: matrix(1, 0, 0, 1, -244, -53);">
+                                                                                            style="position: absolute; left: 0px; top: 0px; z-index: 0;">
                                                                                             <div
-                                                                                                style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px;">
+                                                                                                style="position: absolute; z-index: 985; transform: matrix(1, 0, 0, 1, -244, -53);">
                                                                                                 <div
-                                                                                                    style="width: 256px; height: 256px;">
+                                                                                                    style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px;">
+                                                                                                    <div
+                                                                                                        style="width: 256px; height: 256px;">
+                                                                                                    </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                </div>
-                                                                                <div
-                                                                                    style="position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;">
-                                                                                </div>
-                                                                                <div
-                                                                                    style="position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;">
-                                                                                </div>
-                                                                                <div
-                                                                                    style="position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;">
                                                                                     <div
-                                                                                        style="position: absolute; left: 0px; top: 0px; z-index: -1;">
+                                                                                        style="position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;">
+                                                                                    </div>
+                                                                                    <div
+                                                                                        style="position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;">
+                                                                                    </div>
+                                                                                    <div
+                                                                                        style="position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;">
                                                                                         <div
-                                                                                            style="position: absolute; z-index: 985; transform: matrix(1, 0, 0, 1, -244, -53);">
+                                                                                            style="position: absolute; left: 0px; top: 0px; z-index: -1;">
                                                                                             <div
-                                                                                                style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 0px; top: 0px;">
+                                                                                                style="position: absolute; z-index: 985; transform: matrix(1, 0, 0, 1, -244, -53);">
+                                                                                                <div
+                                                                                                    style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 0px; top: 0px;">
+                                                                                                </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                    </div>
-                                                                                    <div
-                                                                                        style="width: 27px; height: 43px; overflow: hidden; position: absolute; left: -14px; top: -43px; z-index: 0;">
-                                                                                        <img alt=""
-                                                                                            src="https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png"
-                                                                                            draggable="false"
-                                                                                            style="position: absolute; left: 0px; top: 0px; width: 27px; height: 43px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div
-                                                                                    style="position: absolute; left: 0px; top: 0px; z-index: 0;">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div
-                                                                                style="z-index: 3; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px; touch-action: pan-x pan-y;">
-                                                                                <div
-                                                                                    style="z-index: 4; position: absolute; left: 50%; top: 50%; width: 100%; transform: translate(0px, 0px);">
-                                                                                    <div
-                                                                                        style="position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;">
-                                                                                    </div>
-                                                                                    <div
-                                                                                        style="position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;">
-                                                                                    </div>
-                                                                                    <div
-                                                                                        style="position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;">
-                                                                                        <div aria-label="Drag Me" role="img"
-                                                                                            tabindex="-1"
-                                                                                            style="width: 27px; height: 43px; overflow: hidden; position: absolute; touch-action: none; left: -14px; top: -43px; z-index: 0;">
+                                                                                        <div
+                                                                                            style="width: 27px; height: 43px; overflow: hidden; position: absolute; left: -14px; top: -43px; z-index: 0;">
                                                                                             <img alt=""
-                                                                                                src="https://maps.gstatic.com/mapfiles/transparent.png"
+                                                                                                src="https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png"
                                                                                                 draggable="false"
-                                                                                                usemap="#gmimap0"
-                                                                                                style="width: 27px; height: 43px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"><map
-                                                                                                name="gmimap0"
-                                                                                                id="gmimap0"><area log="miw"
-                                                                                                    coords="13.5,0,4,3.75,0,13.5,13.5,43,27,13.5,23,3.75"
-                                                                                                    shape="poly"
-                                                                                                    tabindex="-1"
-                                                                                                    title="Drag Me"
-                                                                                                    style="cursor: pointer; touch-action: none;"></map>
+                                                                                                style="position: absolute; left: 0px; top: 0px; width: 27px; height: 43px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;">
                                                                                         </div>
                                                                                     </div>
                                                                                     <div
-                                                                                        style="position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;">
+                                                                                        style="position: absolute; left: 0px; top: 0px; z-index: 0;">
                                                                                     </div>
                                                                                 </div>
+                                                                                <div
+                                                                                    style="z-index: 3; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px; touch-action: pan-x pan-y;">
+                                                                                    <div
+                                                                                        style="z-index: 4; position: absolute; left: 50%; top: 50%; width: 100%; transform: translate(0px, 0px);">
+                                                                                        <div
+                                                                                            style="position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;">
+                                                                                        </div>
+                                                                                        <div
+                                                                                            style="position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;">
+                                                                                        </div>
+                                                                                        <div
+                                                                                            style="position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;">
+                                                                                            <div aria-label="Drag Me"
+                                                                                                role="img" tabindex="-1"
+                                                                                                style="width: 27px; height: 43px; overflow: hidden; position: absolute; touch-action: none; left: -14px; top: -43px; z-index: 0;">
+                                                                                                <img alt=""
+                                                                                                    src="https://maps.gstatic.com/mapfiles/transparent.png"
+                                                                                                    draggable="false"
+                                                                                                    usemap="#gmimap0"
+                                                                                                    style="width: 27px; height: 43px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"><map
+                                                                                                    name="gmimap0"
+                                                                                                    id="gmimap0"><area
+                                                                                                        log="miw"
+                                                                                                        coords="13.5,0,4,3.75,0,13.5,13.5,43,27,13.5,23,3.75"
+                                                                                                        shape="poly"
+                                                                                                        tabindex="-1"
+                                                                                                        title="Drag Me"
+                                                                                                        style="cursor: pointer; touch-action: none;"></map>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            style="position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="gm-style-moc"
+                                                                                    style="z-index: 4; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px; opacity: 0;">
+                                                                                    <p class="gm-style-mot"></p>
+                                                                                </div>
+                                                                            </div><iframe aria-hidden="true" frameborder="0"
+                                                                                tabindex="-1"
+                                                                                style="z-index: -1; position: absolute; width: 100%; height: 100%; top: 0px; left: 0px; border: none;"></iframe>
+                                                                            <div
+                                                                                style="pointer-events: none; width: 100%; height: 100%; box-sizing: border-box; position: absolute; z-index: 1000002; opacity: 0; border: 2px solid rgb(26, 115, 232);">
                                                                             </div>
-                                                                            <div class="gm-style-moc"
-                                                                                style="z-index: 4; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px; opacity: 0;">
-                                                                                <p class="gm-style-mot"></p>
-                                                                            </div>
-                                                                        </div><iframe aria-hidden="true" frameborder="0"
-                                                                            tabindex="-1"
-                                                                            style="z-index: -1; position: absolute; width: 100%; height: 100%; top: 0px; left: 0px; border: none;"></iframe>
-                                                                        <div
-                                                                            style="pointer-events: none; width: 100%; height: 100%; box-sizing: border-box; position: absolute; z-index: 1000002; opacity: 0; border: 2px solid rgb(26, 115, 232);">
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-
+                                                    </form>
                                                 </div>
 
 
@@ -620,14 +665,16 @@
 
 
                                                     <!-- digital sponsors -->
-                                                    <div class="central-meta item" style="display: inline-block;">
-                                                        <div class="user-post">
-                                                            <div class="friend-info">
-                                                                <figure>
-                                                                    <img src="/temp-services/images/nearly1.jpg" alt="">
-                                                                </figure>
-                                                                <div class="friend-name">
-                                                                    <div class="more">
+                                                    @foreach ($service->posts as $post)
+                                                        <div class="central-meta item" style="display: inline-block;">
+                                                            <div class="user-post">
+                                                                <div class="friend-info">
+                                                                    <figure>
+                                                                        <img src="{{ $post->postAuthor->getProfilePicture() }}"
+                                                                            alt="">
+                                                                    </figure>
+                                                                    <div class="friend-name">
+                                                                        {{-- <div class="more">
                                                                         <div class="more-post-optns"><i
                                                                                 class="fas fa-ellipsis-h"></i>
                                                                             <ul>
@@ -642,206 +689,209 @@
                                                                                 <li><i
                                                                                         class="fas fa-address-card"></i>Boost
                                                                                     This Post</li>
-                                                                                <!-- <li><i class="fas fa-clock"></i>Schedule Post</li>
-                                                                                                                                                                                                                                                                                                                                                                                                                <li><i class="fab fa-wpexplorer"></i>Select as featured</li>
-                                                                                                                                                                                                                                                                                                                                                                                                                <li><i class="fas fa-bell-slash"></i>Turn off Notifications</li> -->
+                                                                                  <li><i class="fas fa-clock"></i>Schedule Post</li>
+                                                                                  <li><i class="fab fa-wpexplorer"></i>Select as featured</li>
+                                                                                  <li><i class="fas fa-bell-slash"></i>Turn off Notifications</li> 
                                                                             </ul>
+                                                                        </div> 
+                                                                    </div> --}}
+                                                                        <ins><a href="time-line.html"
+                                                                                title="">{{ $post->postAuthor->name ?: 'NA' }}</a>
+                                                                            {{-- share <a href="#" title="">link</a> --}}
+                                                                        </ins>
+                                                                        <span><i class="fa fa-globe"></i> published:
+                                                                            {{-- january,5 2010 19:PM --}}
+                                                                            {{ Carbon\Carbon::parse($post->created_at)->format('F d, Y') }}
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="post-meta">
+                                                                        <div class="description">
+                                                                            <p>{{ $post->content ?: '' }}
+                                                                            </p>
                                                                         </div>
-                                                                    </div>
-                                                                    <ins><a href="time-line.html" title="">Jack
-                                                                            Carter</a>
-                                                                        share <a href="#" title="">link</a></ins>
-                                                                    <span><i class="fa fa-globe"></i> published:
-                                                                        january,5 2010 19:PM
-                                                                    </span>
-                                                                </div>
-                                                                <div class="post-meta">
-                                                                    <div class="description">
-                                                                        <p>
-                                                                            World's most beautiful car in Curabitur <a
-                                                                                href="#" title="">#test
-                                                                                drive booking !</a> the most beatuiful
-                                                                            car
-                                                                            available in america
-                                                                            and the saudia arabia, you can book your
-                                                                            test
-                                                                            drive by our official
-                                                                            website
-                                                                        </p>
-                                                                    </div>
 
-                                                                    {{-- <ul class="like-dislike">
+                                                                        {{-- <ul class="like-dislike">
                                                                         <li><a href="#" title="Save to Pin Post"><i class="fa fa-thumb-tack"></i></a></li>
                                                                         <li><a href="#" title="Like Post"><i class="fas fa-thumbs-up"></i></a></li>
                                                                         <li><a href="#" title="dislike Post"><i class="fas fa-thumbs-down"></i></a></li>
                                                                     </ul> --}}
-                                                                    <div class="we-video-info">
-                                                                        <ul>
-                                                                            <li>
-                                                                                <span class="views" title="views">
-                                                                                    <i class="fa fa-eye"></i>
-                                                                                    <ins>1.2k</ins>
-                                                                                </span>
-                                                                            </li>
-                                                                            <li>
-                                                                                <div class="likes heart"
-                                                                                    title="Like/Dislike"><i
-                                                                                        class="fas fa-heart"></i>
-                                                                                    <span>2K</span>
-                                                                                </div>
-                                                                            </li>
-                                                                            <li>
-                                                                                <span class="comment"
-                                                                                    title="Comments">
-                                                                                    <i class="fa fa-commenting"></i>
-                                                                                    <ins>52</ins>
-                                                                                </span>
-                                                                            </li>
+                                                                        <div class="we-video-info">
+                                                                            <ul>
+                                                                                {{-- <li>
+                                                                                    <span class="views"
+                                                                                        title="views">
+                                                                                        <i class="fa fa-eye"></i>
+                                                                                        <ins>0</ins>
+                                                                                    </span>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="likes heart"
+                                                                                        title="Like/Dislike"><i
+                                                                                            class="fas fa-heart"></i>
+                                                                                        <span>0</span>
+                                                                                    </div>
+                                                                                </li> --}}
+                                                                                {{-- <li>
+                                                                                    <span class="comment"
+                                                                                        title="Comments">
+                                                                                        <i class="fa fa-commenting"></i>
+                                                                                        <ins>0</ins>
+                                                                                    </span>
+                                                                                </li> --}}
 
-                                                                            <!-- <li>
-                                                                                                                                                                                                                                                                                                                                                                                                                <span>
-                                                                                                                                                                                                                                                                                                                                                                                                                  <a class="share-pst" href="#" title="Share">
-                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="fa fa-share-alt"></i>
-                                                                                                                                                                                                                                                                                                                                                                                                                  </a>
-                                                                                                                                                                                                                                                                                                                                                                                                                  <ins>20</ins>
-                                                                                                                                                                                                                                                                                                                                                                                                                </span>	
-                                                                                                                                                                                                                                                                                                                                                                                                              </li> -->
-                                                                        </ul>
-                                                                        <div class="users-thumb-list">
-                                                                            <a data-toggle="tooltip" title="Anderw" href="#"
-                                                                                data-original-title="Anderw">
-                                                                                <img alt=""
-                                                                                    src="/temp-services/images/userlist-1.jpg">
-                                                                            </a>
-                                                                            <a data-toggle="tooltip" title="frank" href="#"
-                                                                                data-original-title="frank">
-                                                                                <img alt=""
-                                                                                    src="/temp-services/images/userlist-2.jpg">
-                                                                            </a>
-                                                                            <a data-toggle="tooltip" title="Sara" href="#"
-                                                                                data-original-title="Sara">
-                                                                                <img alt=""
-                                                                                    src="/temp-services/images/userlist-3.jpg">
-                                                                            </a>
-                                                                            <a data-toggle="tooltip" title="Amy" href="#"
-                                                                                data-original-title="Amy">
-                                                                                <img alt=""
-                                                                                    src="/temp-services/images/userlist-1.jpg">
-                                                                            </a>
-                                                                            <a data-toggle="tooltip" title="Ema" href="#"
-                                                                                data-original-title="Ema">
-                                                                                <img alt=""
-                                                                                    src="/temp-services/images/userlist-2.jpg">
-                                                                            </a>
-                                                                            <span><strong>You</strong>, <b>Sarah</b> and
-                                                                                <a href="#" title="">24+ more</a>
-                                                                                liked</span>
+                                                                                {{-- <li><span><a class="share-pst"
+                                                                                            href="#" title="Share"><i
+                                                                                                class="fa fa-share-alt"></i></a><ins>20</ins></span>
+                                                                                </li> --}}
+                                                                            </ul>
+                                                                            {{-- <div class="users-thumb-list">
+                                                                                <a data-toggle="tooltip" title="Anderw"
+                                                                                    href="#" data-original-title="Anderw">
+                                                                                    <img alt=""
+                                                                                        src="/temp-services/images/userlist-1.jpg">
+                                                                                </a>
+                                                                                <a data-toggle="tooltip" title="frank"
+                                                                                    href="#" data-original-title="frank">
+                                                                                    <img alt=""
+                                                                                        src="/temp-services/images/userlist-2.jpg">
+                                                                                </a>
+                                                                                <a data-toggle="tooltip" title="Sara"
+                                                                                    href="#" data-original-title="Sara">
+                                                                                    <img alt=""
+                                                                                        src="/temp-services/images/userlist-3.jpg">
+                                                                                </a>
+                                                                                <a data-toggle="tooltip" title="Amy"
+                                                                                    href="#" data-original-title="Amy">
+                                                                                    <img alt=""
+                                                                                        src="/temp-services/images/userlist-1.jpg">
+                                                                                </a>
+                                                                                <a data-toggle="tooltip" title="Ema"
+                                                                                    href="#" data-original-title="Ema">
+                                                                                    <img alt=""
+                                                                                        src="/temp-services/images/userlist-2.jpg">
+                                                                                </a>
+                                                                                <span><strong>You</strong>, <b>Sarah</b> and
+                                                                                    <a href="#" title="">24+ more</a>
+                                                                                    liked</span>
+                                                                            </div> --}}
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="coment-area" style="">
-                                                                    <ul class="we-comet">
-                                                                        <li>
-                                                                            <div class="comet-avatar">
-                                                                                <img src="/temp-services/images/userlist-3.jpg"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="we-comment">
-                                                                                <h5><a href="time-line.html" title="">Jason
-                                                                                        borne</a></h5>
-                                                                                <p>we are working for the dance and sing
-                                                                                    songs. this video is
-                                                                                    very awesome for the youngster.
-                                                                                    please
-                                                                                    vote this video and
-                                                                                    like our channel</p>
-                                                                                <div class="inline-itms">
-                                                                                    <span>1 year ago</span>
-                                                                                    <a class="we-reply" href="#"
-                                                                                        title="Reply"><i
-                                                                                            class="fa fa-reply"></i></a>
-                                                                                    <a href="#" title=""><i
-                                                                                            class="fa fa-heart"></i><span>20</span></a>
+                                                                    <div class="coment-area" style="">
+                                                                        <ul class="we-comet">
+                                                                            <li>
+                                                                                <div class="comet-avatar">
+                                                                                    <img src="/temp-services/images/userlist-3.jpg"
+                                                                                        alt="">
                                                                                 </div>
-                                                                            </div>
-
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="comet-avatar">
-                                                                                <img src="/temp-services/images/userlist-1.jpg"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="we-comment">
-                                                                                <h5><a href="time-line.html"
-                                                                                        title="">Sophia</a></h5>
-                                                                                <p>we are working for the dance and sing
-                                                                                    songs. this video is
-                                                                                    very awesome for the youngster.
-
-                                                                                    <i class="em em-smiley"></i>
-                                                                                </p>
-                                                                                <div class="inline-itms">
-                                                                                    <span>1 year ago</span>
-                                                                                    <a class="we-reply" href="#"
-                                                                                        title="Reply"><i
-                                                                                            class="fa fa-reply"></i></a>
-                                                                                    <a href="#" title=""><i
-                                                                                            class="fa fa-heart"></i><span>20</span></a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#" title=""
-                                                                                class="showmore underline">more
-                                                                                comments+</a>
-                                                                        </li>
-                                                                        <li class="post-comment">
-                                                                            <div class="comet-avatar">
-                                                                                <img src="/temp-services/images/userlist-2.jpg"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="post-comt-box">
-                                                                                <form method="post">
-                                                                                    <textarea
-                                                                                        placeholder="Post your comment"></textarea>
-                                                                                    <div class="add-smiles">
-                                                                                        <div class="uploadimage">
-                                                                                            <i class="fa fa-image"></i>
-                                                                                            <label class="fileContainer">
-                                                                                                <input type="file">
-                                                                                            </label>
-                                                                                        </div>
-                                                                                        <span class="em em-expressionless"
-                                                                                            title="add icon"></span>
-                                                                                        <div class="smiles-bunch">
-                                                                                            <i class="em em---1"></i>
-                                                                                            <i class="em em-smiley"></i>
-                                                                                            <i class="em em-anguished"></i>
-                                                                                            <i class="em em-laughing"></i>
-                                                                                            <i class="em em-angry"></i>
-                                                                                            <i
-                                                                                                class="em em-astonished"></i>
-                                                                                            <i class="em em-blush"></i>
-                                                                                            <i
-                                                                                                class="em em-disappointed"></i>
-                                                                                            <i class="em em-worried"></i>
-                                                                                            <i
-                                                                                                class="em em-kissing_heart"></i>
-                                                                                            <i class="em em-rage"></i>
-                                                                                            <i
-                                                                                                class="em em-stuck_out_tongue"></i>
-                                                                                        </div>
+                                                                                <div class="we-comment">
+                                                                                    <h5><a href="time-line.html"
+                                                                                            title="">Jason
+                                                                                            borne</a></h5>
+                                                                                    <p>we are working for the dance and sing
+                                                                                        songs. this video is
+                                                                                        very awesome for the youngster.
+                                                                                        please
+                                                                                        vote this video and
+                                                                                        like our channel</p>
+                                                                                    <div class="inline-itms">
+                                                                                        <span>1 year ago</span>
+                                                                                        <a class="we-reply" href="#"
+                                                                                            title="Reply"><i
+                                                                                                class="fa fa-reply"></i></a>
+                                                                                        <a href="#" title=""><i
+                                                                                                class="fa fa-heart"></i><span>20</span></a>
                                                                                     </div>
+                                                                                </div>
 
-                                                                                    <button type="submit"></button>
-                                                                                </form>
-                                                                            </div>
-                                                                        </li>
-                                                                    </ul>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="comet-avatar">
+                                                                                    <img src="/temp-services/images/userlist-1.jpg"
+                                                                                        alt="">
+                                                                                </div>
+                                                                                <div class="we-comment">
+                                                                                    <h5><a href="time-line.html"
+                                                                                            title="">Sophia</a></h5>
+                                                                                    <p>we are working for the dance and sing
+                                                                                        songs. this video is
+                                                                                        very awesome for the youngster.
+
+                                                                                        <i class="em em-smiley"></i>
+                                                                                    </p>
+                                                                                    <div class="inline-itms">
+                                                                                        <span>1 year ago</span>
+                                                                                        <a class="we-reply" href="#"
+                                                                                            title="Reply"><i
+                                                                                                class="fa fa-reply"></i></a>
+                                                                                        <a href="#" title=""><i
+                                                                                                class="fa fa-heart"></i><span>20</span></a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="#" title=""
+                                                                                    class="showmore underline">more
+                                                                                    comments+</a>
+                                                                            </li>
+                                                                            <li class="post-comment">
+                                                                                <div class="comet-avatar">
+                                                                                    <img src="/temp-services/images/userlist-2.jpg"
+                                                                                        alt="">
+                                                                                </div>
+                                                                                <div class="post-comt-box">
+                                                                                    <form method="post">
+                                                                                        <textarea
+                                                                                            placeholder="Post your comment"></textarea>
+                                                                                        <div class="add-smiles">
+                                                                                            <div class="uploadimage">
+                                                                                                <i
+                                                                                                    class="fa fa-image"></i>
+                                                                                                <label
+                                                                                                    class="fileContainer">
+                                                                                                    <input type="file">
+                                                                                                </label>
+                                                                                            </div>
+                                                                                            <span
+                                                                                                class="em em-expressionless"
+                                                                                                title="add icon"></span>
+                                                                                            <div class="smiles-bunch">
+                                                                                                <i
+                                                                                                    class="em em---1"></i>
+                                                                                                <i
+                                                                                                    class="em em-smiley"></i>
+                                                                                                <i
+                                                                                                    class="em em-anguished"></i>
+                                                                                                <i
+                                                                                                    class="em em-laughing"></i>
+                                                                                                <i
+                                                                                                    class="em em-angry"></i>
+                                                                                                <i
+                                                                                                    class="em em-astonished"></i>
+                                                                                                <i
+                                                                                                    class="em em-blush"></i>
+                                                                                                <i
+                                                                                                    class="em em-disappointed"></i>
+                                                                                                <i
+                                                                                                    class="em em-worried"></i>
+                                                                                                <i
+                                                                                                    class="em em-kissing_heart"></i>
+                                                                                                <i
+                                                                                                    class="em em-rage"></i>
+                                                                                                <i
+                                                                                                    class="em em-stuck_out_tongue"></i>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <button type="submit"></button>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>
@@ -873,6 +923,18 @@
                         <img src="" class="imagepreview">
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="modal fade in" id="file_not_supported" role="dialog">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <p style="text-align: center;padding: 30px 20px;font-family: Hind,Arial;font-size: 14px;">
+                        <i class="fa fa-info-circle main" aria-hidden="true" style="color:#f2dede;"></i>
+                        <?php echo 'This file format is not supported'; ?>
+                    </p>
+                </div>
+
             </div>
         </div>
     </div>
@@ -913,7 +975,6 @@
 
             /** Post a Comment **/
             jQuery(".post-comt-box textarea").on("keydown", function(event) {
-
                 if (event.keyCode == 13) {
                     var comment = jQuery(this).val();
                     var parent = jQuery(".showmore").parent("li");
@@ -926,10 +987,6 @@
                 }
             });
         });
-
-        //  function toggleComment(){
-        //     $('.coment-area').toggleClass('d-block');
-        //   }
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -971,9 +1028,101 @@
                     $('#imagemodal').modal('show');
                 });
             });
+            var deleted_images = [];
 
+            function DeleteImageById(name, id) {
+                deleted_images.push(name);
+                $('#image_to_' + id).remove();
+            }
+            // on click of photo upload icon
+            $("#publisher-photos").on('change', function() {
+                deleted_images = [];
+                //Get count of selected files
+                var countFiles = $(this)[0].files.length;
+                var imgPath = $(this)[0].value;
+                var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+                var image_holder = $("#image-holder");
+                image_holder.empty();
+                if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+                    if (typeof(FileReader) != "undefined") {
+                        //loop for each file selected for uploaded.
+                        for (var i = 0; i < countFiles; i++) {
+                            var reader = new FileReader();
+                            var ii = 0;
+                            reader.onload = function(e) {
+                                name = "'" + $("#publisher-photos")[0].files[ii].name + "'";
+                                image_holder.append('<span class="thumb-image-delete" id="image_to_' +
+                                    ii + '"><span onclick="DeleteImageById(' + name + ',' + ii +
+                                    ')" class="pointer thumb-image-delete-btn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg></span><img src="' +
+                                    e.target.result + '" class="thumb-image"></span>')
+                                ii = ii + 1;
+                                // $("<img />", {
+                                //                 "src": e.target.result,
+                                //                 "class": "thumb-image"
+                                //               }).appendTo(image_holder);
+                            }
+                            image_holder.show();
+                            reader.readAsDataURL($(this)[0].files[i]);
+                        }
+                    } else {
+                        image_holder.html("<p>This browser does not support FileReader.</p>");
+                    }
+                }
+            });
+            var allowed = "jpg,png,jpeg,gif,mkv,docx,zip,rar,pdf,doc,mp3,mp4,flv,wav,txt,mov,avi,webm,wav,mpeg";
 
+            function isInArray(value, array) {
+                return array.indexOf(value) > -1;
+            }
 
+            function Wo_IsFileAllowedToUpload(filename, allowed) {
+                var extension = filename.replace(/^.*\./, '').toLowerCase();
+                var allowed_array = allowed.split(',');
+                if (isInArray(extension, allowed_array)) {
+                    return true;
+                }
+                return false;
+            }
+            var Wo_Delay = (function() {
+                var timer = 0;
+                return function(callback, ms) {
+                    clearTimeout(timer);
+                    timer = setTimeout(callback, ms);
+                };
+            })();
+            // on click of video upload icon
+            $("#publisher-video").change(function() {
+                var filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+                $("#video-form").val(filename);
+                $("#video-holder").addClass("d-block").removeClass("d-none")
+                $("#videofilename").html(filename)
+                if (Wo_IsFileAllowedToUpload(filename, allowed) == false) {
+                    $("#file_not_supported").modal('show');
+                    Wo_Delay(function() {
+                        $("#file_not_supported").modal('hide');
+                    }, 3000);
+                    $("#publisher-video").val('');
+                    $("#video-form").val('');
+                    return false;
+                }
+            });
+
+            $("#publisher-music").change(function() {
+                var filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+                $("#music-form").val(filename);
+                $("#music-form").val(filename);
+                $("#music-holder").addClass("d-block").removeClass("d-none")
+                $("#musicfilename").html(filename)
+                if (Wo_IsFileAllowedToUpload(filename, allowed) == false) {
+                    $("#file_not_supported").modal('show');
+                    Wo_Delay(function() {
+                        $("#file_not_supported").modal('hide');
+                    }, 3000);
+                    $("#publisher-music").val('');
+                    $("#music-form").val('');
+                    return false;
+                }
+            });
         });
         $('#imageCarousel').slick();
 
@@ -1001,5 +1150,4 @@
 
 
 @section('scripts')
-
 @endsection

@@ -14,6 +14,7 @@ use App\Http\Controllers\SellerController;
 use App\Http\Controllers\OAuthController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\StripeController;
 
 /*
@@ -88,6 +89,11 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::post('/support/ticket/{id}/reply', [TicketController::class, 'ticketReply']);
     Route::post('/support/ticket/{id}/close', [TicketController::class, 'ticketClose']);
     Route::post('/dispute/{id}/addReply', [PurchaseController::class, 'disputeReply'])->name('disputeReply');
+
+    //post routes
+    Route::post('/create/post', [PostController::class, 'createPost'])->name('createPost');
+
+    
 
 
 

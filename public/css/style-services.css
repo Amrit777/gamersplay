@@ -2645,5 +2645,42 @@ form button {
   }
 }
 
+.thumb-image-delete {
+  position: relative;
+  display: inline-block;
+}
+
+#image-holder {
+  width: 100%;
+  padding: 0 8px;
+  margin: 5px 0 10px;
+  white-space: nowrap;
+}
+
+.thumb-image-delete-btn {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  text-align: center;
+  line-height: 1;
+  padding: 3px;
+}
+#image-holder .thumb-image:last-child {
+  margin-right: 0;
+}
+
+#image-holder .thumb-image {
+  width: 100px;
+  height: 100px;
+  margin: 0 5px 0 5px;
+  display: inline-block;
+  object-fit: cover;
+  user-select: none;
+  pointer-events: none;
+  border-radius: 4px;
+}
 
 /* custom css : Amit Singh */

@@ -13,13 +13,15 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('posts');
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('content');
-            $table->integer('user_id');
-            $table->string('image')->nullable();
+            $table->longText('content')->nullable();
+            $table->integer('user_id')->nullable();
+            $table->integer('service_id')->nullable();
             $table->boolean('visible')->default(1);
+            $table->boolean('state_id')->default(1);
+            $table->boolean('type_id')->default(1);
             $table->timestamps();
         });
     }

@@ -218,7 +218,7 @@ class ServicesController extends Controller
     public function service($id)
     {
         $id = intVal($id);
-        $service = Service::with('images', 'category', 'user','ratings')->whereId($id)->first();
+        $service = Service::with('images', 'category', 'user', 'ratings', 'posts')->whereId($id)->first();
 
         if ($service == null) {
             return redirect('/');

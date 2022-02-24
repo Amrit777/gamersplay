@@ -27,6 +27,11 @@ class Service extends Model
         return $this->hasMany(ServiceImage::class, 'service_id');
     }
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'service_id');
+    }
+
     public function category_type()
     {
         return $this->belongsTo(CategoryType::class, 'category_type_id');
