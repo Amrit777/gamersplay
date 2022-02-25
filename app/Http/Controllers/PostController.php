@@ -41,8 +41,8 @@ class PostController extends Controller
             'postMusic' => 'mimes:mp3',
         ]);
         $status = [];
-        DB::beginTransaction();
-        try {
+        // DB::beginTransaction();
+        // try {
             $user = Auth::user()->id;
             $model = new Post();
             $model->content = $request->content;
@@ -89,13 +89,13 @@ class PostController extends Controller
                     $model->images()->save($music);
                 }
             }
-            DB::commit();
+            // DB::commit();
             $status = ['success' => 'Post is created.'];
-        } catch (\Illuminate\Database\QueryException $exception) {
-            DB::rollback();
-            $error = implode(" | ",$exception->errorInfo);
-            $status = ['error' => $error];
-        }
+        // } catch (\Illuminate\Database\QueryException $exception) {
+        //     DB::rollback();
+        //     $error = implode(" | ",$exception->errorInfo);
+        //     $status = ['error' => $error];
+        // }
         return redirect()->to(url()->previous() . '#profile')->with($status);
 
         // return redirect()->back()->with($status);
