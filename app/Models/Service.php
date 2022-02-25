@@ -29,7 +29,7 @@ class Service extends Model
 
     public function posts()
     {
-        return $this->hasMany(Post::class, 'service_id');
+        return $this->hasMany(Post::class, 'service_id')->orderBy("id","DESC");
     }
 
     public function category_type()

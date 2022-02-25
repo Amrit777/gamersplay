@@ -16,6 +16,8 @@ class CreateMediaTbl extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('file_name')->nullable();
+            $table->string('name')->nullable();
+            $table->string('extension')->nullable();
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->bigInteger('imageable_id')->unsigned()->nullable();
             $table->string('imageable_type')->nullable();

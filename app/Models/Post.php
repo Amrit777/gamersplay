@@ -23,7 +23,7 @@ class Post extends Model
 
     public function images()
     {
-        return $this->morphMany(Image::class, 'imageable')->orderBy("id", "DESC");
+        return $this->morphMany(Image::class, 'imageable');
     }
 
     public function postAuthor()

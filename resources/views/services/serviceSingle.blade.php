@@ -2,6 +2,7 @@
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('css/slick-theme.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/styleservices.css') }}"> --}}
 @endsection
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -283,7 +284,7 @@
                                             <ul class="nav nav-tabs nav-custom-nav" id="myTab" role="tablist">
                                                 <li class="nav-item" role="presentation">
                                                     <a class="nav-link active" id="home-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#home" type="button" role="tab" aria-controls="home"
+                                                        data-bs-target="#home" type="button" role="tab" aria-controls="home" href="#home"
                                                         aria-selected="true">
                                                         Service Details
                                                     </a>
@@ -291,7 +292,7 @@
                                                 <li class="nav-item" role="presentation">
                                                     <a class="nav-link" id="profile-tab" data-bs-toggle="tab"
                                                         data-bs-target="#profile" type="button" role="tab"
-                                                        aria-controls="profile" aria-selected="false">
+                                                        aria-controls="profile" aria-selected="false" href="#profile">
                                                         Timeline
                                                     </a>
                                                 </li>
@@ -440,7 +441,7 @@
                                                 <div class="central-meta postbox">
                                                     <span class="create-post">Create post</span>
                                                     <form name="add-blog-post-form" id="add-blog-post-form" method="post"
-                                                        action="{{ route('createPost') }}">
+                                                        enctype="multipart/form-data" action="{{ route('createPost') }}">
                                                         @csrf
                                                         <input type="hidden" name="service_id"
                                                             value="{{ $service->id }}">
@@ -656,14 +657,9 @@
                                                         </div>
                                                     </form>
                                                 </div>
-
-
-
                                                 <!-- END: Create post -->
 
                                                 <div class="loadMore">
-
-
                                                     <!-- digital sponsors -->
                                                     @foreach ($service->posts as $post)
                                                         <div class="central-meta item" style="display: inline-block;">
@@ -710,11 +706,86 @@
                                                                             </p>
                                                                         </div>
 
+                                                                        @if (!empty($post->images))
+                                                                            @foreach ($post->images as $postImage)
+                                                                                @if ($postImage->type_id == 2)
+                                                                                    <div class="row">
+                                                                                        <div class="video-holder-show"
+                                                                                            class="d-none">
+                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                width="24" height="24"
+                                                                                                viewBox="0 0 24 24"
+                                                                                                fill="none"
+                                                                                                stroke="currentColor"
+                                                                                                stroke-width="2"
+                                                                                                stroke-linecap="round"
+                                                                                                stroke-linejoin="round"
+                                                                                                class="feather feather-video">
+                                                                                                <polygon
+                                                                                                    points="23 7 16 12 23 17 23 7">
+                                                                                                </polygon>
+                                                                                                <rect x="1" y="5" width="15"
+                                                                                                    height="14" rx="2"
+                                                                                                    ry="2"></rect>
+                                                                                            </svg>
+                                                                                            <span
+                                                                                                class="videofilenamedisplay">{{ $postImage->name }}</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="clear"></div>
+                                                                                @endif
+                                                                                @if ($postImage->type_id == 3)
+                                                                                    <div class="row">
+                                                                                        <div class="music-holder-show"
+                                                                                            class="d-none">
+                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                width="24" height="24"
+                                                                                                viewBox="0 0 24 24"
+                                                                                                fill="none"
+                                                                                                stroke="currentColor"
+                                                                                                stroke-width="2"
+                                                                                                stroke-linecap="round"
+                                                                                                stroke-linejoin="round"
+                                                                                                class="feather feather-music">
+                                                                                                <path
+                                                                                                    d="M9 17H5a2 2 0 0 0-2 2 2 2 0 0 0 2 2h2a2 2 0 0 0 2-2zm12-2h-4a2 2 0 0 0-2 2 2 2 0 0 0 2 2h2a2 2 0 0 0 2-2z">
+                                                                                                </path>
+                                                                                                <polyline
+                                                                                                    points="9 17 9 5 21 3 21 15">
+                                                                                                </polyline>
+                                                                                            </svg>
+                                                                                            <span
+                                                                                                class="musicfilenamedisplay">{{ $postImage->name }}</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="clear"></div>
+                                                                                @endif
+                                                                            @endforeach
+                                                                            <div class="clear"></div>
+
+                                                                            <div id="fullsizeimg"
+                                                                                style="position: relative;">
+                                                                                <div class="wo_adaptive_media">
+                                                                                    @foreach ($post->images as $postImage)
+                                                                                        @if ($postImage->type_id == 1)
+                                                                                            <div class="album-image">
+                                                                                                <img src='{{ $postImage->file_name }}'
+                                                                                                    alt="{{ $postImage->name }}"
+                                                                                                    class="image-file pointer">
+                                                                                            </div>
+                                                                                            <div class="clear">
+                                                                                            </div>
+                                                                                        @endif
+                                                                                    @endforeach
+                                                                                </div>
+                                                                            </div>
+                                                                        @endif
+
                                                                         {{-- <ul class="like-dislike">
                                                                         <li><a href="#" title="Save to Pin Post"><i class="fa fa-thumb-tack"></i></a></li>
                                                                         <li><a href="#" title="Like Post"><i class="fas fa-thumbs-up"></i></a></li>
                                                                         <li><a href="#" title="dislike Post"><i class="fas fa-thumbs-down"></i></a></li>
-                                                                    </ul> --}}
+                                                                            </ul> --}}
                                                                         <div class="we-video-info">
                                                                             <ul>
                                                                                 {{-- <li>
@@ -1123,7 +1194,44 @@
                     return false;
                 }
             });
+
         });
+
+        $(document).ready(() => {
+            let url = location.href.replace(/\/$/, "");
+
+            if (location.hash) {
+                const hash = url.split("#");
+                $('#myTab a[href="#' + hash[1] + '"]').tab("show");
+                url = location.href.replace(/\/#/, "#");
+                history.replaceState(null, null, url);
+                setTimeout(() => {
+                    $(window).scrollTop(0);
+                }, 400);
+            }
+
+            $('a[data-bs-toggle="tab"]').on("click", function() {
+                let newUrl;
+                const hash = $(this).attr("href");
+                if (hash == "#home") {
+                    newUrl = url.split("#")[0];
+                } else {
+                    newUrl = url.split("#")[0] + hash;
+                }
+                newUrl += "/";
+                history.replaceState(null, null, newUrl);
+            });
+        });
+
+
+
+
+
+
+
+
+
+
         $('#imageCarousel').slick();
 
         $('#buyBtn').click(function(e) {
