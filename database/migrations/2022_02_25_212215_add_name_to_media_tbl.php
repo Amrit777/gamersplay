@@ -13,7 +13,7 @@ class AddNameToMediaTbl extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
+        Schema::table('images', function (Blueprint $table) {
             $table->string('name')->nullable();
         });
     }
