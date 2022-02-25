@@ -34,7 +34,7 @@ class PostController extends Controller
     public function createPost(Request $request)
     {
         $request->validate([
-            'content' => 'required|max:1024|string',
+            'content' => 'max:1024|string',
             'postPhotos.*' => 'mimes:jpeg,jpg,x-png,png',
             'postPhotos' => 'max:4',
             'postVideo' => 'mimes:mp4',
