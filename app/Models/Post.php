@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Image;
+use Illuminate\Http\Client\Response;
 
 class Post extends Model
 {
@@ -22,7 +23,7 @@ class Post extends Model
 
     public function images()
     {
-        return $this->morphMany(Image::class, 'imageable');
+        return $this->morphMany(Image::class, 'imageable')->orderBy("id", "DESC");
     }
 
     public function postAuthor()
@@ -31,4 +32,6 @@ class Post extends Model
     }
 
     protected $with = ['postAuthor'];
+
+
 }

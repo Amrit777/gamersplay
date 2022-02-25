@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Storage;
 
 class Image extends Model
@@ -62,8 +63,16 @@ class Image extends Model
 
         $image->move($imagepath, $imageName);
 
-        $return_path = '/' . $foldername . $userpath . '/' . $imageName;
+        $return_path = '/storage/' . $foldername . $userpath . '/' . $imageName;
         return $return_path;
+    }
+
+    public function getMovie()
+    {
+        $video = Storage::disk('public')->get($this->file_name);
+        $response = Response::make($video, 200);
+        $response->header('Content-Type', 'video/mp4');
+        return $response;
     }
     // public function mediaPage()
     // {
