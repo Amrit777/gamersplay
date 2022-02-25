@@ -62,7 +62,7 @@ class ServiceSeeder extends Seeder
             'friday_to' => '23:59:59',
             'saturday_to' => '23:59:59',
             'sunday_to' => '23:59:59',
-            'description' => 'This is a test.',
+            'description' => 'This is a test 2.',
             'created_at' => Carbon::now(),
         ]);
        

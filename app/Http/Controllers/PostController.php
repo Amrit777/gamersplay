@@ -93,7 +93,8 @@ class PostController extends Controller
             $status = ['success' => 'Post is created.'];
         } catch (\Illuminate\Database\QueryException $exception) {
             DB::rollback();
-            $status = ['error' => $exception->errorInfo];
+            $error = implode(" | ",$exception->errorInfo);
+            $status = ['error' => $error];
         }
         return redirect()->to(url()->previous() . '#profile')->with($status);
 
