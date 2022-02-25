@@ -284,8 +284,8 @@
                                             <ul class="nav nav-tabs nav-custom-nav" id="myTab" role="tablist">
                                                 <li class="nav-item" role="presentation">
                                                     <a class="nav-link active" id="home-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#home" type="button" role="tab" aria-controls="home" href="#home"
-                                                        aria-selected="true">
+                                                        data-bs-target="#home" type="button" role="tab" aria-controls="home"
+                                                        href="#home" aria-selected="true">
                                                         Service Details
                                                     </a>
                                                 </li>
@@ -296,14 +296,14 @@
                                                         Timeline
                                                     </a>
                                                 </li>
-                                                {{-- <li class="nav-item" role="presentation">
-                                                    <a class="nav-link" id="contact-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#contact" type="button" role="tab"
-                                                        aria-controls="contact" aria-selected="false">
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link" id="gallery-tab" data-bs-toggle="tab"
+                                                        data-bs-target="#gallery" type="button" role="tab"
+                                                        aria-controls="gallery" aria-selected="false" href="#gallery">
                                                         Photos
                                                     </a>
                                                 </li>
-                                                <li class="nav-item" role="presentation">
+                                                {{-- <li class="nav-item" role="presentation">
                                                     <a class="nav-link" id="followers-tab" data-bs-toggle="tab"
                                                         data-bs-target="#followers" type="button" role="tab"
                                                         aria-controls="followers" aria-selected="false">
@@ -427,7 +427,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <!-- START: Timeline Tab Start here -->
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -972,6 +971,61 @@
 
                         </div>
                         <!-- END: Timeline Tab END here -->
+
+                        <!-- START: Gallery -->
+                        <div class="tab-pane fade" id="gallery" role="tabpanel" aria-labelledby="gallery-tab">
+                            <div class="card mt-2 p-3">
+                                <div class="card-body ">
+                                    <div class="service-main-body-content">
+                                        <!-- Gallery -->
+                                        <div class="row">
+
+                                            @if(!empty($service->user->images))
+                                                @foreach ($service->user->images as $galleryImage)
+                                                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                                                    <img src="{{$galleryImage->file_name}}"
+                                                        class="w-100 shadow-1-strong rounded mb-4" alt="{{$galleryImage->name}}" />
+    
+                                                    {{-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp"
+                                                        class="w-100 shadow-1-strong rounded mb-4"
+                                                        alt="Wintry Mountain Landscape" /> --}}
+                                                </div>
+                                                @endforeach
+                                            @endif
+                                            {{-- <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
+                                                    class="w-100 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
+
+                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp"
+                                                    class="w-100 shadow-1-strong rounded mb-4"
+                                                    alt="Wintry Mountain Landscape" /> 
+                                            </div>--}}
+
+                                            {{-- <div class="col-lg-4 mb-4 mb-lg-0">
+                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain2.webp"
+                                                    class="w-100 shadow-1-strong rounded mb-4"
+                                                    alt="Mountains in the Clouds" />
+
+                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
+                                                    class="w-100 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
+                                            </div>
+
+                                            <div class="col-lg-4 mb-4 mb-lg-0">
+                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp"
+                                                    class="w-100 shadow-1-strong rounded mb-4" alt="Waves at Sea" />
+
+                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain3.webp"
+                                                    class="w-100 shadow-1-strong rounded mb-4"
+                                                    alt="Yosemite National Park" />
+                                            </div> --}}
+                                        </div>
+                                        <!-- Gallery -->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- END: Gallery -->
                     </div>
                     <!-- END: First Card mianbody -->
 
