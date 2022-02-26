@@ -296,14 +296,14 @@
                                                         Timeline
                                                     </a>
                                                 </li>
-                                                {{--<li class="nav-item" role="presentation">
+                                                <li class="nav-item" role="presentation">
                                                     <a class="nav-link" id="gallery-tab" data-bs-toggle="tab"
                                                         data-bs-target="#gallery" type="button" role="tab"
                                                         aria-controls="gallery" aria-selected="false" href="#gallery">
                                                         Photos
                                                     </a>
                                                 </li>
-                                                 <li class="nav-item" role="presentation">
+                                                {{--  <li class="nav-item" role="presentation">
                                                     <a class="nav-link" id="followers-tab" data-bs-toggle="tab"
                                                         data-bs-target="#followers" type="button" role="tab"
                                                         aria-controls="followers" aria-selected="false">
@@ -979,17 +979,27 @@
                                     <div class="service-main-body-content">
                                         <!-- Gallery -->
                                         <div class="row">
-
-                                            @if(!empty($service->user->images))
-                                                @foreach ($service->user->images as $galleryImage)
-                                                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                                                    <img src="{{$galleryImage->file_name}}"
-                                                        class="w-100 shadow-1-strong rounded mb-4" alt="{{$galleryImage->name}}" />
-    
-                                                    {{-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp"
-                                                        class="w-100 shadow-1-strong rounded mb-4"
-                                                        alt="Wintry Mountain Landscape" /> --}}
-                                                </div>
+                                            @php
+                                                $userGallery = $service->user
+                                                    ->imagesAsArray()
+                                                    ->get()
+                                                    ->toArray();
+                                            @endphp
+                                            @if (!empty($userGallery))
+                                                @foreach (array_chunk($userGallery, 2) as $galleryImage)
+                                                       
+                                                    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                                                        @if(isset($galleryImage[0]) && !empty($galleryImage[0]))
+                                                            <img src="{{ $galleryImage[0]['file_name'] }}"
+                                                                class="w-100 shadow-1-strong rounded mb-4"
+                                                                alt="{{ $galleryImage[0]['name'] }}" />
+                                                        @endif
+                                                        @if(isset($galleryImage[1]) && !empty($galleryImage[1]))
+                                                            <img src="{{ $galleryImage[1]['file_name'] }}"
+                                                                class="w-100 shadow-1-strong rounded mb-4"
+                                                                alt="{{ $galleryImage[1]['name'] }}" />
+                                                        @endif
+                                                    </div>
                                                 @endforeach
                                             @endif
                                             {{-- <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
@@ -999,7 +1009,7 @@
                                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp"
                                                     class="w-100 shadow-1-strong rounded mb-4"
                                                     alt="Wintry Mountain Landscape" /> 
-                                            </div>--}}
+                                            </div> --}}
 
                                             {{-- <div class="col-lg-4 mb-4 mb-lg-0">
                                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain2.webp"
