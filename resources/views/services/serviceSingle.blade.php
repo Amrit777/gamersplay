@@ -296,13 +296,13 @@
                                                         Timeline
                                                     </a>
                                                 </li>
-                                                <li class="nav-item" role="presentation">
+                                                {{-- <li class="nav-item" role="presentation">
                                                     <a class="nav-link" id="gallery-tab" data-bs-toggle="tab"
                                                         data-bs-target="#gallery" type="button" role="tab"
                                                         aria-controls="gallery" aria-selected="false" href="#gallery">
                                                         Photos
                                                     </a>
-                                                </li>
+                                                </li> --}}
                                                 {{--  <li class="nav-item" role="presentation">
                                                     <a class="nav-link" id="followers-tab" data-bs-toggle="tab"
                                                         data-bs-target="#followers" type="button" role="tab"
