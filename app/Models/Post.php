@@ -35,7 +35,7 @@ class Post extends Model
                 $class = "width-1 col-12";
                 break;
             case '2':
-                $class = "width-2 col-md-6";
+                $class = "width-2";
                 break;
             case '3':
                 $class = "width-3";
