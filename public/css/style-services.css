@@ -2710,7 +2710,7 @@ form button {
   margin-right: 1px;
   overflow: hidden;
   position: relative;
-  max-width: 49.5%!important;
+  max-width: 49.999%!important;
   padding-right: 1px;
 }
 
