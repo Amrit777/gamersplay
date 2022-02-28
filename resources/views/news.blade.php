@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <a href="/news/{{$post->id}}">
-                        <div class="news-article-image" style="background:url('{{$post->image}}'); width:100%; height:150px; background-position:center; background-size:cover; border-radius:16px;"></div>
+                        <div class="news-article-image" style="background:url('{{$post->image ? $post->image->file_name : ''}}'); width:100%; height:150px; background-position:center; background-size:cover; border-radius:16px;"></div>
                     </a>
                 </div>
                 <div class="col-md-9">

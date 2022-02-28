@@ -303,7 +303,7 @@
                                                         Photos
                                                     </a>
                                                 </li> --}}
-                                                {{--  <li class="nav-item" role="presentation">
+                                                {{-- <li class="nav-item" role="presentation">
                                                     <a class="nav-link" id="followers-tab" data-bs-toggle="tab"
                                                         data-bs-target="#followers" type="button" role="tab"
                                                         aria-controls="followers" aria-selected="false">
@@ -449,10 +449,10 @@
                                                                 <img src="/temp-services/images/admin.jpg" alt="">
                                                             </figure>
                                                             <div class="newpst-input">
-                                                                <textarea rows="2" name="content"
+                                                                <textarea rows="5" name="content"
                                                                     placeholder="Share some what you are thinking?"></textarea>
                                                             </div>
-                                                            <div class="row">
+                                                            {{-- <div class="row">
                                                                 <div id="video-holder" class="d-none">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                         height="24" viewBox="0 0 24 24" fill="none"
@@ -468,8 +468,8 @@
                                                                         readonly>
                                                                     <span id="videofilename"></span>
                                                                 </div>
-                                                            </div>
-                                                            <div class="row">
+                                                            </div> --}}
+                                                            {{-- <div class="row">
                                                                 <div id="music-holder" class="d-none">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                         height="24" viewBox="0 0 24 24" fill="none"
@@ -486,7 +486,7 @@
                                                                         readonly>
                                                                     <span id="musicfilename"></span>
                                                                 </div>
-                                                            </div>
+                                                            </div> --}}
                                                             <div class="row">
                                                                 <div id="image-holder"></div>
                                                             </div>
@@ -497,13 +497,13 @@
                                                                         <i class="fa fa-map-marker"></i>
                                                                     </span>
                                                                 </li> --}}
-                                                                    <li>
+                                                                    {{-- <li>
                                                                         <i class="fa fa-music"></i>
                                                                         <label class="fileContainer">
                                                                             <input type="file" id="publisher-music"
                                                                                 name="postMusic" accept="audio/*">
                                                                         </label>
-                                                                    </li>
+                                                                    </li> --}}
                                                                     <li>
                                                                         <i class="fa fa-image"></i>
                                                                         <label class="fileContainer">
@@ -512,13 +512,13 @@
                                                                                 name="postPhotos[]" multiple="multiple">
                                                                         </label>
                                                                     </li>
-                                                                    <li>
+                                                                    {{-- <li>
                                                                         <i class="fa fa-video-camera"></i>
                                                                         <label class="fileContainer">
                                                                             <input type="file" id="publisher-video"
                                                                                 name="postVideo" accept="video/*">
                                                                         </label>
-                                                                    </li>
+                                                                    </li> --}}
                                                                     {{-- <li>
                                                                     <i class="fa fa-camera"></i>
                                                                     <label class="fileContainer">
@@ -530,8 +530,8 @@
                                                                             data-ripple="">Preview</button>
                                                                     </li> --}}
                                                                 </ul>
-                                                                <button class="post-btn" type="submit"
-                                                                    data-ripple="">Post</button>
+                                                                <button id="create-post-btn" class="post-btn"
+                                                                    type="submit" data-ripple="">Post</button>
                                                             </div>
                                                             <div class="add-location-post">
                                                                 <span>Drag map point to selected area</span>
@@ -706,7 +706,7 @@
                                                                         </div>
 
                                                                         @if (!empty($post->images))
-                                                                            @foreach ($post->images as $postImage)
+                                                                            {{-- @foreach ($post->images as $postImage)
                                                                                 @if ($postImage->type_id == 2)
                                                                                     <div class="row">
                                                                                         <div class="video-holder-show"
@@ -760,21 +760,21 @@
                                                                                     <div class="clear"></div>
                                                                                 @endif
                                                                             @endforeach
-                                                                            <div class="clear"></div>
+                                                                            <div class="clear"></div> --}}
 
                                                                             <div id="fullsizeimg"
                                                                                 style="position: relative;">
-                                                                                <div class="wo_adaptive_media">
+                                                                                <div class="row wo_adaptive_media">
                                                                                     @foreach ($post->images as $postImage)
-                                                                                        @if ($postImage->type_id == 1)
-                                                                                            <div class="album-image">
+                                                                                        {{-- @if ($postImage->type_id == 1) --}}
+                                                                                            <div class="album-image {{$post->selectClassImage()}}">
                                                                                                 <img src='{{ $postImage->file_name }}'
                                                                                                     alt="{{ $postImage->name }}"
                                                                                                     class="image-file pointer">
                                                                                             </div>
                                                                                             <div class="clear">
                                                                                             </div>
-                                                                                        @endif
+                                                                                        {{-- @endif --}}
                                                                                     @endforeach
                                                                                 </div>
                                                                             </div>
@@ -987,14 +987,13 @@
                                             @endphp
                                             @if (!empty($userGallery))
                                                 @foreach (array_chunk($userGallery, 2) as $galleryImage)
-                                                       
                                                     <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                                                        @if(isset($galleryImage[0]) && !empty($galleryImage[0]))
+                                                        @if (isset($galleryImage[0]) && !empty($galleryImage[0]))
                                                             <img src="{{ $galleryImage[0]['file_name'] }}"
                                                                 class="w-100 shadow-1-strong rounded mb-4"
                                                                 alt="{{ $galleryImage[0]['name'] }}" />
                                                         @endif
-                                                        @if(isset($galleryImage[1]) && !empty($galleryImage[1]))
+                                                        @if (isset($galleryImage[1]) && !empty($galleryImage[1]))
                                                             <img src="{{ $galleryImage[1]['file_name'] }}"
                                                                 class="w-100 shadow-1-strong rounded mb-4"
                                                                 alt="{{ $galleryImage[1]['name'] }}" />
@@ -1258,6 +1257,18 @@
                     return false;
                 }
             });
+
+            $('#add-blog-post-form').submit(function(e) {
+                e.preventDefault();
+                var buttonSubmit = $("#create-post-btn");
+                $("#create-post-btn").disabled =  true;
+                $("#create-post-btn").innerText = 'Posting…';
+                this.submit();
+            });
+            // $(document).on("click", "#create-post-btn", function(e) {
+            //     e.preventDefault();
+                
+            // });
 
         });
 

@@ -23,7 +23,36 @@ class Post extends Model
 
     public function images()
     {
-        return $this->morphMany(Image::class, 'imageable');
+        return $this->morphMany(Image::class, 'imageable')->where('type_id', 1);
+    }
+
+    public function selectClassImage()
+    {
+        $count = $this->images->count();
+        $class = "";
+        switch ($count) {
+            case '1':
+                $class = "width-1 col-12";
+                break;
+            case '2':
+                $class = "width-2 col-md-6";
+                break;
+            case '3':
+                $class = "width-3";
+                break;
+            case '4':
+                $class = "width-4";
+                break;
+            default:
+                $class = "";
+                break;
+        }
+        return $class;
+    }
+
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable')->where('type_id', 1);
     }
 
     public function postAuthor()
@@ -32,6 +61,5 @@ class Post extends Model
     }
 
     protected $with = ['postAuthor'];
-
-
 }
+
