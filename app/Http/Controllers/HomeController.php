@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\News;
 use App\Models\Post;
 use Auth;
 use Cache;
@@ -52,11 +53,11 @@ class HomeController extends Controller
 
     public function news()
     {
-        $posts = Post::with('postAuthor')->orderBy('created_at', 'desc')->paginate(10);
+        $posts = News::with('postAuthor')->orderBy('created_at', 'desc')->paginate(10);
         return view('news', compact('posts'));
     }
 
-    public function post(Post $post)
+    public function post(News $post)
     {
         return view('post', ['post' => $post]);
     }

@@ -52,7 +52,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($posts as $post)
+                    @foreach ($news as $post)
                         <tr>
                             <td>{{ $post->id }}</td>
                             <td>{{ $post->title }}</td>

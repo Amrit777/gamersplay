@@ -171,8 +171,6 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
     Route::get('/services/{id}', [AdminController::class, 'service'])->name('admin.service');
     Route::get('/usersSearch', [AdminController::class, 'searchUsers']);
     Route::get('/servicesSearch', [AdminController::class, 'searchServices']);
-
-
     Route::get('/users/{id}', [AdminController::class, 'user']);
     Route::get('/applications', [AdminController::class, 'applications'])->name('admin.applications');
     Route::get('/applications/approve', [AdminController::class, 'approveApplication']);
@@ -183,7 +181,6 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
     Route::get('/categoryNew', [AdminController::class, 'categoryNew'])->name('admin.newCategory');
     Route::get('/news', [AdminController::class, 'news'])->name('admin.news');
     Route::get('/news/{id}', [AdminController::class, 'postUpdatePage']);
-
     Route::post('/user/edit', [AdminController::class, 'updateUser']);
     Route::post('/user/ban', [AdminController::class, 'ban']);
     Route::post('/user/unban', [AdminController::class, 'unban']);

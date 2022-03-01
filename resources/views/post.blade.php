@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div style="display:flex; justify-content:center;;">
-            <img src="{{ $post->image ? $post->image->file_name : '' }}" alt=""
+            <img src="/{{ $post->image }}" alt=""
                 style="height:100%; max-height:250px; max-width:100%; object-fit:cover;">
         </div>
         <br>
