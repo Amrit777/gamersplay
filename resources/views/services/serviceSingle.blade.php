@@ -335,12 +335,12 @@
 
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            @include('services.serviceDetails',['service'=> $service]);
+                            @include('services.serviceDetails',['service'=> $service])
                         </div>
 
                         <!-- START: Timeline Tab Start here -->
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            @include('services.servicesPost',['service'=> $service]);
+                            @include('services.servicesPost',['service'=> $service])
                         </div>
                         <!-- END: Timeline Tab END here -->
 
