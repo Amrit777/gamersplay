@@ -456,7 +456,7 @@ class AdminController extends Controller
 
     public function postUpdatePage($id)
     {
-        $post = Post::whereId($id)->first();
+        $post = News::whereId($id)->first();
         return view('admin.post', compact('post'));
     }
 
@@ -470,7 +470,7 @@ class AdminController extends Controller
         ]);
 
 
-        $post = Post::whereId($validated['id'])->first();
+        $post = News::whereId($validated['id'])->first();
         if ($post == null) return response('success');
         $post->title = $validated['title'];
         $post->content = $validated['content'];
@@ -496,7 +496,7 @@ class AdminController extends Controller
 
     public function deleteNews($id)
     {
-        $post = Post::whereId($id)->first();
+        $post = News::whereId($id)->first();
         if ($post->image != null) {
             unlink(public_path('/' . $post['image']));
         }
