@@ -509,8 +509,10 @@
                                                                         <label class="fileContainer">
                                                                             <input type="file" id="publisher-photos"
                                                                                 accept="image/x-png, image/gif, image/jpeg"
-                                                                                name="postPhotos[]" multiple="multiple">
+                                                                                name="postPhotos[]" multiple="multiple"
+                                                                                {{-- onchange="checkFiles(this.files)" --}}>
                                                                         </label>
+                                                                        <span id="postphotos_error"></span>
                                                                     </li>
                                                                     {{-- <li>
                                                                         <i class="fa fa-video-camera"></i>
@@ -1165,38 +1167,51 @@
             });
 
             // on click of photo upload icon
-            $("#publisher-photos").on('change', function() {
+            $("#publisher-photos").on('change', function(e) {
                 deleted_images = [];
                 //Get count of selected files
                 var countFiles = $(this)[0].files.length;
-                var imgPath = $(this)[0].value;
-                var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
-                var image_holder = $("#image-holder");
-                image_holder.empty();
-                if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
-                    if (typeof(FileReader) != "undefined") {
-                        //loop for each file selected for uploaded.
-                        for (var i = 0; i < countFiles; i++) {
-                            var reader = new FileReader();
-                            var ii = 0;
-                            reader.onload = function(e) {
-                                name = "'" + $("#publisher-photos")[0].files[ii].name + "'";
-                                image_holder.append('<span class="thumb-image-delete" id="image_to_' +
-                                    ii + '"><span onclick="DeleteImageById(' + name + ',' + ii +
-                                    ')" class="pointer thumb-image-delete-btn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg></span><img src="' +
-                                    e.target.result + '" class="thumb-image"></span>')
-                                ii = ii + 1;
-                                // $("<img />", {
-                                //                 "src": e.target.result,
-                                //                 "class": "thumb-image"
-                                //               }).appendTo(image_holder);
+                $("#postphotos_error").html("");
+                if (countFiles > 4) {
+                    // alert("Only ");
+                    $("#postphotos_error").html("Only 4 files allowed!!!");
+                    e.preventDefault();
+                    // let list = new DataTransfer;
+                    // for (let i = 0; i < 4; i++)
+                    //     list.items.add(files[i])
+                    // document.getElementById('files').files = list.files
+                } else {
+                    var imgPath = $(this)[0].value;
+                    var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+                    var image_holder = $("#image-holder");
+                    image_holder.empty();
+                    if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+                        if (typeof(FileReader) != "undefined") {
+                            //loop for each file selected for uploaded.
+                            for (var i = 0; i < countFiles; i++) {
+                                var reader = new FileReader();
+                                var ii = 0;
+                                reader.onload = function(e) {
+                                    name = "'" + $("#publisher-photos")[0].files[ii].name + "'";
+                                    image_holder.append(
+                                        '<span class="thumb-image-delete" id="image_to_' +
+                                        ii + '"><span onclick="DeleteImageById(' + name + ',' + ii +
+                                        ')" class="pointer thumb-image-delete-btn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg></span><img src="' +
+                                        e.target.result + '" class="thumb-image"></span>')
+                                    ii = ii + 1;
+                                    // $("<img />", {
+                                    //                 "src": e.target.result,
+                                    //                 "class": "thumb-image"
+                                    //               }).appendTo(image_holder);
+                                }
+                                image_holder.show();
+                                reader.readAsDataURL($(this)[0].files[i]);
                             }
-                            image_holder.show();
-                            reader.readAsDataURL($(this)[0].files[i]);
+                        } else {
+                            image_holder.html("<p>This browser does not support FileReader.</p>");
                         }
-                    } else {
-                        image_holder.html("<p>This browser does not support FileReader.</p>");
                     }
+
                 }
             });
             var allowed = "jpg,png,jpeg,gif,mkv,docx,zip,rar,pdf,doc,mp3,mp4,flv,wav,txt,mov,avi,webm,wav,mpeg";
@@ -1292,10 +1307,21 @@
 
         // delete image preview
         var deleted_images = [];
+
         function DeleteImageById(name, id) {
             deleted_images.push(name);
             $('#image_to_' + id).remove();
         }
+
+        // function checkFiles(files) {
+        //     if (files.length > 4) {
+        //         alert("length exceeded; files have been truncated");
+        //         let list = new DataTransfer;
+        //         for (let i = 0; i < 4; i++)
+        //             list.items.add(files[i])
+        //         document.getElementById('files').files = list.files
+        //     }
+        // }
 
         $('#buyBtn').click(function(e) {
             var userBalance = @json(Auth::user()->points);
