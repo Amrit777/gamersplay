@@ -767,13 +767,14 @@
                                                                                 <div class="row wo_adaptive_media">
                                                                                     @foreach ($post->images as $postImage)
                                                                                         {{-- @if ($postImage->type_id == 1) --}}
-                                                                                            <div class="album-image {{$post->selectClassImage()}}">
-                                                                                                <img src='{{ $postImage->file_name }}'
-                                                                                                    alt="{{ $postImage->name }}"
-                                                                                                    class="image-file pointer">
-                                                                                            </div>
-                                                                                            <div class="clear">
-                                                                                            </div>
+                                                                                        <div
+                                                                                            class="album-image {{ $post->selectClassImage() }}">
+                                                                                            <img src='{{ $postImage->file_name }}'
+                                                                                                alt="{{ $postImage->name }}"
+                                                                                                class="image-file pointer">
+                                                                                        </div>
+                                                                                        <div class="clear">
+                                                                                        </div>
                                                                                         {{-- @endif --}}
                                                                                     @endforeach
                                                                                 </div>
@@ -1162,12 +1163,7 @@
                     $('#imagemodal').modal('show');
                 });
             });
-            var deleted_images = [];
 
-            function DeleteImageById(name, id) {
-                deleted_images.push(name);
-                $('#image_to_' + id).remove();
-            }
             // on click of photo upload icon
             $("#publisher-photos").on('change', function() {
                 deleted_images = [];
@@ -1225,51 +1221,46 @@
                 };
             })();
             // on click of video upload icon
-            $("#publisher-video").change(function() {
-                var filename = $(this).val().replace(/C:\\fakepath\\/i, '');
-                $("#video-form").val(filename);
-                $("#video-holder").addClass("d-block").removeClass("d-none")
-                $("#videofilename").html(filename)
-                if (Wo_IsFileAllowedToUpload(filename, allowed) == false) {
-                    $("#file_not_supported").modal('show');
-                    Wo_Delay(function() {
-                        $("#file_not_supported").modal('hide');
-                    }, 3000);
-                    $("#publisher-video").val('');
-                    $("#video-form").val('');
-                    return false;
-                }
-            });
+            // $("#publisher-video").change(function() {
+            //     var filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+            //     $("#video-form").val(filename);
+            //     $("#video-holder").addClass("d-block").removeClass("d-none")
+            //     $("#videofilename").html(filename)
+            //     if (Wo_IsFileAllowedToUpload(filename, allowed) == false) {
+            //         $("#file_not_supported").modal('show');
+            //         Wo_Delay(function() {
+            //             $("#file_not_supported").modal('hide');
+            //         }, 3000);
+            //         $("#publisher-video").val('');
+            //         $("#video-form").val('');
+            //         return false;
+            //     }
+            // });
 
-            $("#publisher-music").change(function() {
-                var filename = $(this).val().replace(/C:\\fakepath\\/i, '');
-                $("#music-form").val(filename);
-                $("#music-form").val(filename);
-                $("#music-holder").addClass("d-block").removeClass("d-none")
-                $("#musicfilename").html(filename)
-                if (Wo_IsFileAllowedToUpload(filename, allowed) == false) {
-                    $("#file_not_supported").modal('show');
-                    Wo_Delay(function() {
-                        $("#file_not_supported").modal('hide');
-                    }, 3000);
-                    $("#publisher-music").val('');
-                    $("#music-form").val('');
-                    return false;
-                }
-            });
+            // $("#publisher-music").change(function() {
+            //     var filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+            //     $("#music-form").val(filename);
+            //     $("#music-form").val(filename);
+            //     $("#music-holder").addClass("d-block").removeClass("d-none")
+            //     $("#musicfilename").html(filename)
+            //     if (Wo_IsFileAllowedToUpload(filename, allowed) == false) {
+            //         $("#file_not_supported").modal('show');
+            //         Wo_Delay(function() {
+            //             $("#file_not_supported").modal('hide');
+            //         }, 3000);
+            //         $("#publisher-music").val('');
+            //         $("#music-form").val('');
+            //         return false;
+            //     }
+            // });
 
             $('#add-blog-post-form').submit(function(e) {
                 e.preventDefault();
                 var buttonSubmit = $("#create-post-btn");
-                $("#create-post-btn").disabled =  true;
+                $("#create-post-btn").disabled = true;
                 $("#create-post-btn").innerText = 'Posting…';
                 this.submit();
             });
-            // $(document).on("click", "#create-post-btn", function(e) {
-            //     e.preventDefault();
-                
-            // });
-
         });
 
         $(document).ready(() => {
@@ -1299,15 +1290,12 @@
         });
 
 
-
-
-
-
-
-
-
-
-        $('#imageCarousel').slick();
+        // delete image preview
+        var deleted_images = [];
+        function DeleteImageById(name, id) {
+            deleted_images.push(name);
+            $('#image_to_' + id).remove();
+        }
 
         $('#buyBtn').click(function(e) {
             var userBalance = @json(Auth::user()->points);
