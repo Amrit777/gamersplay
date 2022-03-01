@@ -35,8 +35,8 @@ class PostController extends Controller
     public function createPost(Request $request)
     {
         $rules = [
-            'content' => 'required|string|max:1024',
-            'postPhotos.*' => 'mimes:jpeg,jpg,x-png,png',
+            'content' => 'required_without:postPhotos|nullable|string|max:1024',
+            'postPhotos.*' => 'required_without:content|mimes:jpeg,jpg,x-png,png',
             'postPhotos' => 'max:4',
             // 'postVideo' => 'mimes:mp4',
             // 'postMusic' => 'mimes:mp3',
