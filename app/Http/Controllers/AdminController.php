@@ -443,7 +443,9 @@ class AdminController extends Controller
             if (file_exists(public_path('storage/news/')) == false) {
                 mkdir(public_path('storage/news/'));
             }
-            mkdir(public_path('storage/news/' . $post->id));
+            if (file_exists(public_path('storage/news/' . $post->id)) == false) {
+                mkdir(public_path('storage/news/' . $post->id));
+            }
             $file = $request->image->store('storage/news/' . $post->id, 'public');
             $post->image = $file;
             $post->save();
