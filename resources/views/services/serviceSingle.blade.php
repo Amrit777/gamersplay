@@ -349,59 +349,7 @@
                             <div class="card mt-2 p-3">
                                 <div class="card-body ">
                                     <div class="service-main-body-content">
-                                        @include('services.galleryImages',['service'=> $service]);
-                                        <!-- Gallery -->
-                                        <div class="row">
-                                            {{-- @php
-                                                $userGallery = $service->user
-                                                    ->imagesAsArray()
-                                                    ->get()
-                                                    ->toArray();
-                                            @endphp --}}
-                                            {{-- @if (!empty($userGallery))
-                                                @foreach (array_chunk($userGallery, 2) as $galleryImage)
-                                                    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                                                        @if (isset($galleryImage[0]) && !empty($galleryImage[0]))
-                                                            <img src="{{ $galleryImage[0]['file_name'] }}"
-                                                                class="w-100 shadow-1-strong rounded mb-4"
-                                                                alt="{{ $galleryImage[0]['name'] }}" />
-                                                        @endif
-                                                        @if (isset($galleryImage[1]) && !empty($galleryImage[1]))
-                                                            <img src="{{ $galleryImage[1]['file_name'] }}"
-                                                                class="w-100 shadow-1-strong rounded mb-4"
-                                                                alt="{{ $galleryImage[1]['name'] }}" />
-                                                        @endif
-                                                    </div>
-                                                @endforeach
-                                            @endif --}}
-                                            {{-- <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-                                                    class="w-100 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
-
-                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp"
-                                                    class="w-100 shadow-1-strong rounded mb-4"
-                                                    alt="Wintry Mountain Landscape" /> 
-                                            </div> --}}
-
-                                            {{-- <div class="col-lg-4 mb-4 mb-lg-0">
-                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain2.webp"
-                                                    class="w-100 shadow-1-strong rounded mb-4"
-                                                    alt="Mountains in the Clouds" />
-
-                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-                                                    class="w-100 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
-                                            </div>
-
-                                            <div class="col-lg-4 mb-4 mb-lg-0">
-                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp"
-                                                    class="w-100 shadow-1-strong rounded mb-4" alt="Waves at Sea" />
-
-                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain3.webp"
-                                                    class="w-100 shadow-1-strong rounded mb-4"
-                                                    alt="Yosemite National Park" />
-                                            </div> --}}
-                                        </div>
-                                        <!-- Gallery -->
+                                        @include('services.galleryImages',['service'=> $service])
                                     </div>
                                 </div>
                             </div>
