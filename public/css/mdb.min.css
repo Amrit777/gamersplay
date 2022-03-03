@@ -1,7 +1,7 @@
-.lightbox img:not(.lightbox-disabled) {
+/* .lightbox img:not(.lightbox-disabled) {
   cursor: -webkit-zoom-in;
   cursor: zoom-in
-}
+} */
 
 .lightbox-gallery {
   visibility: hidden;
