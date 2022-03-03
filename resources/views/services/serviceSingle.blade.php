@@ -416,10 +416,6 @@
 
     <script>
         jQuery(document).ready(function($) {
-            $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-                event.preventDefault();
-                $(this).ekkoLightbox();
-            });
             // show comments	
             $('.comment').on('click', function() {
                 $(this).parents(".post-meta").siblings(".coment-area").slideToggle("slow");
@@ -653,7 +649,6 @@
 
 
         function registerReaction(element) {
-            console.log("thisss", $(element).attr('data-post-id'))
             let post_id = $(element).attr('data-post-id');
             let liked = $(element).attr('data-reaction-id');
             let userReaction;
@@ -687,7 +682,7 @@
                         }
                         $(element).attr('data-reaction-id', response.liked);
                         $(element.lastElementChild).text(response.likes_count)
-                        Swal.fire(response.message);
+                        // Swal.fire(response.message);
                     }
 
                     if (response.status === false && response.code === 400) {
@@ -736,11 +731,6 @@
 
     <script>
         $(document).on("ready", function() {
-            $("#loginModal").on('shown.bs.modal', function(e) {
-                var tab = e.relatedTarget.hash;
-                $('.nav-tabs a[href="' + tab + '"]').tab('show');
-            })
-
             let lightbox = document.getElementById('lightbox');
             let lightboxInstance = mdb.Lightbox.getInstance(lightbox);
             let lightboxToggler = document.getElementById('lightboxToggler');
