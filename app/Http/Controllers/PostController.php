@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Constants\Constants;
+use App\Models\Comment;
 use App\Models\Image;
+use App\Models\Like;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -166,5 +168,91 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function likePost(Request $request)
+    {
+        $user = Auth::user();
+        $msg = null;
+        $rules = [
+            'id' => 'required',
+            'liked' => 'required'
+        ];
+        $messages = array(
+            'id.required' => 'Something went wrong',
+            'liked.required' => 'Something went wrong'
+        );
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            $error = [
+                'error' => $validator->errors()->first()
+            ];
+            return $this->error($error);
+        }
+        DB::beginTransaction();
+        try {
+            $model = Post::where("id", $request->id)->first();
+            if (empty($model)) {
+                return $this->failed();
+            }
+
+            // check if exists if not create
+            $likeModel = Like::updateOrCreate(
+                [
+                    'likeable_id' => $model->id,
+                    'likeable_type' => get_class($model),
+                    'user_id' => $user->id
+                ],
+                ['state_id' => $request->liked]
+            );
+            DB::commit();
+            if ($likeModel->state_id == 0) {
+                $msg = "Post is unliked!!!";
+            } else {
+                $msg = "Post is liked!!!";
+            }
+            return $this->success(['message' => $msg, "liked" => $likeModel->state_id, 'likes_count' => $model->likes->count()]);
+        } catch (\Illuminate\Database\QueryException $exception) {
+            DB::rollback();
+            $error = implode(" | ", $exception->errorInfo);
+            return $this->error($error);
+        }
+    }
+
+    public function addComment(Request $request)
+    {
+        $user = Auth::user();
+        $rules = [
+            'body' => "required|string",
+            'commentable_id' => "required"
+        ];
+        $messages = array(
+            'body.required' => 'Please add content to your comment',
+            'commentable_id.required' => 'Something went wrong'
+        );
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            $error = [
+                'error' => $validator->errors()->first()
+            ];
+            return $this->error($error);
+        }
+        $data = [];
+        // try {
+        $model = Post::where("id", $request->commentable_id)->first();
+        if (empty($model)) {
+            return $this->failed();
+        }
+        $comment = new Comment();
+        $comment->body = $request->body;
+        $comment->user_id = $user->id;
+        $model->comments()->save($comment);
+
+        return $this->success();
+        // } catch (\Illuminate\Database\QueryException $exception) {
+        //     return $this->error($exception->errorInfo);
+        // }
     }
 }

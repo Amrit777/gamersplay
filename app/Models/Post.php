@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Image;
 use Illuminate\Http\Client\Response;
+use Illuminate\Support\Facades\Auth;
 
 class Post extends Model
 {
@@ -25,7 +26,32 @@ class Post extends Model
     {
         return $this->morphMany(Image::class, 'imageable')->where('type_id', 1);
     }
+    public function likes()
+    {
+        return $this->morphMany(Like::class, 'likeable')->where('state_id', 1);
+    }
+    public function userliked()
+    {
+        if (Auth::check()) {
+            $model = Like::where('likeable_id', $this->id)->where('user_id', Auth::user()->id)->first();
+            if (!empty($model)) {
+                if ($model->state_id == 1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
 
+    public function likedPost()
+    {
+        if (Auth::check()) {
+            return Like::where("likeable_id", $this->id)->where('user_id', Auth::user()->id)->where('state_id', 1)->count();
+        }
+        return 0;
+    }
     public function selectClassImage()
     {
         $count = $this->images->count();
@@ -62,4 +88,3 @@ class Post extends Model
 
     protected $with = ['postAuthor'];
 }
-
