@@ -1,11 +1,12 @@
 @extends('layouts.app')
 @section('style')
-@endsection
-@section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('css/style-services.css?v=') . time() }}" />
+    <link rel="stylesheet" href="{{ asset('css/mdb.min.css') }}" />
+@endsection
+@section('content')
     {{-- NEW CONTENT START --}}
     <div class="gamePlay" id="gamePlay">
         <!-- START: Service Section -->
@@ -335,12 +336,16 @@
 
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            @include('services.serviceDetails',['service'=> $service])
+                            @include('services.serviceDetails', [
+                                'service' => $service,
+                            ])
                         </div>
 
                         <!-- START: Timeline Tab Start here -->
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            @include('services.servicesPost',['service'=> $service])
+                            @include('services.servicesPost', [
+                                'service' => $service,
+                            ])
                         </div>
                         <!-- END: Timeline Tab END here -->
 
@@ -349,7 +354,9 @@
                             <div class="card mt-2 p-3">
                                 <div class="card-body ">
                                     <div class="service-main-body-content">
-                                        @include('services.galleryImages',['service'=> $service])
+                                        @include('services.galleryImages', [
+                                            'service' => $service,
+                                        ])
                                     </div>
                                 </div>
                             </div>
@@ -393,6 +400,14 @@
             </div>
         </div>
     </div>
+
+    {{-- NEW CONTENT END --}}
+@endsection
+
+
+@push('scripts')
+    <script src="{{ asset('js/mdb.min.js') }}"></script>
+
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
@@ -627,6 +642,72 @@
         });
 
 
+        $(document).ready(() => {
+            $(document).on("click", ".post-box", function(e) {
+                if (e.target.classList.contains("post-reaction")) {
+                    registerReaction(e.target)
+                }
+            })
+
+        });
+
+
+        function registerReaction(element) {
+            console.log("thisss", $(element).attr('data-post-id'))
+            let post_id = $(element).attr('data-post-id');
+            let liked = $(element).attr('data-reaction-id');
+            let userReaction;
+            if (liked === '1') {
+                userReaction = 0;
+            } else {
+                userReaction = 1;
+            }
+            if (!post_id) {
+                return false;
+            }
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                method: 'post',
+                url: `/post/like`,
+                data: {
+                    'id': post_id,
+                    'liked': userReaction
+                },
+                success: function(response) {
+                    let msg;
+                    if (response.status === true && response.code === 200) {
+                        if (response.liked === '1') {
+                            $(element).addClass('active-heart');
+                        } else {
+                            $(element).removeClass('active-heart');
+                        }
+                        $(element).attr('data-reaction-id', response.liked);
+                        $(element.lastElementChild).text(response.likes_count)
+                        Swal.fire(response.message);
+                    }
+
+                    if (response.status === false && response.code === 400) {
+                        Swal.fire(response.message);
+                    }
+                    if (response.status === false && response.code === 500) {
+                        Swal.fire(response.message);
+                    }
+                    setTimeout(() => {
+                        Swal.close();
+                    }, 800);
+                },
+                error: function(XMLHttpRequest) {
+                    Swal.fire('An error occured while attempting this action.');
+                }
+            });
+
+        }
+
+
         // delete image preview
         var deleted_images = [];
 
@@ -653,9 +734,21 @@
         @endif
     </script>
 
-    {{-- NEW CONTENT END --}}
-@endsection
+    <script>
+        $(document).on("ready", function() {
+            $("#loginModal").on('shown.bs.modal', function(e) {
+                var tab = e.relatedTarget.hash;
+                $('.nav-tabs a[href="' + tab + '"]').tab('show');
+            })
 
+            let lightbox = document.getElementById('lightbox');
+            let lightboxInstance = mdb.Lightbox.getInstance(lightbox);
+            let lightboxToggler = document.getElementById('lightboxToggler');
+            lightboxToggler.addEventListener('click', function() {
+                lightboxInstance.open(1);
+                lightboxInstance.allowfullscreen(true)
+            });
 
-@section('scripts')
-@endsection
+        });
+    </script>
+@endpush

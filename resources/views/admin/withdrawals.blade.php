@@ -82,7 +82,7 @@
 </div>    
 @endsection
 
-@section('scripts')
+@push('scripts')
     <script>
 
 
@@ -125,4 +125,4 @@
             });
         });
     </script>
-@endsection
+@endpush

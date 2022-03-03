@@ -468,7 +468,7 @@ ul {
 
 /*START: TIMELINE TAB */
 .postbox {
-  z-index: 99;
+  /* z-index: 99; */
   position: relative;
 }
 
@@ -1456,6 +1456,13 @@ p {
 
 .heart:hover i {
   color: red !important;
+}
+
+.active-heart i {
+  color: red !important;
+}
+.active-heart:hover i {
+  color: #b3b1c5 !important;
 }
 
 .we-video-info ul li .heart>span {

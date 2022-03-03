@@ -177,7 +177,7 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
 <script>
     var menuId;
 
@@ -206,4 +206,4 @@
     });
 
 </script>
-@endsection
+@endpush

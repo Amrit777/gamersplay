@@ -123,7 +123,7 @@
 @endsection
 
 
-@section('scripts')
+@push('scripts')
     <script>
         @if (\Session::has('success'))
         Swal.fire('Success','{{\Session::get('success')}}','success');
@@ -135,4 +135,4 @@
         {{\Session::forget('error')}}
         @endif
     </script>
-@endsection
+@endpush

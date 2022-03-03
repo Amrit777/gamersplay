@@ -9,8 +9,7 @@
                         <form name="add-blog-post-form" id="add-blog-post-form" method="post"
                             enctype="multipart/form-data" action="{{ route('createPost') }}">
                             @csrf
-                            <input type="hidden" name="service_id"
-                                value="{{ $service->id }}">
+                            <input type="hidden" name="service_id" value="{{ $service->id }}">
                             <div class="new-postbox">
                                 <figure>
                                     <img src="/temp-services/images/admin.jpg" alt="">
@@ -75,9 +74,8 @@
                                             <i class="fa fa-image"></i>
                                             <label class="fileContainer">
                                                 <input type="file" id="publisher-photos"
-                                                    accept="image/x-png, image/gif, image/jpeg"
-                                                    name="postPhotos[]" multiple="multiple"
-                                                    {{-- onchange="checkFiles(this.files)" --}}>
+                                                    accept="image/x-png, image/gif, image/jpeg" name="postPhotos[]"
+                                                    multiple="multiple" {{-- onchange="checkFiles(this.files)" --}}>
                                             </label>
                                             <span id="postphotos_error"></span>
                                         </li>
@@ -99,8 +97,8 @@
                                                 data-ripple="">Preview</button>
                                         </li> --}}
                                     </ul>
-                                    <button id="create-post-btn" class="post-btn"
-                                        type="submit" data-ripple="">Post</button>
+                                    <button id="create-post-btn" class="post-btn" type="submit"
+                                        data-ripple="">Post</button>
                                 </div>
                                 <div class="add-location-post">
                                     <span>Drag map point to selected area</span>
@@ -108,13 +106,11 @@
 
                                         <div class="col-lg-6">
                                             <label class="control-label">Lat :</label>
-                                            <input type="text" class=""
-                                                id="us3-lat">
+                                            <input type="text" class="" id="us3-lat">
                                         </div>
                                         <div class="col-lg-6">
                                             <label>Long :</label>
-                                            <input type="text" class=""
-                                                id="us3-lon">
+                                            <input type="text" class="" id="us3-lon">
                                         </div>
                                     </div>
                                     <!-- map -->
@@ -124,8 +120,8 @@
                                             <div style="overflow: hidden;"></div>
                                             <div class="gm-style"
                                                 style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px;">
-                                                <div tabindex="0" aria-label="Map"
-                                                    aria-roledescription="map" role="group"
+                                                <div tabindex="0" aria-label="Map" aria-roledescription="map"
+                                                    role="group"
                                                     style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;), default; touch-action: pan-x pan-y;">
                                                     <div
                                                         style="z-index: 1; position: absolute; left: 50%; top: 50%; width: 100%; transform: translate(0px, 0px);">
@@ -137,8 +133,7 @@
                                                                     style="position: absolute; z-index: 985; transform: matrix(1, 0, 0, 1, -244, -53);">
                                                                     <div
                                                                         style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px;">
-                                                                        <div
-                                                                            style="width: 256px; height: 256px;">
+                                                                        <div style="width: 256px; height: 256px;">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -185,21 +180,15 @@
                                                             </div>
                                                             <div
                                                                 style="position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;">
-                                                                <div aria-label="Drag Me"
-                                                                    role="img" tabindex="-1"
+                                                                <div aria-label="Drag Me" role="img" tabindex="-1"
                                                                     style="width: 27px; height: 43px; overflow: hidden; position: absolute; touch-action: none; left: -14px; top: -43px; z-index: 0;">
                                                                     <img alt=""
                                                                         src="https://maps.gstatic.com/mapfiles/transparent.png"
-                                                                        draggable="false"
-                                                                        usemap="#gmimap0"
+                                                                        draggable="false" usemap="#gmimap0"
                                                                         style="width: 27px; height: 43px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"><map
-                                                                        name="gmimap0"
-                                                                        id="gmimap0"><area
-                                                                            log="miw"
+                                                                        name="gmimap0" id="gmimap0"><area log="miw"
                                                                             coords="13.5,0,4,3.75,0,13.5,13.5,43,27,13.5,23,3.75"
-                                                                            shape="poly"
-                                                                            tabindex="-1"
-                                                                            title="Drag Me"
+                                                                            shape="poly" tabindex="-1" title="Drag Me"
                                                                             style="cursor: pointer; touch-action: none;"></map>
                                                                 </div>
                                                             </div>
@@ -212,8 +201,7 @@
                                                         style="z-index: 4; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px; opacity: 0;">
                                                         <p class="gm-style-mot"></p>
                                                     </div>
-                                                </div><iframe aria-hidden="true" frameborder="0"
-                                                    tabindex="-1"
+                                                </div><iframe aria-hidden="true" frameborder="0" tabindex="-1"
                                                     style="z-index: -1; position: absolute; width: 100%; height: 100%; top: 0px; left: 0px; border: none;"></iframe>
                                                 <div
                                                     style="pointer-events: none; width: 100%; height: 100%; box-sizing: border-box; position: absolute; z-index: 1000002; opacity: 0; border: 2px solid rgb(26, 115, 232);">
@@ -227,15 +215,14 @@
                     </div>
                     <!-- END: Create post -->
 
-                    <div class="loadMore">
+                    <div class="loadMore post-box">
                         <!-- digital sponsors -->
                         @foreach ($service->posts as $post)
                             <div class="central-meta item" style="display: inline-block;">
                                 <div class="user-post">
                                     <div class="friend-info">
                                         <figure>
-                                            <img src="{{ $post->postAuthor->getProfilePicture() }}"
-                                                alt="">
+                                            <img src="{{ $post->postAuthor->getProfilePicture() }}" alt="">
                                         </figure>
                                         <div class="friend-name">
                                             {{-- <div class="more">
@@ -331,13 +318,11 @@
                                                 @endforeach
                                                 <div class="clear"></div> --}}
 
-                                                <div id="fullsizeimg"
-                                                    style="position: relative;">
+                                                <div id="fullsizeimg" style="position: relative;">
                                                     <div class="row wo_adaptive_media">
                                                         @foreach ($post->images as $postImage)
                                                             {{-- @if ($postImage->type_id == 1) --}}
-                                                            <div
-                                                                class="album-image {{ $post->selectClassImage() }}">
+                                                            <div class="album-image {{ $post->selectClassImage() }}">
                                                                 <img src='{{ $postImage->file_name }}'
                                                                     alt="{{ $postImage->name }}"
                                                                     class="image-file pointer">
@@ -357,20 +342,20 @@
                                                 </ul> --}}
                                             <div class="we-video-info">
                                                 <ul>
-                                                    {{-- <li>
-                                                        <span class="views"
-                                                            title="views">
+                                                    <li>
+                                                        <span class="views" title="views">
                                                             <i class="fa fa-eye"></i>
                                                             <ins>0</ins>
                                                         </span>
                                                     </li>
                                                     <li>
-                                                        <div class="likes heart"
-                                                            title="Like/Dislike"><i
-                                                                class="fas fa-heart"></i>
-                                                            <span>0</span>
+                                                        <div class="likes heart post-reaction {{$post->userliked() ? 'active-heart' : ""}}" title="Like/Dislike"
+                                                            data-post-id="{{ $post->id }}"
+                                                            data-reaction-id="{{$post->likedPost()}}">
+                                                            <i class="fas fa-heart"></i>
+                                                            <span class="liked_post_count">{{$post->likes->count()}}</span>
                                                         </div>
-                                                    </li> --}}
+                                                    </li>
                                                     {{-- <li>
                                                         <span class="comment"
                                                             title="Comments">
@@ -382,7 +367,7 @@
                                                     {{-- <li><span><a class="share-pst"
                                                                 href="#" title="Share"><i
                                                                     class="fa fa-share-alt"></i></a><ins>20</ins></span>
-                                                    </li> --}}
+                                                    </li>
                                                 </ul>
                                                 {{-- <div class="users-thumb-list">
                                                     <a data-toggle="tooltip" title="Anderw"
@@ -420,12 +405,10 @@
                                             <ul class="we-comet">
                                                 <li>
                                                     <div class="comet-avatar">
-                                                        <img src="/temp-services/images/userlist-3.jpg"
-                                                            alt="">
+                                                        <img src="/temp-services/images/userlist-3.jpg" alt="">
                                                     </div>
                                                     <div class="we-comment">
-                                                        <h5><a href="time-line.html"
-                                                                title="">Jason
+                                                        <h5><a href="time-line.html" title="">Jason
                                                                 borne</a></h5>
                                                         <p>we are working for the dance and sing
                                                             songs. this video is
@@ -435,8 +418,7 @@
                                                             like our channel</p>
                                                         <div class="inline-itms">
                                                             <span>1 year ago</span>
-                                                            <a class="we-reply" href="#"
-                                                                title="Reply"><i
+                                                            <a class="we-reply" href="#" title="Reply"><i
                                                                     class="fa fa-reply"></i></a>
                                                             <a href="#" title=""><i
                                                                     class="fa fa-heart"></i><span>20</span></a>
@@ -446,12 +428,10 @@
                                                 </li>
                                                 <li>
                                                     <div class="comet-avatar">
-                                                        <img src="/temp-services/images/userlist-1.jpg"
-                                                            alt="">
+                                                        <img src="/temp-services/images/userlist-1.jpg" alt="">
                                                     </div>
                                                     <div class="we-comment">
-                                                        <h5><a href="time-line.html"
-                                                                title="">Sophia</a></h5>
+                                                        <h5><a href="time-line.html" title="">Sophia</a></h5>
                                                         <p>we are working for the dance and sing
                                                             songs. this video is
                                                             very awesome for the youngster.
@@ -460,8 +440,7 @@
                                                         </p>
                                                         <div class="inline-itms">
                                                             <span>1 year ago</span>
-                                                            <a class="we-reply" href="#"
-                                                                title="Reply"><i
+                                                            <a class="we-reply" href="#" title="Reply"><i
                                                                     class="fa fa-reply"></i></a>
                                                             <a href="#" title=""><i
                                                                     class="fa fa-heart"></i><span>20</span></a>
@@ -469,56 +448,38 @@
                                                     </div>
                                                 </li>
                                                 <li>
-                                                    <a href="#" title=""
-                                                        class="showmore underline">more
+                                                    <a href="#" title="" class="showmore underline">more
                                                         comments+</a>
                                                 </li>
                                                 <li class="post-comment">
                                                     <div class="comet-avatar">
-                                                        <img src="/temp-services/images/userlist-2.jpg"
-                                                            alt="">
+                                                        <img src="/temp-services/images/userlist-2.jpg" alt="">
                                                     </div>
                                                     <div class="post-comt-box">
-                                                        <form method="post">
-                                                            <textarea
-                                                                placeholder="Post your comment"></textarea>
+                                                        <form method="post" id="{{$post->id}}">
+                                                            <textarea placeholder="Post your comment"></textarea>
                                                             <div class="add-smiles">
                                                                 <div class="uploadimage">
-                                                                    <i
-                                                                        class="fa fa-image"></i>
-                                                                    <label
-                                                                        class="fileContainer">
+                                                                    <i class="fa fa-image"></i>
+                                                                    <label class="fileContainer">
                                                                         <input type="file">
                                                                     </label>
                                                                 </div>
-                                                                <span
-                                                                    class="em em-expressionless"
+                                                                <span class="em em-expressionless"
                                                                     title="add icon"></span>
                                                                 <div class="smiles-bunch">
-                                                                    <i
-                                                                        class="em em---1"></i>
-                                                                    <i
-                                                                        class="em em-smiley"></i>
-                                                                    <i
-                                                                        class="em em-anguished"></i>
-                                                                    <i
-                                                                        class="em em-laughing"></i>
-                                                                    <i
-                                                                        class="em em-angry"></i>
-                                                                    <i
-                                                                        class="em em-astonished"></i>
-                                                                    <i
-                                                                        class="em em-blush"></i>
-                                                                    <i
-                                                                        class="em em-disappointed"></i>
-                                                                    <i
-                                                                        class="em em-worried"></i>
-                                                                    <i
-                                                                        class="em em-kissing_heart"></i>
-                                                                    <i
-                                                                        class="em em-rage"></i>
-                                                                    <i
-                                                                        class="em em-stuck_out_tongue"></i>
+                                                                    <i class="em em---1"></i>
+                                                                    <i class="em em-smiley"></i>
+                                                                    <i class="em em-anguished"></i>
+                                                                    <i class="em em-laughing"></i>
+                                                                    <i class="em em-angry"></i>
+                                                                    <i class="em em-astonished"></i>
+                                                                    <i class="em em-blush"></i>
+                                                                    <i class="em em-disappointed"></i>
+                                                                    <i class="em em-worried"></i>
+                                                                    <i class="em em-kissing_heart"></i>
+                                                                    <i class="em em-rage"></i>
+                                                                    <i class="em em-stuck_out_tongue"></i>
                                                                 </div>
                                                             </div>
 

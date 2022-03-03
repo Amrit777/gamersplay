@@ -187,7 +187,7 @@
 @endsection
 
 @if (isset($popular) && count($popular) > 0)
-    @section('scripts')
+    @push('scripts')
         <script>
             $('.carousel').slick({
                 slidesToShow: 3,
@@ -222,5 +222,5 @@
                 ]
             });
         </script>
-    @endsection
+    @endpush
 @endif

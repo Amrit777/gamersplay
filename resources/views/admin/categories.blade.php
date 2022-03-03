@@ -82,7 +82,7 @@
 </div>    
 @endsection
 
-@section('scripts')
+@push('scripts')
     <script>
         var catToDelete = undefined;
 
@@ -146,4 +146,4 @@
             
         });
     </script>
-@endsection
+@endpush

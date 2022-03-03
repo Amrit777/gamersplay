@@ -201,7 +201,7 @@
     
 @endsection
 
-@section('scripts')
+@push('scripts')
 <script>
     $('#messageBtn').click(function (e) { 
         e.preventDefault();
@@ -237,4 +237,4 @@
         });
     });
 </script>
-@endsection
+@endpush

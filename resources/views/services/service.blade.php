@@ -3,9 +3,7 @@
 @section('content')
 
     <link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css" />
-    <script src="https://unpkg.com/simplebar@latest/dist/simplebar.min.js"></script>
 
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
     <div class="container-fluid">
         <div class="menu-navbar" style="position:fixed !important;" data-simplebar>
@@ -53,7 +51,6 @@
         @endforeach
         </ul>
     </div>
-
     @endforeach
     <br>
     <br>
@@ -150,6 +147,13 @@
     </div>
     </div>
 
+
+@endsection
+
+
+@push('scripts')
+    <script src="https://unpkg.com/simplebar@latest/dist/simplebar.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script>
         @if (Auth::check() == false)
             $(document).ready(function () {
@@ -157,10 +161,6 @@
             });
         @endif
     </script>
-@endsection
-
-
-@section('scripts')
     <script>
         var menuCategories = @json($categories);
         $(document).ready(function() {
@@ -177,4 +177,4 @@
             });
         </script>
     @endif
-@endsection
+@endpush

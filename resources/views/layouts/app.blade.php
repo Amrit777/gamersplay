@@ -277,10 +277,7 @@ $noFooter = true;
                 })
             });
         </script>
-        @yield('scripts')
-
     </div>
-
+    @stack('scripts')
 </body>
-
 </html>

@@ -71,14 +71,14 @@ body {
     background: var(--color-background) !important;
     transition: background-color 0.3s ease-in;
     box-shadow: none;
-    z-index: 9999;
+    z-index: 1;
     padding-top: 0px !important;
     padding-bottom: 0px !important;
 }
 
 .scrolled {
     background: var(--color-darker) !important;
-    z-index: 99999;
+    z-index: 1;
     box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important
 }
 
@@ -433,7 +433,7 @@ ul.footer-menu li a:before {
     width: 250px;
     height: 100%;
     padding: 15px;
-    z-index: 1;
+    /* z-index: 1; */
     margin-top: -32px;
     overflow: auto;
 }

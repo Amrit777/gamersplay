@@ -572,7 +572,7 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
     <script>
         var profilePicChanged = false;
         $(document).ready(function() {
@@ -657,4 +657,4 @@
             {{ \Session::forget('success') }}
         @endif
     </script>
-@endsection
+@endpush

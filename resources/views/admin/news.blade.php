@@ -77,7 +77,7 @@
 @endsection
 
 
-@section('scripts')
+@push('scripts')
 
 
     <!-- Include the Quill library -->
@@ -132,4 +132,4 @@
             });
         });
     </script>
-@endsection
+@endpush

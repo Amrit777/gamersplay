@@ -43,7 +43,7 @@
 </div>    
 @endsection
 
-@section('scripts')
+@push('scripts')
     <script>
         var usersOld = $('#usersTbl').html();
 
@@ -90,4 +90,4 @@
 
     
     </script>
-@endsection
+@endpush

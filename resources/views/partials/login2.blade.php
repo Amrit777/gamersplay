@@ -115,7 +115,7 @@
     <a href="" class="btn btn-default btn-rounded my-3" data-toggle="modal" data-target="#modalLRForm">Launch
         Modal LogIn/Register</a>
 </div>
-@section('scripts')
+@push('scripts')
     @parent
 
     @if ($errors->has('email') || $errors->has('password'))
@@ -127,4 +127,4 @@
             });
         </script>
     @endif
-@endsection
+@endpush

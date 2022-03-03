@@ -149,7 +149,7 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
 
 <script>
 
@@ -188,4 +188,4 @@ $('#purchaseBtn').click(function (e) {
 
 </script>
 
-@endsection
+@endpush

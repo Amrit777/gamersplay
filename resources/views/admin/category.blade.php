@@ -46,7 +46,7 @@
 </div>    
 @endsection
 
-@section('scripts')
+@push('scripts')
 <script>
     $(document).ready(function () {
         $('select[name="menu"]').val('{{$category->menu_id}}');
@@ -61,4 +61,4 @@
     {{\Session::forget('error')}}
     @endif
 </script>
-@endsection
+@endpush

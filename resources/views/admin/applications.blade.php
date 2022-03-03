@@ -58,13 +58,8 @@
 </div>    
 @endsection
 
-@section('scripts')
+@push('scripts')
     <script>
-
-
-
-
-
         $('.btn-admin-action').click(function (e) { 
             e.preventDefault();
             var decision = this.dataset.decision;
@@ -102,4 +97,4 @@
             });
         });
     </script>
-@endsection
+@endpush

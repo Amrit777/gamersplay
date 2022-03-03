@@ -69,7 +69,7 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
 <script>
   var currentUsersIdAuth = {{Auth::id()}};
 </script>
@@ -117,7 +117,7 @@
 </script>
 
 
-@endsection
+@endpush
 
 
 

@@ -34,7 +34,7 @@ class HomeController extends Controller
 
     public function welcome()
     {
-        $news = Post::orderBy('created_at', 'desc')->get()->take(3);
+        $news = News::orderBy('created_at', 'desc')->get()->take(3);
         $popular = Category::where('popular', 1)->where('image_1', '!=', null)->get();
 
         return view('welcome', compact('news', 'popular'));
