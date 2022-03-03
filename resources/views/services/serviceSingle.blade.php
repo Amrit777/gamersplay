@@ -4,7 +4,7 @@
         integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('css/style-services.css?v=') . time() }}" />
-    <link rel="stylesheet" href="{{ asset('css/mdb.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/mdb.min.css?v=') . time() }}" />
 @endsection
 @section('content')
     {{-- NEW CONTENT START --}}
@@ -445,14 +445,11 @@
             /** Post a Comment **/
             jQuery(".post-comt-box textarea").on("keydown", function(event) {
                 if (event.keyCode == 13) {
-                    var comment = jQuery(this).val();
-                    var parent = jQuery(".showmore").parent("li");
-                    var comment_HTML =
-                        '<li><div class="comet-avatar"><img alt="" src="/temp-services/images/userlist-1.jpg"></div><div class="we-comment"><h5><a title="" href="time-line.html">Sophia</a></h5><p>' +
-                        comment +
-                        '</p><div class="inline-itms"><span>1 minut ago</span><a title="Reply" href="#" class="we-reply"><i class="fa fa-reply"></i></a><a title="" href="#"><i class="fa fa-heart"></i></a></div></div></li>';
-                    $(comment_HTML).insertBefore(parent);
-                    jQuery(this).val('');
+                    
+
+
+
+
                 }
             });
         });
