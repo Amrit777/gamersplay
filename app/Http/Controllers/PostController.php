@@ -250,7 +250,11 @@ class PostController extends Controller
         $comment->user_id = $user->id;
         $model->comments()->save($comment);
 
-        return $this->success();
+        return $this->success(
+            [
+                "count" => $model->comments->count()
+            ]
+        );
         // } catch (\Illuminate\Database\QueryException $exception) {
         //     return $this->error($exception->errorInfo);
         // }

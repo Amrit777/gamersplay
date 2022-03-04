@@ -356,13 +356,13 @@
                                                             <span class="liked_post_count">{{$post->likes->count()}}</span>
                                                         </div>
                                                     </li>
-                                                    {{-- <li>
+                                                    <li>
                                                         <span class="comment"
                                                             title="Comments">
                                                             <i class="fa fa-commenting"></i>
-                                                            <ins>0</ins>
+                                                            <ins class="comment_post_count_{{$post->id}}">{{$post->comments->count()}}</ins>
                                                         </span>
-                                                    </li> --}}
+                                                    </li>
 
                                                     {{-- <li><span><a class="share-pst"
                                                                 href="#" title="Share"><i
@@ -403,29 +403,27 @@
                                         </div>
                                         <div class="coment-area" style="">
                                             <ul class="we-comet">
-                                                <li>
-                                                    <div class="comet-avatar">
-                                                        <img src="/temp-services/images/userlist-3.jpg" alt="">
-                                                    </div>
-                                                    <div class="we-comment">
-                                                        <h5><a href="time-line.html" title="">Jason
-                                                                borne</a></h5>
-                                                        <p>we are working for the dance and sing
-                                                            songs. this video is
-                                                            very awesome for the youngster.
-                                                            please
-                                                            vote this video and
-                                                            like our channel</p>
-                                                        <div class="inline-itms">
-                                                            <span>1 year ago</span>
-                                                            <a class="we-reply" href="#" title="Reply"><i
-                                                                    class="fa fa-reply"></i></a>
-                                                            <a href="#" title=""><i
-                                                                    class="fa fa-heart"></i><span>20</span></a>
+                                                @if(!empty($post->comments))
+                                                    @foreach($post->comments as $comment)
+                                                    <li>
+                                                        <div class="comet-avatar">
+                                                            <img src="{{$comment->user->getProfilePicture()}}" alt="">
                                                         </div>
-                                                    </div>
-
-                                                </li>
+                                                        <div class="we-comment">
+                                                            <h5><a href="time-line.html" title="">{{$comment->user->name}}</a></h5>
+                                                            <p>{{$comment->body}}</p>
+                                                            <div class="inline-itms">
+                                                                <span>{{ Carbon\Carbon::parse($comment->created_at)->format('F d, Y') }}</span>
+                                                                {{-- <a class="we-reply" href="#" title="Reply"><i
+                                                                        class="fa fa-reply"></i></a> --}}
+                                                                {{-- <a href="#" title=""><i
+                                                                        class="fa fa-heart"></i><span>20</span></a> --}}
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    @endforeach
+                                                @endif
+{{--                                                 
                                                 <li>
                                                     <div class="comet-avatar">
                                                         <img src="/temp-services/images/userlist-1.jpg" alt="">
@@ -446,9 +444,9 @@
                                                                     class="fa fa-heart"></i><span>20</span></a>
                                                         </div>
                                                     </div>
-                                                </li>
+                                                </li> --}}
                                                 <li>
-                                                    <a href="#" title="" class="showmore underline">more
+                                                    <a href="#" title="" class="showmore underline" data-comment-load="load_more_{{$post->id}}" id="showmore_{{$post->id}}">more
                                                         comments+</a>
                                                 </li>
                                                 <li class="post-comment">
@@ -456,9 +454,10 @@
                                                         <img src="/temp-services/images/userlist-2.jpg" alt="">
                                                     </div>
                                                     <div class="post-comt-box">
-                                                        <form method="post" id="{{$post->id}}">
-                                                            <textarea placeholder="Post your comment"></textarea>
-                                                            <div class="add-smiles">
+                                                        <form method="POST" action="#" id="comment_{{$post->id}}" data-post-id="{{$post->id}}">
+                                                            <input name="commentable_id" type="hidden" value="{{$post->id}}" id="commentable_id_{{$post->id}}">
+                                                            <textarea placeholder="Post your comment" name="body" id="commentable_content_{{$post->id}}" data-post-id="{{$post->id}}"></textarea>
+                                                            {{-- <div class="add-smiles">
                                                                 <div class="uploadimage">
                                                                     <i class="fa fa-image"></i>
                                                                     <label class="fileContainer">
@@ -481,9 +480,9 @@
                                                                     <i class="em em-rage"></i>
                                                                     <i class="em em-stuck_out_tongue"></i>
                                                                 </div>
-                                                            </div>
+                                                            </div> --}}
 
-                                                            <button type="submit"></button>
+                                                            {{-- <button type="submit"></button> --}}
                                                         </form>
                                                     </div>
                                                 </li>

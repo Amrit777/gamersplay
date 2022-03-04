@@ -30,6 +30,10 @@ class Post extends Model
     {
         return $this->morphMany(Like::class, 'likeable')->where('state_id', 1);
     }
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
     public function userliked()
     {
         if (Auth::check()) {
