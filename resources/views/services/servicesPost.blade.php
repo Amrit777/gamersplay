@@ -367,7 +367,7 @@
                                                     {{-- <li><span><a class="share-pst"
                                                                 href="#" title="Share"><i
                                                                     class="fa fa-share-alt"></i></a><ins>20</ins></span>
-                                                    </li>
+                                                    </li> --}}
                                                 </ul>
                                                 {{-- <div class="users-thumb-list">
                                                     <a data-toggle="tooltip" title="Anderw"
