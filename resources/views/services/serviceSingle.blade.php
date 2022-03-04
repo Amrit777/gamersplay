@@ -531,13 +531,8 @@
                 var countFiles = $(this)[0].files.length;
                 $("#postphotos_error").html("");
                 if (countFiles > 4) {
-                    // alert("Only ");
                     $("#postphotos_error").html("Only 4 files allowed!!!");
                     e.preventDefault();
-                    // let list = new DataTransfer;
-                    // for (let i = 0; i < 4; i++)
-                    //     list.items.add(files[i])
-                    // document.getElementById('files').files = list.files
                 } else {
                     var imgPath = $(this)[0].value;
                     var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();

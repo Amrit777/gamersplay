@@ -356,13 +356,13 @@
                                                             <span class="liked_post_count">{{$post->likes->count()}}</span>
                                                         </div>
                                                     </li>
-                                                    {{-- <li>
+                                                    <li>
                                                         <span class="comment"
                                                             title="Comments">
                                                             <i class="fa fa-commenting"></i>
                                                             <ins class="comment_post_count_{{$post->id}}">{{$post->comments->count()}}</ins>
                                                         </span>
-                                                    </li> --}}
+                                                    </li>
 
                                                     {{-- <li><span><a class="share-pst"
                                                                 href="#" title="Share"><i
