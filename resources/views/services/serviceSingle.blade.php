@@ -466,7 +466,7 @@
                             if (response.status === true && response.code === 200) {
                                 var parent = jQuery("#showmore_" + post_id).parent("li");
                                 var comment_HTML =
-                                    '<li><div class="comet-avatar"><img alt="" src="{{ Auth::user()->getProfilePicture() }}"></div><div class="we-comment"><h5><a title="" href="time-line.html">Sophia</a></h5><p>' +
+                                    '<li><div class="comet-avatar"><img alt="" src="{{ Auth::user()->getProfilePicture() }}"></div><div class="we-comment"><h5><a title="" href="time-line.html">{{ Auth::user()->name }}</a></h5><p>' +
                                     comment +
                                     '</p><div class="inline-itms"><span>1 minut ago</span></div></div></li>';
                                     // '</p><div class="inline-itms"><span>1 minut ago</span><a title="Reply" href="#" class="we-reply"><i class="fa fa-reply"></i></a><a title="" href="#"><i class="fa fa-heart"></i></a></div></div></li>';                                    
