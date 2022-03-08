@@ -370,97 +370,25 @@
                                                                     class="fa fa-share-alt"></i></a><ins>20</ins></span>
                                                     </li> --}}
                                                 </ul>
-                                                {{-- <div class="users-thumb-list">
-                                                    <a data-toggle="tooltip" title="Anderw"
-                                                        href="#" data-original-title="Anderw">
-                                                        <img alt=""
-                                                            src="/temp-services/images/userlist-1.jpg">
-                                                    </a>
-                                                    <a data-toggle="tooltip" title="frank"
-                                                        href="#" data-original-title="frank">
-                                                        <img alt=""
-                                                            src="/temp-services/images/userlist-2.jpg">
-                                                    </a>
-                                                    <a data-toggle="tooltip" title="Sara"
-                                                        href="#" data-original-title="Sara">
-                                                        <img alt=""
-                                                            src="/temp-services/images/userlist-3.jpg">
-                                                    </a>
-                                                    <a data-toggle="tooltip" title="Amy"
-                                                        href="#" data-original-title="Amy">
-                                                        <img alt=""
-                                                            src="/temp-services/images/userlist-1.jpg">
-                                                    </a>
-                                                    <a data-toggle="tooltip" title="Ema"
-                                                        href="#" data-original-title="Ema">
-                                                        <img alt=""
-                                                            src="/temp-services/images/userlist-2.jpg">
-                                                    </a>
-                                                    <span><strong>You</strong>, <b>Sarah</b> and
-                                                        <a href="#" title="">24+ more</a>
-                                                        liked</span>
-                                                </div> --}}
+                                                <div class="users-thumb-list"
+                                                    id="people-liked-post-{{ $post->id }}">
+                                                    {!! $post->postLikedUserNames() !!}
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="coment-area ">
-                                            <ul class="we-comet">
-                                                @if (!empty($post->comments))
-                                                    @foreach ($post->comments as $comment)
-                                                        <li>
-                                                            <div class="comet-avatar">
-                                                                <img src="{{ $comment->user->getProfilePicture() }}"
-                                                                    alt="">
-                                                            </div>
-                                                            <div class="we-comment">
-                                                                <h5><a href="time-line.html"
-                                                                        title="">{{ $comment->user->name }}</a></h5>
-                                                                <p>{{ $comment->body }}</p>
-                                                                <div class="inline-itms comment-action-box">
-                                                                    <span>{{ Carbon\Carbon::parse($comment->created_at)->format('F d, Y') }}</span>
-                                                                    {{-- <a class="we-reply" href="#" title="Reply"><i
-                                                                        class="fa fa-reply"></i></a> --}}
-                                                                    <span
-                                                                        class="comment-reaction likes heart {{ $comment->userliked() ? 'active-heart' : '' }} "
-                                                                        data-comment-post-id="{{ $comment->id }}"
-                                                                        data-comment-reaction-id="{{ $comment->likedPost() }}">
-                                                                        <i class="fa fa-heart"></i>
-                                                                        <span
-                                                                            id="liked_comment_count_{{ $comment->id }}">
-                                                                            {{ $comment->likes->count() }}
-                                                                        </span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    @endforeach
+                                            <ul class="we-comet" id="comment-box_{{$post->id}}">
+                                                {!! $post->commentByUsers() !!}
+                                                @if ($post->comments->count() > 3)
+                                                    <li>
+                                                        <a href="#" title="" class="showmore underline"
+                                                            data-comment-load_page="1"
+                                                            data-comment-post-id="{{ $post->id }}"
+                                                            id="showmore_{{ $post->id }}">more
+                                                            comments+</a>
+                                                    </li>
                                                 @endif
-                                                {{-- <li>
-                                                    <div class="comet-avatar">
-                                                        <img src="/temp-services/images/userlist-1.jpg" alt="">
-                                                    </div>
-                                                    <div class="we-comment">
-                                                        <h5><a href="time-line.html" title="">Sophia</a></h5>
-                                                        <p>we are working for the dance and sing
-                                                            songs. this video is
-                                                            very awesome for the youngster.
 
-                                                            <i class="em em-smiley"></i>
-                                                        </p>
-                                                        <div class="inline-itms">
-                                                            <span>1 year ago</span>
-                                                            <a class="we-reply" href="#" title="Reply"><i
-                                                                    class="fa fa-reply"></i></a>
-                                                            <a href="#" title=""><i
-                                                                    class="fa fa-heart"></i><span>20</span></a>
-                                                        </div>
-                                                    </div>
-                                                </li> --}}
-                                                <li>
-                                                    <a href="#" title="" class="showmore underline"
-                                                        data-comment-load="load_more_{{ $post->id }}"
-                                                        id="showmore_{{ $post->id }}">more
-                                                        comments+</a>
-                                                </li>
                                                 <li class="post-comment">
                                                     <div class="comet-avatar">
                                                         <img src="/temp-services/images/userlist-2.jpg" alt="">

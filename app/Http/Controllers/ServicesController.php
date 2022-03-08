@@ -223,8 +223,6 @@ class ServicesController extends Controller
         if ($service == null) {
             return redirect('/');
         }
-        // print_r($service);
-        // exit();
         return view('services.serviceSingle', compact('service'));
     }
 }

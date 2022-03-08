@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-
+use ImageResize;
 class Image extends Model
 {
     protected $fillable = [
@@ -59,7 +59,7 @@ class Image extends Model
         }
         return 0;
     }
-    public static function saveImage($image, $foldername, $userid = null)
+    public static function saveImage($image, $foldername, $userid = null, $thumbnail = false)
     {
 
         $imageExtension = $image->getClientOriginalExtension();
@@ -67,6 +67,7 @@ class Image extends Model
         $imageName = pathinfo($imageName);
         $imageNameWE = preg_replace('/\s+/', '_', $imageName['filename']);
         $imageName = $imageNameWE . '.' . $imageExtension;
+        $thumbnailName = $imageName . '-thumbnail.' . $imageExtension;
 
         $first = 1;
         $separator = '-';
@@ -75,6 +76,8 @@ class Image extends Model
             $userpath = '/' . $userid;
         }
 
+        //create folders for image
+
         while (file_exists(storage_path() . '/app/public/' . $foldername . $userpath . '/' . $imageName)) {
 
             preg_match('/(.+)' . $separator . '([0-9]+)$/', $imageName, $match);
@@ -82,14 +85,28 @@ class Image extends Model
             $imageName = isset($match[2]) ? $match[1] . $separator . ($match[2] + 1) : $imageNameWE . $separator . $first;
             $first++;
             $imageName = $imageName . '.' . $imageExtension;
+            $thumbnailName = $imageName . '-thumbnail.' . $imageExtension;
         }
 
         $imagepath = storage_path() . '/app/public/' . $foldername . '/' . $userid;
 
         $image->move($imagepath, $imageName);
 
+        if ($thumbnail) {
+            self::imageThumbnail($image, $imagepath . '/' . $thumbnailName);
+        }
         $return_path = '/storage/' . $foldername . $userpath . '/' . $imageName;
         return $return_path;
+    }
+
+    public static function imageThumbnail($image, $path)
+    {
+        $thumbnail = ImageResize::make($image);
+
+        $thumbnail->resize(32, 32, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($path);
+        return $path;
     }
 
     public function getMovie()

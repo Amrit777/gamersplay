@@ -469,10 +469,10 @@
                                     '<li><div class="comet-avatar"><img alt="" src="{{ Auth::user()->getProfilePicture() }}"></div><div class="we-comment"><h5><a title="" href="time-line.html">{{ Auth::user()->name }}</a></h5><p>' +
                                     comment +
                                     '</p><div class="inline-itms"><span>1 min ago</span></div></div></li>';
-                                    // '</p><div class="inline-itms"><span>1 minut ago</span><a title="Reply" href="#" class="we-reply"><i class="fa fa-reply"></i></a><a title="" href="#"><i class="fa fa-heart"></i></a></div></div></li>';                                    
+                                // '</p><div class="inline-itms"><span>1 minut ago</span><a title="Reply" href="#" class="we-reply"><i class="fa fa-reply"></i></a><a title="" href="#"><i class="fa fa-heart"></i></a></div></div></li>';                                    
                                 $(comment_HTML).insertBefore(parent);
-                                $("#commentable_content_"+post_id).val("");
-                                $("#comment_post_count_"+post_id).val(response.count);
+                                $("#commentable_content_" + post_id).val("");
+                                $("#comment_post_count_" + post_id).val(response.count);
                             }
                         },
                         error: function() {
@@ -630,6 +630,40 @@
                 this.submit();
             });
 
+            $(document).on("click", "[id^='showmore_']", function(e) {
+                e.preventDefault();
+                let loadMoreTarget = e.target;
+                let post_id = $(loadMoreTarget).attr("data-comment-post-id");
+                let page = $(loadMoreTarget).attr("data-comment-load_page");
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    method: 'post',
+                    url: `/comments/load`,
+                    data: {
+                        'id': post_id,
+                        'page': page
+                    },
+                    success: function(response) {
+                        console.log("comment load response", response)
+                        if (response.status === true && response.code === 200) {
+                            $(".comment-section_" + post_id).last().after(response.data);
+                            $(loadMoreTarget).attr("data-comment-load_page", response.page)
+                            if (response.last_page === true) {
+                                $("#showmore_" + post_id).hide();
+                            }
+                        }
+                    },
+                    error: function(XMLHttpRequest) {
+                        Swal.fire('An error occured while attempting this action.');
+                    }
+                });
+            });
+
         });
 
         $(document).ready(() => {
@@ -710,7 +744,7 @@
                 data: {
                     'id': post_id,
                     'liked': userReaction,
-                    'type' : type
+                    'type': type
                 },
                 success: function(response) {
                     let msg;
@@ -722,7 +756,7 @@
                         }
                         $(element).attr('data-reaction-id', response.liked);
                         $(element.lastElementChild).text(response.likes_count)
-                        // Swal.fire(response.message);
+                        $("#people-liked-post-" + post_id).html(response.liked_html);
                     }
 
                     if (response.status === false && response.code === 400) {
@@ -741,6 +775,7 @@
             });
 
         }
+
         function registerGalleryReaction(element) {
             let post_id = $(element).attr('data-gallery-image-id');
             let liked = $(element).attr('data-gallery-reaction-id');
@@ -765,7 +800,7 @@
                 data: {
                     'id': post_id,
                     'liked': userReaction,
-                    'type' : type
+                    'type': type
                 },
                 success: function(response) {
                     let msg;
@@ -796,6 +831,7 @@
             });
 
         }
+
         function registerCommentReaction(element) {
             let post_id = $(element).attr('data-comment-post-id');
             let liked = $(element).attr('data-comment-reaction-id');
@@ -820,7 +856,7 @@
                 data: {
                     'id': post_id,
                     'liked': userReaction,
-                    'type' : type
+                    'type': type
                 },
                 success: function(response) {
                     let msg;
@@ -831,7 +867,7 @@
                             $(element).removeClass('active-heart');
                         }
                         $(element).attr('data-comment-reaction-id', response.liked);
-                        $("#liked_comment_count_"+post_id).text(response.likes_count)
+                        $("#liked_comment_count_" + post_id).text(response.likes_count)
                         // Swal.fire(response.message);
                     }
 
@@ -851,7 +887,6 @@
             });
 
         }
-
 
         // delete image preview
         var deleted_images = [];

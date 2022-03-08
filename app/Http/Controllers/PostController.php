@@ -220,7 +220,16 @@ class PostController extends Controller
             } else {
                 $msg = "liked!!!";
             }
-            return $this->success(['message' => $msg, "liked" => $likeModel->state_id, 'likes_count' => $model->likes->count()]);
+            $data = [];
+            $data = [
+                'message' => $msg,
+                "liked" => $likeModel->state_id,
+                'likes_count' => $model->likes->count(),
+            ];
+            if ($request->type == 'post') {
+                $data['liked_html'] = $model->postLikedUserNames();
+            }
+            return $this->success($data);
         } catch (\Illuminate\Database\QueryException $exception) {
             DB::rollback();
             $error = implode(" | ", $exception->errorInfo);
@@ -266,5 +275,51 @@ class PostController extends Controller
         // } catch (\Illuminate\Database\QueryException $exception) {
         //     return $this->error($exception->errorInfo);
         // }
+    }
+
+    public function loadMoreComment(Request $request)
+    {
+        $user = Auth::user();
+        $rules = [
+            'id' => "required|numeric",
+            'page' => "required|numeric"
+        ];
+        $messages = array(
+            'page.required' => 'Something went wrong',
+            'id.required' => 'Something went wrong'
+        );
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            $error = [
+                'error' => $validator->errors()->first()
+            ];
+            return $this->error($error);
+        }
+        $limit = 3;
+        $model = Post::where('id', $request->id)->first();
+        if (!empty($model)) {
+            $offset = $request->page * $limit;
+            $comment = $model->commentByUsers($offset);
+            // $comment = Comment::where('commentable_id', $model->id)->where('commentable_type', get_class($model))->skip($offset)->take($limit)->get();
+            if (!empty($comment)) {
+                return $this->success(
+                    [
+                        "data" => $comment,
+                        "page" => ($request->page + 1),
+                        "last_page" => false
+                    ]
+                );
+            } else {
+                return $this->success(
+                    [
+                        "data" => "",
+                        "page" => $request->page,
+                        "last_page" => true
+                    ]
+                );
+            }
+        }
+        return $this->error("Error!!!");
     }
 }

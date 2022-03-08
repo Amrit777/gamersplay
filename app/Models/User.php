@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Passport\HasApiTokens;
 use Laravel\Cashier\Billable;
 
@@ -25,7 +26,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'real_name',
         'password',
-        'tnc'
+        'tnc',
+        'profile_thumbnail'
     ];
 
     /**
@@ -76,6 +78,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         if (!empty($this->profile_picture)) {
             return $this->profile_picture;
+        } else {
+            return "/imgs/avatar.svg";
+        }
+    }
+    public function getImageThumbnail()
+    {
+        if (!empty($this->profile_thumbnail)) {
+            return $this->profile_thumbnail;
         } else {
             return "/imgs/avatar.svg";
         }

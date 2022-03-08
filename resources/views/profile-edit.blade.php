@@ -9,7 +9,6 @@
     </style>
 @endsection
 @section('content')
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8 offset-md-2">
@@ -48,9 +47,6 @@
 
                                     </div>
                                 @else
-
-
-
                                     <div style="display:Flex; justify-content:center; flex-direction:column;">
                                         <div style="text-align: center;">
                                             <img src="{{ asset('/imgs/avatar.svg') }}"
@@ -78,6 +74,11 @@
                         <div class="col-md-4">
                             <form method="POST" action="/profile/{{ $user->id }}/edit">
                                 @csrf
+                                @if (session('error'))
+                                    <div class="alert alert-danger">
+                                        {{ session('error') }}
+                                    </div>
+                                @endif
                                 {{-- Form Element --}}
                                 <div class="form-group">
                                     <label for="">Nickname</label>
@@ -567,9 +568,6 @@
 
         </div>
     </div>
-
-
-
 @endsection
 
 @push('scripts')

@@ -96,7 +96,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::post('/post/comment', [PostController::class, 'addComment'])->name('comment');
     Route::post('/gallery/like', [PostController::class, 'likePost'])->name('gallerylikePost');
     Route::post('/comment/like', [PostController::class, 'likePost'])->name('commentlikePost');
-
+    Route::post('/comments/load', [PostController::class, 'loadMoreComment'])->name('commentLoad');
 
     
 
