@@ -676,6 +676,15 @@
 
         });
 
+        $(document).ready(() => {
+            $(document).on("click", ".comment-action-box", function(e) {
+                if (e.target.classList.contains("comment-reaction")) {
+                    registerCommentReaction(e.target)
+                }
+            })
+
+        });
+
 
         function registerReaction(element) {
             let post_id = $(element).attr('data-post-id');
@@ -768,6 +777,61 @@
                         }
                         $(element).attr('data-gallery-reaction-id', response.liked);
                         $(element.lastElementChild).text(response.likes_count)
+                        // Swal.fire(response.message);
+                    }
+
+                    if (response.status === false && response.code === 400) {
+                        Swal.fire(response.message);
+                    }
+                    if (response.status === false && response.code === 500) {
+                        Swal.fire(response.message);
+                    }
+                    setTimeout(() => {
+                        Swal.close();
+                    }, 800);
+                },
+                error: function(XMLHttpRequest) {
+                    Swal.fire('An error occured while attempting this action.');
+                }
+            });
+
+        }
+        function registerCommentReaction(element) {
+            let post_id = $(element).attr('data-comment-post-id');
+            let liked = $(element).attr('data-comment-reaction-id');
+            let type = "comment";
+            let userReaction;
+            if (liked === '1') {
+                userReaction = 0;
+            } else {
+                userReaction = 1;
+            }
+            if (!post_id) {
+                return false;
+            }
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                method: 'post',
+                url: `/comment/like`,
+                data: {
+                    'id': post_id,
+                    'liked': userReaction,
+                    'type' : type
+                },
+                success: function(response) {
+                    let msg;
+                    if (response.status === true && response.code === 200) {
+                        if (response.liked === '1') {
+                            $(element).addClass('active-heart');
+                        } else {
+                            $(element).removeClass('active-heart');
+                        }
+                        $(element).attr('data-comment-reaction-id', response.liked);
+                        $("#liked_comment_count_"+post_id).text(response.likes_count)
                         // Swal.fire(response.message);
                     }
 

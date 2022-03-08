@@ -1461,6 +1461,7 @@ p {
 .active-heart i {
   color: red !important;
 }
+
 .active-heart:hover i {
   color: #b3b1c5 !important;
 }
@@ -2675,6 +2676,7 @@ form button {
   line-height: 1;
   padding: 3px;
 }
+
 #image-holder .thumb-image:last-child {
   margin-right: 0;
 }
@@ -2709,7 +2711,7 @@ form button {
   margin-right: 1px;
   overflow: hidden;
   position: relative;
-  max-width: 100%!important;
+  max-width: 100% !important;
   padding-right: 1px;
 }
 
@@ -2717,7 +2719,7 @@ form button {
   margin-right: 1px;
   overflow: hidden;
   position: relative;
-  max-width: 49.999%!important;
+  max-width: 49.999% !important;
   padding-right: 1px;
 }
 
@@ -2725,7 +2727,7 @@ form button {
   margin-right: 1px;
   overflow: hidden;
   position: relative;
-  width: 66.666666666667%!important;
+  width: 66.666666666667% !important;
   padding-right: 1px;
 }
 
@@ -2733,14 +2735,14 @@ form button {
   display: inline-block;
   height: 100%;
   vertical-align: top;
-  width: calc(100% / 3 - 1.4px)!important;
+  width: calc(100% / 3 - 1.4px) !important;
 }
 
 .wo_adaptive_media .width-4:first-child {
   margin-right: 1px;
   overflow: hidden;
   position: relative;
-  width: 65%!important;
+  width: 65% !important;
   padding-right: 1px;
 }
 
@@ -2748,12 +2750,26 @@ form button {
   display: inline-block;
   height: 100%;
   vertical-align: top;
-  width: calc(100% / 4 - 1.4px)!important;
+  width: calc(100% / 4 - 1.4px) !important;
 }
 
 .album-image {
   position: relative;
   color: #fff;
   float: left;
+}
+
+.comment-reaction:hover,.gallery-reaction:hover {
+  animation: none;
+}
+
+.comment-reaction{
+  color: var(--color-lighter-primary);
+}
+.comment-reaction>span {
+  color: #b3b1c5;
+  display: inline-block;
+  font-size: 13px;
+  vertical-align: text-top;
 }
 /* custom css : Amit Singh */

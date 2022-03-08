@@ -12,7 +12,8 @@ $userGallery = $service->user->imagesAsArray;
                 <img src="{{ $galleryImage->file_name }}" data-mdb-img="{{ $galleryImage->file_name }}"
                     alt="{{ $galleryImage->name }}" class="w-100 shadow-1-strong rounded mb-2">
                 <div class="likes heart gallery-reaction {{ $galleryImage->userliked() ? 'active-heart' : '' }}"
-                    title="Like/Dislike" data-gallery-image-id="{{ $galleryImage->id }}" data-gallery-reaction-id="{{ $galleryImage->likedPost() }}">
+                    title="Like/Dislike" data-gallery-image-id="{{ $galleryImage->id }}"
+                    data-gallery-reaction-id="{{ $galleryImage->likedPost() }}">
                     <i class="fas fa-heart"></i>
                     <span class="liked_gallery_count">{{ $galleryImage->likes->count() }}</span>
                 </div>

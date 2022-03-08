@@ -349,18 +349,19 @@
                                                         </span>
                                                     </li>
                                                     <li>
-                                                        <div class="likes heart post-reaction {{$post->userliked() ? 'active-heart' : ""}}" title="Like/Dislike"
-                                                            data-post-id="{{ $post->id }}"
-                                                            data-reaction-id="{{$post->likedPost()}}">
+                                                        <div class="likes heart post-reaction {{ $post->userliked() ? 'active-heart' : '' }}"
+                                                            title="Like/Dislike" data-post-id="{{ $post->id }}"
+                                                            data-reaction-id="{{ $post->likedPost() }}">
                                                             <i class="fas fa-heart"></i>
-                                                            <span class="liked_post_count">{{$post->likes->count()}}</span>
+                                                            <span
+                                                                class="liked_post_count">{{ $post->likes->count() }}</span>
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <span class="comment"
-                                                            title="Comments">
+                                                        <span class="comment" title="Comments">
                                                             <i class="fa fa-commenting"></i>
-                                                            <ins class="comment_post_count_{{$post->id}}">{{$post->comments->count()}}</ins>
+                                                            <ins
+                                                                class="comment_post_count_{{ $post->id }}">{{ $post->comments->count() }}</ins>
                                                         </span>
                                                     </li>
 
@@ -401,30 +402,39 @@
                                                 </div> --}}
                                             </div>
                                         </div>
-                                        <div class="coment-area" style="">
+                                        <div class="coment-area ">
                                             <ul class="we-comet">
-                                                @if(!empty($post->comments))
-                                                    @foreach($post->comments as $comment)
-                                                    <li>
-                                                        <div class="comet-avatar">
-                                                            <img src="{{$comment->user->getProfilePicture()}}" alt="">
-                                                        </div>
-                                                        <div class="we-comment">
-                                                            <h5><a href="time-line.html" title="">{{$comment->user->name}}</a></h5>
-                                                            <p>{{$comment->body}}</p>
-                                                            <div class="inline-itms">
-                                                                <span>{{ Carbon\Carbon::parse($comment->created_at)->format('F d, Y') }}</span>
-                                                                {{-- <a class="we-reply" href="#" title="Reply"><i
-                                                                        class="fa fa-reply"></i></a> --}}
-                                                                {{-- <a href="#" title=""><i
-                                                                        class="fa fa-heart"></i><span>20</span></a> --}}
+                                                @if (!empty($post->comments))
+                                                    @foreach ($post->comments as $comment)
+                                                        <li>
+                                                            <div class="comet-avatar">
+                                                                <img src="{{ $comment->user->getProfilePicture() }}"
+                                                                    alt="">
                                                             </div>
-                                                        </div>
-                                                    </li>
+                                                            <div class="we-comment">
+                                                                <h5><a href="time-line.html"
+                                                                        title="">{{ $comment->user->name }}</a></h5>
+                                                                <p>{{ $comment->body }}</p>
+                                                                <div class="inline-itms comment-action-box">
+                                                                    <span>{{ Carbon\Carbon::parse($comment->created_at)->format('F d, Y') }}</span>
+                                                                    {{-- <a class="we-reply" href="#" title="Reply"><i
+                                                                        class="fa fa-reply"></i></a> --}}
+                                                                    <span
+                                                                        class="comment-reaction likes heart {{ $comment->userliked() ? 'active-heart' : '' }} "
+                                                                        data-comment-post-id="{{ $comment->id }}"
+                                                                        data-comment-reaction-id="{{ $comment->likedPost() }}">
+                                                                        <i class="fa fa-heart"></i>
+                                                                        <span
+                                                                            id="liked_comment_count_{{ $comment->id }}">
+                                                                            {{ $comment->likes->count() }}
+                                                                        </span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </li>
                                                     @endforeach
                                                 @endif
-{{--                                                 
-                                                <li>
+                                                {{-- <li>
                                                     <div class="comet-avatar">
                                                         <img src="/temp-services/images/userlist-1.jpg" alt="">
                                                     </div>
@@ -446,7 +456,9 @@
                                                     </div>
                                                 </li> --}}
                                                 <li>
-                                                    <a href="#" title="" class="showmore underline" data-comment-load="load_more_{{$post->id}}" id="showmore_{{$post->id}}">more
+                                                    <a href="#" title="" class="showmore underline"
+                                                        data-comment-load="load_more_{{ $post->id }}"
+                                                        id="showmore_{{ $post->id }}">more
                                                         comments+</a>
                                                 </li>
                                                 <li class="post-comment">
@@ -454,9 +466,14 @@
                                                         <img src="/temp-services/images/userlist-2.jpg" alt="">
                                                     </div>
                                                     <div class="post-comt-box">
-                                                        <form method="POST" action="#" id="comment_{{$post->id}}" data-post-id="{{$post->id}}">
-                                                            <input name="commentable_id" type="hidden" value="{{$post->id}}" id="commentable_id_{{$post->id}}">
-                                                            <textarea placeholder="Post your comment" name="body" id="commentable_content_{{$post->id}}" data-post-id="{{$post->id}}"></textarea>
+                                                        <form method="POST" action="#" id="comment_{{ $post->id }}"
+                                                            data-post-id="{{ $post->id }}">
+                                                            <input name="commentable_id" type="hidden"
+                                                                value="{{ $post->id }}"
+                                                                id="commentable_id_{{ $post->id }}">
+                                                            <textarea placeholder="Post your comment" name="body"
+                                                                id="commentable_content_{{ $post->id }}"
+                                                                data-post-id="{{ $post->id }}"></textarea>
                                                             {{-- <div class="add-smiles">
                                                                 <div class="uploadimage">
                                                                     <i class="fa fa-image"></i>

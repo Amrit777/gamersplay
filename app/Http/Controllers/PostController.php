@@ -196,6 +196,8 @@ class PostController extends Controller
         try {
             if ($request->type == 'gallery') {
                 $model = Image::where("id", $request->id)->first();
+            } elseif ($request->type == 'comment') {
+                $model = Comment::where("id", $request->id)->first();
             } else {
                 $model = Post::where("id", $request->id)->first();
             }
