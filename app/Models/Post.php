@@ -104,7 +104,11 @@ class Post extends Model
             $names .= ' liked.</span>';
         }
         if (!empty($currentUser)) {
-            $names = $currentUser . $names;
+            if (!empty($names)) {
+                $names = $currentUser . $names;
+            } else {
+                $names = $currentUser . ' liked.</span>';
+            }
         }
 
         return $content . $names;
