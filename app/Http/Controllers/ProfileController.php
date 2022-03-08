@@ -204,7 +204,9 @@ class ProfileController extends Controller
                 $uprofile = $user->profile_picture;
                 if (strpos($uprofile, '/storage/avatars/')) {
                     $filename = str_replace(url('/') . '/storage/avatars/', '', $uprofile);
-                    unlink(public_path('storage/avatars/' . $filename));
+                    if (File::exists(public_path('storage/avatars/' . $filename))) {
+                        unlink(public_path('storage/avatars/' . $filename));
+                    }
                 }
                 $user->profile_picture = url('/') . '/' . $file;
 
