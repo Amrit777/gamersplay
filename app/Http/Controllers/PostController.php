@@ -269,6 +269,7 @@ class PostController extends Controller
 
         return $this->success(
             [
+                "data" => Post::commentHtml($comment, $model->id),
                 "count" => $model->comments->count()
             ]
         );

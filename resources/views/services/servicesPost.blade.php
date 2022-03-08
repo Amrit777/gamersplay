@@ -361,7 +361,7 @@
                                                         <span class="comment" title="Comments">
                                                             <i class="fa fa-commenting"></i>
                                                             <ins
-                                                                class="comment_post_count_{{ $post->id }}">{{ $post->comments->count() }}</ins>
+                                                                id="comment_post_count_{{ $post->id }}">{{ $post->comments->count() }}</ins>
                                                         </span>
                                                     </li>
 
@@ -389,7 +389,7 @@
                                                     </li>
                                                 @endif
 
-                                                <li class="post-comment">
+                                                <li class="post-comment" id="post-comment_form_{{$post->id}}">
                                                     <div class="comet-avatar">
                                                         <img src="/temp-services/images/userlist-2.jpg" alt="">
                                                     </div>

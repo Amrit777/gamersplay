@@ -121,29 +121,37 @@ class Post extends Model
         $comments = $this->comments->skip($offset)->take($take);
         if (!empty($comments) && ($comments->count() > 0)) {
             foreach ($comments as $key => $value) {
-                $content .= "<li class='comment-section_" . $this->id . "'>";
-                $content .= '<div class="comet-avatar"><img src="' . $value->user->getProfilePicture() . '" alt=""> </div>';
-                $content .= '<div class="we-comment">';
-                $content .= '<h5><a href="time-line.html" title="">' . $value->user->name . '</a></h5>';
-                $content .= '<p>' . $value->body . '</p>';
-                $content .= '<div class="inline-itms comment-action-box">';
-                $content .= '<span>' . Carbon::parse($value->created_at)->format('F d, Y') . '</span>';
-                $content .= '<span class="comment-reaction likes heart';
-                if ($value->userliked()) {
-                    $content .= ' active-heart';
-                }
-                $content .= '" data-comment-post-id="' . $value->id . '" data-comment-reaction-id="' . $value->likedPost() . '">';
-                $content .= ' <i class="fa fa-heart"></i>';
-                $content .= ' <span id="liked_comment_count_' . $value->id . '"> ' . $value->likes->count() . '</span>';
-                $content .= '</span>';
-                $content .= '</div>';
-                $content .= '</div>';
-                $content .= "</li>";
+                $content .= self::commentHtml($value, $this->id);
             }
         }
-
         return $content;
     }
+
+    public static function commentHtml($value, $post)
+    {
+        $content = "";
+        $content .= "<li class='comment-section_" . $post . "'>";
+        $content .= '<div class="comet-avatar"><img src="' . $value->user->getProfilePicture() . '" alt=""></div>';
+        $content .= '<div class="we-comment">';
+        $content .= '<h5><a href="time-line.html" title="">' . $value->user->name . '</a></h5>';
+        $content .= '<p>' . $value->body . '</p>';
+        $content .= '<div class="inline-itms comment-action-box">';
+        $content .= '<span>' . Carbon::parse($value->created_at)->format('F d, Y') . '</span>';
+        $content .= '<span class="comment-reaction likes heart';
+        if ($value->userliked()) {
+            $content .= ' active-heart';
+        }
+        $content .= '" data-comment-post-id="' . $value->id . '" data-comment-reaction-id="' . $value->likedPost() . '">';
+        $content .= ' <i class="fa fa-heart"></i>';
+        $content .= ' <span id="liked_comment_count_' . $value->id . '"> ' . $value->likes->count() . '</span>';
+        $content .= '</span>';
+        $content .= '</div>';
+        $content .= '</div>';
+        $content .= "</li>";
+        return $content;
+    }
+
+
 
     public function selectClassImage()
     {
