@@ -176,11 +176,13 @@ class PostController extends Controller
         $msg = null;
         $rules = [
             'id' => 'required',
-            'liked' => 'required'
+            'liked' => 'required',
+            'type' => 'required'
         ];
         $messages = array(
             'id.required' => 'Something went wrong',
-            'liked.required' => 'Something went wrong'
+            'liked.required' => 'Something went wrong',
+            'type.required' => 'Something went wrong',
         );
         $validator = Validator::make($request->all(), $rules, $messages);
 
@@ -192,7 +194,11 @@ class PostController extends Controller
         }
         DB::beginTransaction();
         try {
-            $model = Post::where("id", $request->id)->first();
+            if ($request->type == 'gallery') {
+                $model = Image::where("id", $request->id)->first();
+            } else {
+                $model = Post::where("id", $request->id)->first();
+            }
             if (empty($model)) {
                 return $this->failed();
             }
@@ -208,9 +214,9 @@ class PostController extends Controller
             );
             DB::commit();
             if ($likeModel->state_id == 0) {
-                $msg = "Post is unliked!!!";
+                $msg = "unliked!!!";
             } else {
-                $msg = "Post is liked!!!";
+                $msg = "liked!!!";
             }
             return $this->success(['message' => $msg, "liked" => $likeModel->state_id, 'likes_count' => $model->likes->count()]);
         } catch (\Illuminate\Database\QueryException $exception) {

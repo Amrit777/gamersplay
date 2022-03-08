@@ -667,11 +667,20 @@
             })
 
         });
+        $(document).ready(() => {
+            $(document).on("click", ".lightbox-user-gallery", function(e) {
+                if (e.target.classList.contains("gallery-reaction")) {
+                    registerGalleryReaction(e.target)
+                }
+            })
+
+        });
 
 
         function registerReaction(element) {
             let post_id = $(element).attr('data-post-id');
             let liked = $(element).attr('data-reaction-id');
+            let type = "post";
             let userReaction;
             if (liked === '1') {
                 userReaction = 0;
@@ -691,7 +700,8 @@
                 url: `/post/like`,
                 data: {
                     'id': post_id,
-                    'liked': userReaction
+                    'liked': userReaction,
+                    'type' : type
                 },
                 success: function(response) {
                     let msg;
@@ -702,6 +712,61 @@
                             $(element).removeClass('active-heart');
                         }
                         $(element).attr('data-reaction-id', response.liked);
+                        $(element.lastElementChild).text(response.likes_count)
+                        // Swal.fire(response.message);
+                    }
+
+                    if (response.status === false && response.code === 400) {
+                        Swal.fire(response.message);
+                    }
+                    if (response.status === false && response.code === 500) {
+                        Swal.fire(response.message);
+                    }
+                    setTimeout(() => {
+                        Swal.close();
+                    }, 800);
+                },
+                error: function(XMLHttpRequest) {
+                    Swal.fire('An error occured while attempting this action.');
+                }
+            });
+
+        }
+        function registerGalleryReaction(element) {
+            let post_id = $(element).attr('data-gallery-image-id');
+            let liked = $(element).attr('data-gallery-reaction-id');
+            let type = "gallery";
+            let userReaction;
+            if (liked === '1') {
+                userReaction = 0;
+            } else {
+                userReaction = 1;
+            }
+            if (!post_id) {
+                return false;
+            }
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                method: 'post',
+                url: `/gallery/like`,
+                data: {
+                    'id': post_id,
+                    'liked': userReaction,
+                    'type' : type
+                },
+                success: function(response) {
+                    let msg;
+                    if (response.status === true && response.code === 200) {
+                        if (response.liked === '1') {
+                            $(element).addClass('active-heart');
+                        } else {
+                            $(element).removeClass('active-heart');
+                        }
+                        $(element).attr('data-gallery-reaction-id', response.liked);
                         $(element.lastElementChild).text(response.likes_count)
                         // Swal.fire(response.message);
                     }
