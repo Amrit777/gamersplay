@@ -100,7 +100,9 @@ class Post extends Model
         if (!empty($totalCount) && $totalCount > 0) {
             $names .= ' and <a href="#" title="">' . $totalCount . ' more</a>';
         }
-        $names .= ' liked.</span>';
+        if (!empty($names)) {
+            $names .= ' liked.</span>';
+        }
         if (!empty($currentUser)) {
             $names = $currentUser . $names;
         }
