@@ -90,7 +90,7 @@ function generateServiceCSS(service) {
     } 
     //to-be-removed (dev purposes)
     else { 
-        html += '<p>'+service['average_rate']+'/'+service['ratings_count']+' <img src="/imgs/icons/star1.svg" style="height:20px; vertical-align:middle;"></p>';
+        html += '<p>'+service['average_rate']+'('+service['ratings_count']+') <img src="/imgs/icons/star1.svg" style="height:20px; vertical-align:middle;"></p>';
      }
     html += '</div>';
     html += '</div>';

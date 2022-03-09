@@ -466,8 +466,9 @@
                             console.log("response data", response.data)
                             console.log("response count", response.count)
                             if (response.status === true && response.code === 200) {
-                                let parent = jQuery("#post-comment_form_" + post_id).parent("li");
-                                console.log("parent",parent)
+                                let parent = jQuery("#post-comment_form_" + post_id).parent(
+                                    "li");
+                                console.log("parent", parent)
                                 let comment_HTML = response.data;
                                 $(comment_HTML).insertBefore("#post-comment_form_" + post_id);
                                 $("#commentable_content_" + post_id).val("");
@@ -654,6 +655,40 @@
                             $(loadMoreTarget).attr("data-comment-load_page", response.page)
                             if (response.last_page === true) {
                                 $("#showmore_" + post_id).hide();
+                            }
+                        }
+                    },
+                    error: function(XMLHttpRequest) {
+                        Swal.fire('An error occured while attempting this action.');
+                    }
+                });
+            });
+
+            $(document).on("click", '.showmore-posts', function(e) {
+                e.preventDefault();
+                let loadMoreTargetPost = e.target;
+                let page = $(loadMoreTargetPost).attr('data-post-load_page');
+                let service = $(loadMoreTargetPost).attr('data-post-service');
+                if (!page && !service) return false;
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    method: 'post',
+                    url: `/posts/load`,
+                    data: {
+                        page,
+                        service
+                    },
+                    success: function(response) {
+                        console.log("post load response", response)
+                        if (response.status === true && response.code === 200) {
+                            $(".post-item-box").last().after(response.data);
+                            $(loadMoreTargetPost).attr("data-post-load_page", response.page)
+                            if (response.last_page === true) {
+                                $(".showmore-posts").hide();
                             }
                         }
                     },

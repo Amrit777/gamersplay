@@ -231,7 +231,7 @@ class PostController extends Controller
             $data = [
                 'message' => $msg,
                 "liked" => $likeModel->state_id,
-                'likes_count' => $model->number_format_short($model->likes->count()),
+                'likes_count' => $likeModel->number_format_short($model->likes->count()),
             ];
             if ($request->type == 'post') {
                 $data['liked_html'] = $model->postLikedUserNames();
@@ -322,6 +322,45 @@ class PostController extends Controller
                     "last_page" => true
                 ]);
             }
+        }
+        return $this->error("Error!!!");
+    }
+
+    public function loadMorePosts(Request $request)
+    {
+        $user = Auth::user();
+        $rules = [
+            'service' => "required|numeric",
+            'page' => "required|numeric"
+        ];
+        $messages = array(
+            'service.required' => 'Something went wrong',
+            'page.required' => 'Something went wrong'
+        );
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            $error = [
+                'error' => $validator->errors()->first()
+            ];
+            return $this->error($error);
+        }
+        $limit = 5;
+        $offset = $request->page * $limit;
+        $posts = Post::where('service_id', $request->service)->skip($offset)->take($limit)->latest()->get();
+        if (!empty($posts) && $posts->count() > 0) {
+            $html = view('services.postSection', compact('posts'))->render();
+            return $this->success([
+                "data" => $html,
+                "page" => ($request->page + 1),
+                "last_page" => false
+            ]);
+        } else {
+            return $this->success([
+                "data" => "",
+                "page" => ($request->page + 1),
+                "last_page" => true
+            ]);
         }
         return $this->error("Error!!!");
     }
