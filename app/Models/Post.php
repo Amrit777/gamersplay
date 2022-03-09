@@ -230,7 +230,5 @@ class Post extends BaseModel
     {
         $url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';
         return preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>',  $this->attributes['content']);
-
-        // return preg_replace('@(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.%-=#]*(\?\S+)?)?)?)@', '<a href=""></a>', $this->attributes['content']);
     }
 }

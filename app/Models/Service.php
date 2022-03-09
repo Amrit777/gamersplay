@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     use HasFactory;
-    protected $appends = ['average_rate', 'post_count'];
+    protected $appends = ['average_rate', 'post_count', 'ratings_count'];
 
     public function user()
     {
@@ -47,5 +47,9 @@ class Service extends Model
     public function getPostCountAttribute()
     {
         return $this->attributes['post_count'] = $this->posts->count();
+    }
+    public function getRatingsCountAttribute()
+    {
+        return $this->attributes['ratings_count'] = $this->ratings->count();
     }
 }
