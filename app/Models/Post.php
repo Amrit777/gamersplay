@@ -38,7 +38,9 @@ class Post extends Model
     public function userliked()
     {
         if (Auth::check()) {
-            $model = Like::where('likeable_id', $this->id)->where('user_id', Auth::user()->id)->first();
+            $model = Like::where('likeable_id', $this->id)
+                ->where('likeable_type', get_class($this))
+                ->where('user_id', Auth::user()->id)->first();
             if (!empty($model)) {
                 if ($model->state_id == 1) {
                     return true;
