@@ -167,7 +167,7 @@
             $('#popularMenu').trigger('click');
         });
     </script>
-    <script src="{{ asset('js/services.js?v1.0') }}"></script>
+    <script src="{{ asset('js/services.js?v=') . time() }}"></script>
 
     @if (isset($_GET['menu']) && isset($_GET['category']))
         <script>
