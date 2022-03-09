@@ -8,9 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     use HasFactory;
-
-
-    protected $appends = ['average_rate'];
+    protected $appends = ['average_rate', 'post_count'];
 
     public function user()
     {
@@ -24,12 +22,12 @@ class Service extends Model
 
     public function images()
     {
-        return $this->hasMany(ServiceImage::class, 'service_id');
+        return $this->hasMany(ServiceImage::class, 'service_id')->latest();
     }
 
     public function posts()
     {
-        return $this->hasMany(Post::class, 'service_id')->orderBy("id","DESC");
+        return $this->hasMany(Post::class, 'service_id')->orderBy("id", "DESC");
     }
 
     public function category_type()
@@ -45,5 +43,9 @@ class Service extends Model
     public function getAverageRateAttribute()
     {
         return $this->attributes['average_rate'] = $this->ratings->avg('rating');
+    }
+    public function getPostCountAttribute()
+    {
+        return $this->attributes['post_count'] = $this->posts->count();
     }
 }

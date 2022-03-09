@@ -62,7 +62,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function imagesAsArray()
     {
-        return $this->hasMany(Image::class)->where('type_id', 1);
+        return $this->hasMany(Image::class)->where('type_id', 1)->latest();
     }
     public function services()
     {

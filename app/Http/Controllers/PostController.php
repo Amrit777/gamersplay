@@ -37,14 +37,21 @@ class PostController extends Controller
     public function createPost(Request $request)
     {
         $rules = [
-            'content' => 'required_without:postPhotos|nullable|string|max:1024',
-            'postPhotos.*' => 'required_without:content|mimes:jpeg,jpg,x-png,png',
+            'content' => [
+                'required_without:postPhotos',
+                'nullable',
+                'string',
+                'max:1024',
+                'regex:/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/i'
+            ],
+            'postPhotos.*' => 'required_without:content|mimes:jpeg,jpg,x-png,png,gif',
             'postPhotos' => 'max:4',
             // 'postVideo' => 'mimes:mp4',
             // 'postMusic' => 'mimes:mp3',
         ];
         $messages = array(
             'content.required' => 'Content is required.',
+            'content.regex' => "Only youtube links are allowed",
             'postPhotos.max' => 'Only 4 files are allowed.'
         );
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -224,7 +231,7 @@ class PostController extends Controller
             $data = [
                 'message' => $msg,
                 "liked" => $likeModel->state_id,
-                'likes_count' => $model->likes->count(),
+                'likes_count' => $model->number_format_short($model->likes->count()),
             ];
             if ($request->type == 'post') {
                 $data['liked_html'] = $model->postLikedUserNames();
@@ -269,8 +276,8 @@ class PostController extends Controller
 
         return $this->success(
             [
-                "data" => Post::commentHtml($comment, $model->id),
-                "count" => $model->comments->count()
+                "data" => Post::commentHtml($comment, $model),
+                'count' => $model->number_format_short($model->comments->count()),
             ]
         );
         // } catch (\Illuminate\Database\QueryException $exception) {
@@ -302,23 +309,18 @@ class PostController extends Controller
         if (!empty($model)) {
             $offset = $request->page * $limit;
             $comment = $model->commentByUsers($offset);
-            // $comment = Comment::where('commentable_id', $model->id)->where('commentable_type', get_class($model))->skip($offset)->take($limit)->get();
             if (!empty($comment)) {
-                return $this->success(
-                    [
-                        "data" => $comment,
-                        "page" => ($request->page + 1),
-                        "last_page" => false
-                    ]
-                );
+                return $this->success([
+                    "data" => $comment,
+                    "page" => ($request->page + 1),
+                    "last_page" => false
+                ]);
             } else {
-                return $this->success(
-                    [
-                        "data" => "",
-                        "page" => $request->page,
-                        "last_page" => true
-                    ]
-                );
+                return $this->success([
+                    "data" => "",
+                    "page" => $request->page,
+                    "last_page" => true
+                ]);
             }
         }
         return $this->error("Error!!!");

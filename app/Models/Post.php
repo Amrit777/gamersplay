@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Auth;
 
-class Post extends Model
+class Post extends BaseModel
 {
     use HasFactory;
 
@@ -21,6 +21,12 @@ class Post extends Model
         'user_id',
         'created_at',
         'type_id'
+    ];
+
+    protected $appends = [
+        'comments_count',
+        'likes_count',
+        'formatted_created_at'
     ];
 
     public function images()
@@ -123,7 +129,7 @@ class Post extends Model
         $comments = $this->comments->skip($offset)->take($take);
         if (!empty($comments) && ($comments->count() > 0)) {
             foreach ($comments as $key => $value) {
-                $content .= self::commentHtml($value, $this->id);
+                $content .= self::commentHtml($value, $this);
             }
         }
         return $content;
@@ -132,7 +138,7 @@ class Post extends Model
     public static function commentHtml($value, $post)
     {
         $content = "";
-        $content .= "<li class='comment-section_" . $post . "'>";
+        $content .= "<li class='comment-section_" . $post->id . "'>";
         $content .= '<div class="comet-avatar"><img src="' . $value->user->getProfilePicture() . '" alt=""></div>';
         $content .= '<div class="we-comment">';
         $content .= '<h5><a href="time-line.html" title="">' . $value->user->name . '</a></h5>';
@@ -145,7 +151,7 @@ class Post extends Model
         }
         $content .= '" data-comment-post-id="' . $value->id . '" data-comment-reaction-id="' . $value->likedPost() . '">';
         $content .= ' <i class="fa fa-heart"></i>';
-        $content .= ' <span id="liked_comment_count_' . $value->id . '"> ' . $value->likes->count() . '</span>';
+        $content .= ' <span id="liked_comment_count_' . $value->id . '"> ' . $post->likes_count . '</span>';
         $content .= '</span>';
         $content .= '</div>';
         $content .= '</div>';
@@ -153,7 +159,23 @@ class Post extends Model
         return $content;
     }
 
-
+    public function imageContentHtml()
+    {
+        $content = "";
+        if (!empty($this->images)) {
+            $content .=  '<div id="fullsizeimg" style="position: relative;" class="lightbox lightbox-user-gallery">';
+            $content .=  '<div class="row wo_adaptive_media">';
+            foreach ($this->images as $value) {
+                $content .= '<div class="album-image ' . $this->selectClassImage() . '">';
+                $content .= '<img src="' . $value->file_name . '" alt="' . $value->name . '" class="image-file pointer">';
+                $content .= '</div>';
+                $content .= '<div class="clear"></div>';
+            }
+            $content .=  '</div>';
+            $content .=  '</div>';
+        }
+        return $content;
+    }
 
     public function selectClassImage()
     {
@@ -190,4 +212,25 @@ class Post extends Model
     }
 
     protected $with = ['postAuthor'];
+
+    public function getLikesCountAttribute()
+    {
+        return $this->attributes['likes_count'] = $this->number_format_short($this->likes->count());
+    }
+    public function getCommentsCountAttribute()
+    {
+        return $this->attributes['comments_count'] = $this->number_format_short($this->comments->count());
+    }
+    public function getFormattedCreatedAtAttribute()
+    {
+        return $this->attributes['formatted_created_at'] = Carbon::parse($this->created_at)->format('F d, Y');
+    }
+
+    public function getContentAttribute()
+    {
+        $url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';
+        return preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>',  $this->attributes['content']);
+
+        // return preg_replace('@(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.%-=#]*(\?\S+)?)?)?)@', '<a href=""></a>', $this->attributes['content']);
+    }
 }

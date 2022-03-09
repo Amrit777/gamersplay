@@ -85,12 +85,12 @@ function generateServiceCSS(service) {
     html += '<div class="service-description" style="border-top:1px dashed var(--color-secondary);">';
     html += '<small><span style="font-size:20px; color:var(--color-secondary);">'+service['price']+'</span> GP</small>';
 
-    if(service['rating'] == null) {
+    if(service['average_rate'] == null) {
         html += '<p>- <img src="/imgs/icons/star1.svg" style="height:20px; vertical-align:middle;"></p>';
     } 
     //to-be-removed (dev purposes)
     else { 
-        html += '<p>'+service['rating']+' <img src="/imgs/icons/star1.svg" style="height:20px; vertical-align:middle;"></p>';
+        html += '<p>'+service['average_rate']+' <img src="/imgs/icons/star1.svg" style="height:20px; vertical-align:middle;"></p>';
      }
     html += '</div>';
     html += '</div>';
