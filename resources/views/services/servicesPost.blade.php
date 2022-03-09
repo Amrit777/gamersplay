@@ -4,6 +4,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <!-- START: Create Post -->
+                    @if($service->user->id == Auth::user()->id)
                     <div class="central-meta postbox">
                         <span class="create-post">Create post</span>
                         <form name="add-blog-post-form" id="add-blog-post-form" method="post"
@@ -213,6 +214,7 @@
                             </div>
                         </form>
                     </div>
+                    @endif
                     <!-- END: Create post -->
 
                     <div class="loadMore post-box">
