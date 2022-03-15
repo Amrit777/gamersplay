@@ -481,13 +481,11 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-            var youtubeLinks = [];
-            var existsYoutubeLinks = [];
-            var uniqueyoutubeLinks;
-            var showChar = 100;
-            var ellipsestext = "...";
-            var moretext = "more";
-            var lesstext = "less";
+           
+            let showChar = 100;
+            let ellipsestext = "...";
+            let moretext = "more";
+            let lesstext = "less";
             $('.more-description').each(function() {
                 var content = $(this).html();
                 if (content.length > showChar) {
@@ -776,7 +774,9 @@
                 }
             });
         }
-
+        let youtubeLinks = [];
+            let existsYoutubeLinks = [];
+            let uniqueyoutubeLinks;
         function validateYouTubeUrl(url) {
             let spliteurl = url.split(" ")
             if (url != undefined || url != '') {
