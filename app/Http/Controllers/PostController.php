@@ -364,4 +364,62 @@ class PostController extends Controller
         }
         return $this->error("Error!!!");
     }
+
+    function deletePost(Request $request)
+    {
+        $user = Auth::user();
+        if ($user)
+            $rules = [
+                'id' => "required|numeric",
+                'type' => "required|string"
+            ];
+        $messages = array(
+            'id.required' => 'Invalid Post ID provided!',
+            'type.required' => 'Invalid data provided'
+        );
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return $this->error($validator->errors()->first());
+        }
+
+        $model = Post::where('id', $request->id)->first();
+        if (!empty($model)) {
+            if ($model->delete()) {
+                return $this->success("Post Deletion successfull");
+            }
+            return $this->error("Something went wrong");
+        } else {
+            return $this->error("Post not found.");
+        }
+    }
+    function deleteGallery(Request $request)
+    {
+        $user = Auth::user();
+        if ($user)
+            $rules = [
+                'id' => "required|numeric",
+                'type' => "required|string"
+            ];
+        $messages = array(
+            'id.required' => 'Invalid Post ID provided!',
+            'type.required' => 'Invalid data provided'
+        );
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return $this->error($validator->errors()->first());
+        }
+
+        $model = Image::where('id', $request->id)->first();
+        if (!empty($model)) {
+            if ($model->delete()) {
+                return $this->success("Image Deletion successfull");
+            }
+            return $this->error("Something went wrong");
+        } else {
+            return $this->error("Image not found.");
+        }
+    }
+    
 }

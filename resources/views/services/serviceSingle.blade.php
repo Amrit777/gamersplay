@@ -462,13 +462,9 @@
                         url: "/post/comment",
                         data: $('#' + event.target.form.id).serialize(),
                         success: function(response) {
-                            console.log("response", response)
-                            console.log("response data", response.data)
-                            console.log("response count", response.count)
                             if (response.status === true && response.code === 200) {
                                 let parent = jQuery("#post-comment_form_" + post_id).parent(
                                     "li");
-                                console.log("parent", parent)
                                 let comment_HTML = response.data;
                                 $(comment_HTML).insertBefore("#post-comment_form_" + post_id);
                                 $("#commentable_content_" + post_id).val("");
@@ -485,6 +481,9 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
+            var youtubeLinks = [];
+            var existsYoutubeLinks = [];
+            var uniqueyoutubeLinks;
             var showChar = 100;
             var ellipsestext = "...";
             var moretext = "more";
@@ -501,7 +500,6 @@
 
                     $(this).html(html);
                 }
-
             });
 
             $(".morelink").click(function() {
@@ -649,7 +647,6 @@
                         'page': page
                     },
                     success: function(response) {
-                        console.log("comment load response", response)
                         if (response.status === true && response.code === 200) {
                             $(".comment-section_" + post_id).last().after(response.data);
                             $(loadMoreTarget).attr("data-comment-load_page", response.page)
@@ -683,7 +680,6 @@
                         service
                     },
                     success: function(response) {
-                        console.log("post load response", response)
                         if (response.status === true && response.code === 200) {
                             $(".post-item-box").last().after(response.data);
                             $(loadMoreTargetPost).attr("data-post-load_page", response.page)
@@ -698,7 +694,134 @@
                 });
             });
 
+            $(document).on("input", "#post-content", function() {
+                var url = $(this).val();
+                validateYouTubeUrl(url);
+            });
+
+            $(document).on("click", ".post-actions", function(e) {
+                if (e.currentTarget.classList.contains("post-actions")) {
+                    let post_id = $(e.currentTarget).attr('data-post');
+                    if (e.target.className === 'delete-post-action') {
+                        Swal.fire({
+                            title: "Are you sure you want to delete this Post?",
+                            text: "You will not be able to recover this post!",
+                            icon: "warning",
+                            buttons: [
+                                'No, cancel it!',
+                                'Yes, I am sure!'
+                            ],
+                            dangerMode: true,
+                            showCancelButton: true,
+                        }).then(function(isConfirm) {
+                            if (isConfirm.isConfirmed === true) {
+                                deletePost(post_id)
+                            } else {
+                                Swal.fire("Cancelled", "Your post is safe :)", "error");
+                            }
+                        })
+                    }
+                }
+            });
         });
+
+        function deletePost(postId, post_html) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                method: 'DELETE',
+                url: `/post/delete`,
+                data: {
+                    id: postId,
+                    type: 'delete'
+                },
+                success: function(response) {
+                    if (response.status === true && response.code === 200) {
+                        // $("#post-item-box-" + postId).remove();
+                        // Swal.fire('Success', response.message);
+                        window.location.reload();
+                    }
+                },
+                error: function(XMLHttpRequest) {
+                    Swal.fire('An error occured while attempting this action.');
+                }
+            });
+        }
+
+        function deleteGalleryImage(post_id) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                method: 'DELETE',
+                url: `/gallery/delete`,
+                data: {
+                    id: post_id,
+                    type: 'delete'
+                },
+                success: function(response) {
+                    if (response.status === true && response.code === 200) {
+                        // $("#post-item-box-" + postId).remove();
+                        // Swal.fire('Success', response.message);
+                        window.location.reload();
+                    }
+                },
+                error: function(XMLHttpRequest) {
+                    Swal.fire('An error occured while attempting this action.');
+                }
+            });
+        }
+
+        function validateYouTubeUrl(url) {
+            let spliteurl = url.split(" ")
+            if (url != undefined || url != '') {
+                let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+                let filteraa = spliteurl.filter(function(m, i, self) {
+                    let match = m.match(regExp)
+                    if (match && match[2]) {
+                        if (existsYoutubeLinks.indexOf(match[2]) > -1) {
+                        } else {
+                            youtubeLinks.push({
+                                url: match[2],
+                                show: false
+                            })
+                            existsYoutubeLinks.push(match[2]);
+                        }
+                    }
+                });
+
+                const getUniqArrBy = (props = [], arrInp = [], objTmp = {}, arrTmp = []) => {
+                    if (arrInp.length > 0) {
+                        const lastItem = arrInp[arrInp.length - 1]
+                        const propStr = props.reduce((res, item) => (`${res}${lastItem[item]}`), '')
+                        if (!objTmp[propStr]) {
+                            objTmp[propStr] = true
+                            arrTmp = [...arrTmp, lastItem]
+                        }
+                        arrInp.pop()
+                        return getUniqArrBy(props, arrInp, objTmp, arrTmp)
+                    }
+                    return arrTmp
+                }
+                uniqueyoutubeLinks = getUniqArrBy(['url', 'show'], youtubeLinks)
+                uniqueyoutubeLinks.map((videoUrl, i) => {
+                    if (videoUrl.show === false) {
+                        let youtubeFrame = '<img src="https://img.youtube.com/vi/' + videoUrl.url +
+                            '/default.jpg">';
+                        // let youtubeIframe = '<div col-4><iframe src="https://www.youtube.com/embed/' + videoUrl +
+                        //     '" type="text/html" width="500" height="265" frameborder="0" allowfullscreen></iframe></div>';
+                        $(youtubeFrame).appendTo("#videoObject");
+                        // youtubeLinks[i].show = true
+                        videoUrl.show = true
+                    }
+                })
+            }
+        }
 
         $(document).ready(() => {
             let url = location.href.replace(/\/$/, "");
@@ -726,33 +849,45 @@
             });
         });
 
-
         $(document).ready(() => {
             $(document).on("click", ".post-box", function(e) {
                 if (e.target.classList.contains("post-reaction")) {
                     registerReaction(e.target)
                 }
             })
-
-        });
-        $(document).ready(() => {
             $(document).on("click", ".lightbox-user-gallery", function(e) {
-                if (e.target.classList.contains("gallery-reaction")) {
+                if (e.target.classList.contains("gallery-like-heart")) {
                     registerGalleryReaction(e.target)
+                }
+                if (e.target.parentNode.classList.contains("delete-gallery")) {
+                    let post_id = e.target.parentNode.getAttribute("data-delete-post-id");
+                    if (!post_id) return false;
+                    Swal.fire({
+                        title: "Are you sure you want to delete this image?",
+                        text: "You will not be able to recover this image file!",
+                        icon: "warning",
+                        buttons: [
+                            'No, cancel it!',
+                            'Yes, I am sure!'
+                        ],
+                        dangerMode: true,
+                        showCancelButton: true,
+                    }).then(function(isConfirm) {
+                        if (isConfirm.isConfirmed === true) {
+                            deleteGalleryImage(post_id);
+                        } else {
+                            Swal.fire("Cancelled", "Your imaginary file is safe :)", "error");
+                        }
+                    })
                 }
             })
 
-        });
-
-        $(document).ready(() => {
             $(document).on("click", ".comment-action-box", function(e) {
                 if (e.target.classList.contains("comment-reaction")) {
                     registerCommentReaction(e.target)
                 }
             })
-
         });
-
 
         function registerReaction(element) {
             let post_id = $(element).attr('data-post-id');
@@ -807,12 +942,11 @@
                     Swal.fire('An error occured while attempting this action.');
                 }
             });
-
         }
 
         function registerGalleryReaction(element) {
-            let post_id = $(element).attr('data-gallery-image-id');
-            let liked = $(element).attr('data-gallery-reaction-id');
+            let post_id = $(element).parent().attr('data-gallery-image-id');
+            let liked = $(element).parent().attr('data-gallery-reaction-id');
             let type = "gallery";
             let userReaction;
             if (liked === '1') {
@@ -844,8 +978,8 @@
                         } else {
                             $(element).removeClass('active-heart');
                         }
-                        $(element).attr('data-gallery-reaction-id', response.liked);
-                        $(element.lastElementChild).text(response.likes_count)
+                        $(element).parent().attr('data-gallery-reaction-id', response.liked);
+                        $("#liked_gallery_count-" + post_id).text(response.likes_count)
                         // Swal.fire(response.message);
                     }
 

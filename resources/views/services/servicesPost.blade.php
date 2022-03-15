@@ -16,9 +16,12 @@
                                         <img src="/temp-services/images/admin.jpg" alt="">
                                     </figure>
                                     <div class="newpst-input">
-                                        <textarea rows="5" name="content"
+                                        <textarea rows="5" name="content" id="post-content" 
                                             placeholder="Share some what you are thinking?"></textarea>
                                     </div>
+                                    <div class="row" id="videoObject">
+                                    </div>
+                                    
                                     <div class="row">
                                         <div id="image-holder"></div>
                                     </div>

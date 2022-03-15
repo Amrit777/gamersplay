@@ -226,6 +226,20 @@ class Post extends BaseModel
         return $this->attributes['formatted_created_at'] = Carbon::parse($this->created_at)->format('F d, Y');
     }
 
+    public function videoContentHtml()
+    {
+        $str = "";
+        $url = '/\s*[a-zA-Z\/\/:\.]*youtube.com\/watch\?v=([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i';
+        preg_match_all($url, $this->attributes['content'], $matches);
+        $uniqueArray = array_unique($matches[1]);
+        if (!empty($uniqueArray)) {
+            foreach ($uniqueArray as $value) {
+                $str .= '<iframe width="420" height="315" src="https://www.youtube.com/embed/' . $value . '" frameborder="0" allowfullscreen></iframe><br>';
+            }
+        }
+        return $str;
+    }
+
     public function getContentAttribute()
     {
         $url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';

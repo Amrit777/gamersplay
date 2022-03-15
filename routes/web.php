@@ -98,6 +98,8 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::post('/comment/like', [PostController::class, 'likePost'])->name('commentlikePost');
     Route::post('/comments/load', [PostController::class, 'loadMoreComment'])->name('commentLoad');
     Route::post('/posts/load', [PostController::class, 'loadMorePosts'])->name('postsLoad');
+    Route::delete('/post/delete', [PostController::class, 'deletePost'])->name('deletePost');
+    Route::delete('/gallery/delete', [PostController::class, 'deleteGallery'])->name('deleteGallery');
     
 
     

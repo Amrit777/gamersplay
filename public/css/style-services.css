@@ -1492,6 +1492,19 @@ p {
   animation: pulse 0.6s linear;
 }
 
+.delete-gallery:hover {
+  animation: pulse 0.6s linear;
+}
+
+.delete-gallery {
+  height: 20px;
+  transform: translateZ(0);
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
 .we-video-info>ul li span:hover i {
   animation: 0.6s linear 0s normal none 1 running pulse;
 }
@@ -2759,17 +2772,19 @@ form button {
   float: left;
 }
 
-.comment-reaction:hover,.gallery-reaction:hover {
+.comment-reaction:hover, .gallery-reaction:hover {
   animation: none;
 }
 
-.comment-reaction{
+.comment-reaction {
   color: var(--color-lighter-primary);
 }
+
 .comment-reaction>span {
   color: #b3b1c5;
   display: inline-block;
   font-size: 13px;
   vertical-align: text-top;
 }
+
 /* custom css : Amit Singh */

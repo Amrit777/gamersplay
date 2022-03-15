@@ -139,7 +139,6 @@ function fetchCategoryItems() {
             $('#loader').css('display','flex');
         },
         success: function (response) {
-            console.log(response);
             if(response.data) {
                 var html = "";
                 if(response.data) {
