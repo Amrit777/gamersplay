@@ -1474,6 +1474,27 @@ p {
   top: -10px;
 }
 
+.gallery-like-heart {
+  display: inline-block;
+  font-size: 20px;
+  position: relative;
+  left: 20px;
+  top: -12px;
+}
+
+.gallery-reaction .liked_gallery_count {
+  color: #b3b1c5;
+  font-size: 12px;
+  left: 42px;
+  position: absolute;
+  top: -12px;
+}
+
+.gallery-reaction {
+  bottom: 36px;
+  position: relative;
+}
+
 .we-video-info>ul li span {
   font-size: 16px;
   font-weight: 400;
@@ -1497,13 +1518,25 @@ p {
 }
 
 .delete-gallery {
+  color: #b3b1c5;
   height: 20px;
   transform: translateZ(0);
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
   position: relative;
   transition: all 0.3s ease;
+  right: 20px;
+  top: -12px;
 }
+/* 
+.gallery-reaction {
+  opacity: 0.5;
+}
+
+.gallery-img-item:hover .gallery-reaction {
+  opacity: 1;
+  background-color: red;
+} */
 
 .we-video-info>ul li span:hover i {
   animation: 0.6s linear 0s normal none 1 running pulse;

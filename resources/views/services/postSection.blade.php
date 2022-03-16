@@ -53,12 +53,12 @@
                         </div>
                         <div class="we-video-info">
                             <ul>
-                                <li>
+                                {{-- <li>
                                     <span class="views" title="views">
                                         <i class="fa fa-eye"></i>
                                         <ins>0</ins>
                                     </span>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <div class="likes heart post-reaction {{ $post->userliked() ? 'active-heart' : '' }}"
                                         title="Like/Dislike" data-post-id="{{ $post->id }}"
