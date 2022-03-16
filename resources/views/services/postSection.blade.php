@@ -99,7 +99,7 @@
 
                             <li class="post-comment" id="post-comment_form_{{ $post->id }}">
                                 <div class="comet-avatar">
-                                    <img src="/temp-services/images/userlist-2.jpg" alt="">
+                                    <img src="{{Auth::user()->getProfilePicture()}}" alt="">
                                 </div>
                                 <div class="post-comt-box">
                                     <form method="POST" action="#" id="comment_{{ $post->id }}"
