@@ -2708,7 +2708,7 @@ form button {
 
 #fullsizeimg {
   /* max-height: 600px; */
-  margin-left: -15px;
+  /* margin-left: -15px; */
   width: calc(100% + 30px);
   overflow: hidden;
   margin-bottom: 5px;
