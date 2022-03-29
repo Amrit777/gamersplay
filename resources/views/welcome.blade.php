@@ -24,7 +24,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12" style="text-align:center;">
-                <img src="/imgs/gamersplay-gp-main.png" alt="" class="mw-80">
+                <img src="/imgs/Gaming.png" alt="" class="mw-80">
                 <h1>Welcome to GamersPlay</h1>
                 <p>Your premier destination for finding gamer friends to play with!</p>
                 <br>
@@ -126,7 +126,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div style="text-align:center">
-                    <img src="{{ asset('imgs/finish.png') }}" class="mw-80">
+                    <img src="{{ asset('imgs/findservices.png') }}" class="mw-80">
                     <h4 style="text-align:center;">Find</h4>
                     <p>Browse our extensive list of gamers!</p>
                 </div>

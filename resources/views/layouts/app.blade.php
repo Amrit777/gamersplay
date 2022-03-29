@@ -75,7 +75,7 @@ $noFooter = true;
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <div style="height:40px;">
-                        <img src="{{ asset('imgs/logo.svg') }}" alt="" style="height:40px; width:40px; padding:5px;">
+                        <img src="{{ asset('imgs/gplogopurple.svg') }}" alt="" style="height:40px; width:40px; padding:5px;">
                         {{ config('app.name', 'Laravel') }}
 
                     </div>
