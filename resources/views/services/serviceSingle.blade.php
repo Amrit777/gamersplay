@@ -481,7 +481,7 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-           
+
             let showChar = 100;
             let ellipsestext = "...";
             let moretext = "more";
@@ -559,7 +559,7 @@
 
                 }
             });
-            
+
             var allowed = "jpg,png,jpeg,gif,mkv,docx,zip,rar,pdf,doc,mp3,mp4,flv,wav,txt,mov,avi,webm,wav,mpeg";
 
             function isInArray(value, array) {
@@ -623,6 +623,7 @@
                 this.submit();
             });
 
+            // load more comments
             $(document).on("click", "[id^='showmore_']", function(e) {
                 e.preventDefault();
                 let loadMoreTarget = e.target;
@@ -655,7 +656,7 @@
                     }
                 });
             });
-
+            // load more posts
             $(document).on("click", '.showmore-posts', function(e) {
                 e.preventDefault();
                 let loadMoreTargetPost = e.target;
@@ -688,12 +689,16 @@
                     }
                 });
             });
-
+            // validate if description has links it should be youtube links only
             $(document).on("input", "#post-content", function() {
                 var url = $(this).val();
-                validateYouTubeUrl(url);
+                if (new RegExp(
+                        "([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?"
+                    ).test(url)) {
+                    validateYouTubeUrl(url);
+                }
             });
-
+            // delete post
             $(document).on("click", ".post-actions", function(e) {
                 if (e.currentTarget.classList.contains("post-actions")) {
                     let post_id = $(e.currentTarget).attr('data-post');
@@ -719,7 +724,7 @@
                 }
             });
         });
-
+        // post delete function
         function deletePost(postId, post_html) {
             $.ajaxSetup({
                 headers: {
@@ -745,7 +750,7 @@
                 }
             });
         }
-
+        // delete gallery image
         function deleteGalleryImage(post_id) {
             $.ajaxSetup({
                 headers: {
@@ -771,9 +776,11 @@
                 }
             });
         }
+        // youtube link validation starts here //
         let youtubeLinks = [];
-            let existsYoutubeLinks = [];
-            let uniqueyoutubeLinks;
+        let existsYoutubeLinks = [];
+        let uniqueyoutubeLinks;
+
         function validateYouTubeUrl(url) {
             let spliteurl = url.split(" ")
             if (url != undefined || url != '') {
@@ -781,8 +788,7 @@
                 let filteraa = spliteurl.filter(function(m, i, self) {
                     let match = m.match(regExp)
                     if (match && match[2]) {
-                        if (existsYoutubeLinks.indexOf(match[2]) > -1) {
-                        } else {
+                        if (existsYoutubeLinks.indexOf(match[2]) > -1) {} else {
                             youtubeLinks.push({
                                 url: match[2],
                                 show: false
@@ -844,14 +850,13 @@
                 newUrl += "/";
                 history.replaceState(null, null, newUrl);
             });
-        });
-
-        $(document).ready(() => {
+            // like post
             $(document).on("click", ".post-box", function(e) {
                 if (e.target.classList.contains("post-reaction")) {
                     registerReaction(e.target)
                 }
             })
+            // like and delete gallery images
             $(document).on("click", ".lightbox-user-gallery", function(e) {
                 if (e.target.classList.contains("gallery-like-heart")) {
                     registerGalleryReaction(e.target)
@@ -878,6 +883,7 @@
                     })
                 }
             })
+            // like comments
             $(document).on("click", ".comment-action-box", function(e) {
                 if (e.target.classList.contains("comment-reaction")) {
                     registerCommentReaction(e.target)
@@ -1079,6 +1085,7 @@
     </script>
 
     <script>
+        // lightbox gallery
         $(document).on("ready", function() {
             let lightbox = document.getElementById('lightbox');
             let lightboxInstance = mdb.Lightbox.getInstance(lightbox);

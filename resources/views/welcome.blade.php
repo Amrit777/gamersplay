@@ -28,7 +28,8 @@
                 <h1>Welcome to GamersPlay</h1>
                 <p>Your premier destination for finding gamer friends to play with!</p>
                 <br>
-                <a href="/services" class="btn button-primary">Get started</a>
+                {{-- <a href="/services" class="btn button-primary">Get started</a> --}}
+                <a href="#" class="btn button-primary">Get started</a>
                 <a href="#learnMore" class="btn button-outline-primary">Learn more</a>
             </div>
 
@@ -113,8 +114,6 @@
     <div style="display:flex; justify-content:center;">
         <img src="/imgs/arrow-02.png" class="frontpage-arrow-down">
     </div>
-
-
 
     <br id="learnMore">
     <br>

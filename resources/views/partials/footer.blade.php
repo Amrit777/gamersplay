@@ -10,7 +10,8 @@
                     <div style="display:flex;" class="mobile_ul_nav">
                         <ul class="footer-menu">
                             <li><a href="/">Home</a></li>
-                            <li><a href="/services">Services</a></li>
+                            {{-- <li><a href="/services">Services</a></li> --}}
+                            <li><a href="#">Services</a></li>
                             <li><a href="/news">News</a></li>
                         </ul>
                         <ul class="footer-menu">
@@ -69,7 +70,8 @@
                             <a href="#" class="footer-link active">Home</a>
                         </div>
                         <div class="col-md-2">
-                            <a href="/services" class="footer-link">Services</a>
+                            {{-- <a href="/services" class="footer-link">Services</a> --}}
+                            <a href="#" class="footer-link">Services</a>
                         </div>
                         <div class="col-md-2">
                             <a href="/news" class="footer-link">News</a>
