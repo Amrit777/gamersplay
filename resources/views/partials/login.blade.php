@@ -27,14 +27,14 @@
                     <li class="nav-item">
                         <a class="nav-link active " data-toggle="tab" href="#loginPanel" role="tab">
                             <img class="navs-icons-modal"
-                                src="{{ asset('temp-services/images/formslogo/login.png') }}">
+                                src="{{ asset('temp-services/images/3d/circle.png') }}">
                             Login
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#registerPanel" role="tab">
                             <img class="navs-icons-modal"
-                                src="{{ asset('temp-services/images/formslogo/triangle.png') }}">
+                                src="{{ asset('temp-services/images/3d/triangle.png') }}">
                             Register
                         </a>
                     </li>

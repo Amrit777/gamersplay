@@ -133,7 +133,7 @@
             </div>
             <div class="col-md-4">
                 <div style="text-align:center">
-                    <img src="{{ asset('imgs/match.png') }}" class="mw-80">
+                    <img src="{{ asset('imgs/3d/match.png') }}" class="mw-80">
                     <h4 style="text-align:center;">Match</h4>
                     <p>Found your gamer buddy? It's a match!</p>
                 </div>

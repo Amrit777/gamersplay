@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <div>
-                    <img src="/imgs/logo.svg" alt="" srcset="" style="height:32px; margin-right:25px;">
+                    <img src="/imgs/gplogopurple.svg" alt="" srcset="" style="height:32px; margin-right:25px;">
                 </div>
                 <h5 class="modal-title" id="registerModal">{{ __('Register') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

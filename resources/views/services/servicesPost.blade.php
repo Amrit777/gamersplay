@@ -11,17 +11,17 @@
                                 enctype="multipart/form-data" action="{{ route('createPost') }}">
                                 @csrf
                                 <input type="hidden" name="service_id" value="{{ $service->id }}">
+                                <input type="hidden" name="url" value="">
                                 <div class="new-postbox">
                                     <figure>
                                         <img src="/temp-services/images/admin.jpg" alt="">
                                     </figure>
                                     <div class="newpst-input">
-                                        <textarea rows="5" name="content" id="post-content" 
-                                            placeholder="Share some what you are thinking?"></textarea>
+                                        <textarea rows="5" name="content" id="post-content" placeholder="Share some what you are thinking?"></textarea>
                                     </div>
                                     <div class="row" id="videoObject">
                                     </div>
-                                    
+
                                     <div class="row">
                                         <div id="image-holder"></div>
                                     </div>
@@ -38,7 +38,8 @@
                                             </li>
                                         </ul>
                                         <button id="create-post-btn" class="post-btn" type="submit"
-                                            data-ripple="">Post</button>
+                                            data-ripple="">Post
+                                        </button>
                                     </div>
                                 </div>
                             </form>
