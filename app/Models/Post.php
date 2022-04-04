@@ -61,7 +61,7 @@ class Post extends BaseModel
     public function likedPost()
     {
         if (Auth::check()) {
-            return Like::where("likeable_id", $this->id)->where('user_id', Auth::user()->id)->where('state_id', 1)->count();
+            return Like::where("likeable_id", $this->id)->where("likeable_type", Like::class)->where('user_id', Auth::user()->id)->where('state_id', 1)->count();
         }
         return 0;
     }
