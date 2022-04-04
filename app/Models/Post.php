@@ -61,7 +61,9 @@ class Post extends BaseModel
     public function likedPost()
     {
         if (Auth::check()) {
-            return Like::where("likeable_id", $this->id)->where("likeable_type", Like::class)->where('user_id', Auth::user()->id)->where('state_id', 1)->count();
+            return Like::where("likeable_id", $this->id)->where("likeable_type", Like::class)
+                ->where('user_id', Auth::user()->id)
+                ->where('state_id', 1)->count();
         }
         return 0;
     }
@@ -151,7 +153,7 @@ class Post extends BaseModel
         }
         $content .= '" data-comment-post-id="' . $value->id . '" data-comment-reaction-id="' . $value->likedPost() . '">';
         $content .= ' <i class="fa fa-heart"></i>';
-        $content .= ' <span id="liked_comment_count_' . $value->id . '"> ' . $post->likes_count . '</span>';
+        $content .= ' <span id="liked_comment_count_' . $value->id . '"> ' . $value->likes_count . '</span>';
         $content .= '</span>';
         $content .= '</div>';
         $content .= '</div>';
