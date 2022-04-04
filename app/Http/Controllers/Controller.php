@@ -21,7 +21,7 @@ class Controller extends BaseController
     {
         $response['status'] = false;
         $response['code'] = self::ERROR;
-        $response['message'] = $msg;
+        $response['error'] = $msg;
         return response()->json($response,  self::ERROR);
     }
 

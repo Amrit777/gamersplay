@@ -8,7 +8,7 @@
                         <div class="central-meta postbox">
                             <span class="create-post">Create post</span>
                             <form name="add-blog-post-form" id="add-blog-post-form" method="post"
-                                enctype="multipart/form-data" action="{{ route('createPost') }}">
+                                enctype="multipart/form-data" action="javascript:void(0)">
                                 @csrf
                                 <input type="hidden" name="service_id" value="{{ $service->id }}">
                                 <input type="hidden" name="url" value="">
@@ -19,9 +19,7 @@
                                     <div class="newpst-input">
                                         <textarea rows="5" name="content" id="post-content" placeholder="Share some what you are thinking?"></textarea>
                                     </div>
-                                    <div class="row" id="videoObject">
-                                    </div>
-
+                                    <div class="row" id="videoObject"></div>
                                     <div class="row">
                                         <div id="image-holder"></div>
                                     </div>
@@ -40,6 +38,7 @@
                                         <button id="create-post-btn" class="post-btn" type="submit"
                                             data-ripple="">Post
                                         </button>
+                                        <div class="add-post-progress-bar"></div>
                                     </div>
                                 </div>
                             </form>

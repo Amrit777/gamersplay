@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 class PostController extends Controller
 {
@@ -42,7 +43,8 @@ class PostController extends Controller
                 'nullable',
                 'string',
                 'max:1024',
-                'regex:/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/i'
+                // 'regex:/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?([^\s]+)~$/i',
+                'regex:/(^|\s)((https?:\/\/)?(?=[^\/\s]*youtube)[\w-]+(\.[a-z-]+)+\.?(:\d+)?(\/\S*)?)/i',
             ],
             'postPhotos.*' => 'required_without:content|mimes:jpeg,jpg,x-png,png,gif',
             'postPhotos' => 'max:4',
@@ -54,13 +56,15 @@ class PostController extends Controller
             'content.regex' => "Only youtube links are allowed",
             'postPhotos.max' => 'Only 4 files are allowed.'
         );
+
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
             $error = [
                 'error' => $validator->errors()->first()
             ];
-            return redirect()->to(url()->previous() . '#profile')->with($error);
+            return $this->error($error);
+            // return redirect()->to(url()->previous() . '#profile')->with($error);
         }
 
         $status = [];
@@ -113,13 +117,15 @@ class PostController extends Controller
                 // }
             }
             DB::commit();
-            $status = ['success' => 'Post is created.'];
+            return $this->success(['success' => 'Post is created.']);
         } catch (\Illuminate\Database\QueryException $exception) {
             DB::rollback();
             $error = implode(" | ", $exception->errorInfo);
-            $status = ['error' => $error];
+            return $this->error($error);
+        } catch (TooManyRequestsHttpException $e) {
+            return $this->error($e->message);
         }
-        return redirect()->to(url()->previous() . '#profile')->with($status);
+        // return redirect()->to(url()->previous() . '#profile')->with($status);
     }
     /**
      * Store a newly created resource in storage.
@@ -421,5 +427,4 @@ class PostController extends Controller
             return $this->error("Image not found.");
         }
     }
-    
 }

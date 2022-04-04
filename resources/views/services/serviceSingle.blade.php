@@ -5,6 +5,31 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('css/style-services.css?v=') . time() }}" />
     <link rel="stylesheet" href="{{ asset('css/mdb.min.css?v=') . time() }}" />
+    <style>
+        .progress {
+            width: 100%;
+            background-color: white;
+        }
+
+        .progressBar {
+            width: 1%;
+            height: 40px;
+            background-color: white;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+        }
+
+        .progressBar.active {
+            width: 1%;
+            height: 40px;
+            background-color: green;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+        }
+
+    </style>
 @endsection
 @section('content')
     {{-- NEW CONTENT START --}}
@@ -466,13 +491,18 @@
                                 let parent = jQuery("#post-comment_form_" + post_id).parent(
                                     "li");
                                 let comment_HTML = response.data;
-                                $(comment_HTML).insertBefore("#post-comment_form_" + post_id);
+                                $("#comment-box_"+post_id).prepend(comment_HTML);
+                                // $(comment_HTML).insertBefore("#post-comment_form_" + post_id);
                                 $("#commentable_content_" + post_id).val("");
                                 $("#comment_post_count_" + post_id).text(response.count);
                             }
                         },
-                        error: function() {
-                            jQuery(this).val('');
+                        error: function(data) {
+                            data?.responseJSON?.error?.error ? Swal.fire(data.responseJSON.error
+                                .error) : ""
+                            data?.responseJSON?.message ? Swal.fire(data.responseJSON.message) :
+                                ""
+                            jQuery(this).val(' ');
                         }
                     });
                 }
@@ -481,7 +511,6 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-
             let showChar = 100;
             let ellipsestext = "...";
             let moretext = "more";
@@ -614,13 +643,65 @@
             //         return false;
             //     }
             // });
-
             $('#add-blog-post-form').submit(function(e) {
                 e.preventDefault();
-                var buttonSubmit = $("#create-post-btn");
-                $("#create-post-btn").disabled = true;
-                $("#create-post-btn").innerText = 'Posting…';
-                this.submit();
+                let i = 1;
+                $("#create-post-btn").attr('disabled', true);
+                $("#create-post-btn").text("Posting");
+                let formDataAddPost = new FormData($('#add-blog-post-form')[0]);
+                console.log(...formDataAddPost);
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    beforeSend: function() {
+                        $('.add-post-progress-bar').html(
+                            '<div class="progress"><div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div></div>'
+                        );
+                        setTimeout(function() {
+                            $('.progress-bar').animate({
+                                width: i + "%"
+                            }, 100);
+                        }, 10);
+                        i = i + Math.floor(Math.random() * 100);
+                    },
+                    type: 'POST',
+                    url: "/create/post",
+                    data: formDataAddPost,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: (data) => {
+                        console.log("success", data);
+                        $('.progress-bar').addClass("bg-success")
+                        $('.progress-bar').animate({
+                            width: "100%",
+                        }, 1);
+                        $("#create-post-btn").attr('disabled', false);
+                        $("#create-post-btn").text("Post");
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1000);
+                    },
+                    error: function(data) {
+                        console.log("error", data);
+                        $('.progress-bar').addClass("bg-danger")
+                        $('.progress-bar').animate({
+                            width: "100%"
+                        }, 1);
+                        $("#create-post-btn").attr('disabled', false);
+                        $("#create-post-btn").text("Post");
+                        data?.responseJSON?.error?.error ? Swal.fire(data.responseJSON.error
+                            .error) : ""
+                        data?.responseJSON?.message ? Swal.fire(data.responseJSON.message) : ""
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1000);
+                    }
+                });
+                // this.submit();
             });
 
             // load more comments
@@ -690,13 +771,26 @@
                 });
             });
             // validate if description has links it should be youtube links only
-            $(document).on("input", "#post-content", function() {
-                var url = $(this).val();
-                if (new RegExp(
-                        "([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?"
-                    ).test(url)) {
-                    validateYouTubeUrl(url);
+
+            let regexYoutubeURl = new RegExp(
+                "([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?"
+            );
+            let linksArray = [];
+            $(document).on("input paste", "#post-content", function() {
+                var urlDescription = $(this).val();
+                let geturl = new RegExp(
+                    "(^|[ \t\r\n])((http|https|Http|Https):(([A-Za-z0-9$_.+!*(),;/?:@&~=-])|%[A-Fa-f0-9]{2}){2,}(#([a-zA-Z0-9][a-zA-Z0-9$_.+!*(),;/?:@&~=%-]*))?([A-Za-z0-9$_+!*();/?:~-]))",
+                    "g"
+                );
+                if (urlDescription.match(geturl)) {
+                    console.log("length", urlDescription.match(geturl).length);
+                    console.log("marched", urlDescription.match(geturl));
+                    validateYouTubeUrl(urlDescription.match(geturl));
                 }
+                // console.log("hereeeee", url.match(regexYoutubeURl));
+                // if (regexYoutubeURl.test(urlDescription)) {
+                //     console.log("contains url", regexYoutubeURl.exec(urlDescription));
+                // }
             });
             // delete post
             $(document).on("click", ".post-actions", function(e) {
@@ -782,10 +876,11 @@
         let uniqueyoutubeLinks;
 
         function validateYouTubeUrl(url) {
-            let spliteurl = url.split(" ")
+            // let spliteurl = url.split(" ")
+            console.log("spliteurlspliteurl", url);
             if (url != undefined || url != '') {
                 let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
-                let filteraa = spliteurl.filter(function(m, i, self) {
+                let filteraa = url.filter(function(m, i, self) {
                     let match = m.match(regExp)
                     if (match && match[2]) {
                         if (existsYoutubeLinks.indexOf(match[2]) > -1) {} else {
