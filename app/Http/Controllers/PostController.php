@@ -42,7 +42,7 @@ class PostController extends Controller
                 'required_without:postPhotos',
                 'nullable',
                 'string',
-                'max:1024',
+                'max:500',
                 // 'regex:/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?([^\s]+)~$/i',
                 'regex:/(^|\s)((https?:\/\/)?(?=[^\/\s]*youtube)[\w-]+(\.[a-z-]+)+\.?(:\d+)?(\/\S*)?)/i',
             ],
@@ -254,7 +254,7 @@ class PostController extends Controller
     {
         $user = Auth::user();
         $rules = [
-            'body' => "required|string",
+            'body' => "required|string|max:500",
             'commentable_id' => "required"
         ];
         $messages = array(
