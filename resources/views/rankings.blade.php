@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="header-page">
+<div class="header-page rounded">
     <div>
         <img src="/imgs/icons/rank3.svg" alt="" srcset="" style="height:64px;">
     </div>

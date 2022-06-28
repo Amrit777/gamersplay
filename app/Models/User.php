@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -23,6 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'real_name',
         'password',
+        'tnc'
     ];
 
     /**
@@ -51,10 +53,26 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
 
-    public function getPosts() {
-        return $this->hasMany('App\Models\Post','user_id','id');
+    public function getPosts()
+    {
+        return $this->hasMany('App\Models\Post', 'user_id', 'id');
     }
-    public function services() {
-        return $this->hasMany('App\Models\Service','user_id','id');
+    public function services()
+    {
+        return $this->hasMany('App\Models\Service', 'user_id', 'id');
+    }
+
+    public function getAge()
+    {
+        return Carbon::parse($this->birth_date)->age;
+    }
+
+    public function getProfilePicture()
+    {
+        if (!empty($this->profile_picture)) {
+            return $this->profile_picture;
+        } else {
+            return "/imgs/avatar.svg";
+        }
     }
 }

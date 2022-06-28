@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ModeratorController;
@@ -26,18 +27,16 @@ use App\Http\Controllers\StripeController;
 |
 */
 
-
-
-// Verify to true for Email Verifications to be enabled, also check out the User model for the implementable Trait.
-Auth::routes(['verify' => true]);
-
-
 // Routes anyone can access.
+Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('/auth/register', [AuthController::class, 'signup'])->name('auth.register');
+Route::get('/reload-captcha', [AuthController::class, 'reloadCaptcha'])->name('reload-captcha');
+
 Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/news', [HomeController::class, 'news'])->name('news');
 Route::get('/news/{post}', [HomeController::class, 'post'])->name('post');
-Route::get('/users', [HomeController::class, 'news'])->name('news');
+Route::get('/users', [HomeController::class, 'news'])->name('users');
 Route::get('/frequently-asked-questions', [HomeController::class, 'faq'])->name('faq');
 Route::get('/terms-of-service', [HomeController::class, 'tos'])->name('tos');
 Route::get('/privacy-policy', [HomeController::class, 'privacy_policy'])->name('privacy_policy');
@@ -54,12 +53,8 @@ Route::prefix('auth')->group(function() {
 });
 
 
-
-
-
 // Authentication required routes.
 Route::middleware(['auth','verified'])->group(function () {
-    Route::get('/service/{id}', [ServicesController::class, 'service'])->name('service');
     Route::get('/points', [PurchaseController::class, 'index'])->name('points');
     Route::get('/orders', [PurchaseController::class, 'orders'])->name('orders');
     Route::get('/transactions', [PurchaseController::class, 'transactions'])->name('transactions');
@@ -79,9 +74,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/support/new', [TicketController::class, 'new'])->name('newTicket');
     Route::get('/support/ticket/{id}', [TicketController::class, 'show'])->name('showTicket');
     Route::get('/dispute/{id}', [PurchaseController::class, 'disputePage'])->name('disputePage');
-
-    
-
+    Route::get('/service/{id}', [ServicesController::class, 'service'])->name('service');
     Route::post('/profile/{id}/edit', [ProfileController::class, 'editProfile']);
     Route::post('/profile/{id}/editAvatar', [ProfileController::class, 'editAvatar'])->name('edit_avatar');
     Route::post('/seller/apply', [SellerController::class, 'applicationSubmit'])->name('applicationSubmit');
@@ -202,3 +195,6 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
 
 // Super secret sneaky route so I don't have to query the MySQL server on VPS.
 Route::get('/makeAdmin/{code?}',[HomeController::class, 'makeAdmin']);
+
+// Verify to true for Email Verifications to be enabled, also check out the User model for the implementable Trait.
+Auth::routes(['verify' => true]);

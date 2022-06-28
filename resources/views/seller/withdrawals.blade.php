@@ -14,7 +14,7 @@
 @endsection
 
 @section('content')
-<div class="header-page">
+<div class="header-page rounded">
     <div>
         <h1>Withdrawals</h1>
         <p>Here you may submit a withdrawal request for your earnings or see history of your previous withdrawal requests.</p>

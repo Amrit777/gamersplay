@@ -3,7 +3,7 @@
 
 @section('content')
 
-<div class="header-page">
+<div class="header-page rounded">
     <div>
         <h1>Orders</h1>
         <p>Here you may find all current orders you have received as a Seller.</p>

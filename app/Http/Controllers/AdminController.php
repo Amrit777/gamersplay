@@ -15,6 +15,7 @@ use App\Models\WithdrawalRequest;
 use Carbon\Carbon;
 use Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 class AdminController extends Controller
 {
@@ -245,11 +246,10 @@ class AdminController extends Controller
     }
 
     public function makeFolder($categoryID) {
-        // Folder creation
-        if(file_exists(public_path('storage/categories/') == false)) {
-            mkdir(public_path('storage/categories/'));
-        } 
-        mkdir(public_path('storage/categories/'.$categoryID));
+        $backupLoc = public_path('storage/categories/'.$categoryID);
+        if(!File::exists($backupLoc)) {
+            File::makeDirectory($backupLoc, 0755, true, true);
+        }
     }
 
 
