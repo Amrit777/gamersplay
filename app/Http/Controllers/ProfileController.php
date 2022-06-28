@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -58,7 +60,6 @@ class ProfileController extends Controller
             'instagram_profile' => 'nullable',
             'discord_handle' => 'nullable',
         ]);
-
         $user->name = $validated['name'];
         $user->real_name = $validated['real_name'];
         $user->user_title = $validated['title'];
@@ -203,10 +204,21 @@ class ProfileController extends Controller
                 $uprofile = $user->profile_picture;
                 if (strpos($uprofile, '/storage/avatars/')) {
                     $filename = str_replace(url('/') . '/storage/avatars/', '', $uprofile);
-                    unlink(public_path('storage/avatars/' . $filename));
+                    if (File::exists(public_path('storage/avatars/' . $filename))) {
+                        unlink(public_path('storage/avatars/' . $filename));
+                    }
+                }
+                $user->profile_picture = url('/') . '/' . $file;
+
+                $thumbnailFolder = storage_path() . '/app/public/avatars/thumbnail/';
+
+                if (!File::exists($thumbnailFolder)) {
+                    File::makeDirectory($thumbnailFolder, 0755, true, true);
                 }
 
-                $user->profile_picture = url('/') . '/' . $file;
+                $thumnailName = $request->profile_picture->getClientOriginalName();
+                $thumnail = Image::imageThumbnail($request->profile_picture, $thumbnailFolder . $thumnailName);
+                $user->profile_thumbnail = '/storage/avatars/thumbnail/' . $thumnailName;
                 $user->save();
             }
 

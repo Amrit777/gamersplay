@@ -119,7 +119,7 @@
 </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
     <script>
         $('#payment_method').change(function (e) { 
             e.preventDefault();
@@ -194,4 +194,4 @@
         {{\Session::forget('success')}}
         @endif
     </script>
-@endsection
+@endpush

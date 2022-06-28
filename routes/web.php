@@ -14,6 +14,7 @@ use App\Http\Controllers\SellerController;
 use App\Http\Controllers\OAuthController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\StripeController;
 
 /*
@@ -46,15 +47,17 @@ Route::get('/services/get', [ServicesController::class, 'search'])->name('get');
 
 
 // oAuth routes
-Route::prefix('auth')->group(function() {
+Route::prefix('auth')->group(function () {
     Route::get('discord', [OAuthController::class, 'loginDiscord']);
     Route::get('discord/callback', [OAuthController::class, 'loginDiscordCallback']);
-
+});
+Route::middleware(['auth', 'verified', 'throttle:custom_five'])->group(function () {
+    Route::post('/create/post', [PostController::class, 'createPost'])->name('createPost');
+    Route::post('/post/comment', [PostController::class, 'addComment'])->name('comment');
 });
 
-
 // Authentication required routes.
-Route::middleware(['auth','verified'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/points', [PurchaseController::class, 'index'])->name('points');
     Route::get('/orders', [PurchaseController::class, 'orders'])->name('orders');
     Route::get('/transactions', [PurchaseController::class, 'transactions'])->name('transactions');
@@ -89,35 +92,37 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::post('/support/ticket/{id}/close', [TicketController::class, 'ticketClose']);
     Route::post('/dispute/{id}/addReply', [PurchaseController::class, 'disputeReply'])->name('disputeReply');
 
-
-
+    //post routes
+    Route::post('/post/like', [PostController::class, 'likePost'])->name('likePost');
+    Route::post('/gallery/like', [PostController::class, 'likePost'])->name('gallerylikePost');
+    Route::post('/comment/like', [PostController::class, 'likePost'])->name('commentlikePost');
+    Route::post('/comments/load', [PostController::class, 'loadMoreComment'])->name('commentLoad');
+    Route::post('/posts/load', [PostController::class, 'loadMorePosts'])->name('postsLoad');
+    Route::delete('/post/delete', [PostController::class, 'deletePost'])->name('deletePost');
+    Route::delete('/gallery/delete', [PostController::class, 'deleteGallery'])->name('deleteGallery');
 
     // Paypal routes
 
-    Route::prefix('points/paypal')->group(function() {
+    Route::prefix('points/paypal')->group(function () {
         Route::get('pay', [PayPalController::class, 'postPaymentWithpaypal'])->name('make.payment');
         Route::get('status', [PayPalController::class, 'getPaymentStatus'])->name('payment.status');
     });
 
     // Stripe routes
 
-    Route::prefix('points/stripe')->group(function() {
+    Route::prefix('points/stripe')->group(function () {
         Route::get('pay', [StripeController::class, 'charge'])->name('stripe.payment');
     });
 
 
-    Route::prefix('stripe')->group(function() {
+    Route::prefix('stripe')->group(function () {
         Route::get('method', [StripeController::class, 'paymentMethod'])->name('stripe.paymentMethod');
         Route::post('update', [StripeController::class, 'updatePaymentMethod'])->name('stripe.updatePaymentMethod');
     });
-
-
-
-
 });
 
 // Seller routes
-Route::prefix('seller')->middleware(['auth','seller'])->group(function () {
+Route::prefix('seller')->middleware(['auth', 'seller'])->group(function () {
     Route::get('/', [SellerController::class, 'index'])->name('seller.index');
     Route::get('/withdrawals', [SellerController::class, 'withdrawals'])->name('seller.withdrawals');
     Route::get('/orders', [SellerController::class, 'orders'])->name('seller.orders');
@@ -134,13 +139,12 @@ Route::prefix('seller')->middleware(['auth','seller'])->group(function () {
     Route::post('/service/{id}/addImage', [SellerController::class, 'addImage']);
     Route::post('/service/{id}/deleteImage', [SellerController::class, 'deleteImage']);
     Route::post('/service/{id}/defaultImage', [SellerController::class, 'defaultImage']);
-
 });
 
 
 
 // Moderator routes
-Route::prefix('moderator')->middleware(['auth','moderator'])->group(function () {
+Route::prefix('moderator')->middleware(['auth', 'moderator'])->group(function () {
     Route::get('/', [ModeratorController::class, 'index'])->name('moderator.index');
     Route::get('/disputes', [ModeratorController::class, 'disputes'])->name('moderator.disputes');
     Route::get('/dispute/{id}', [ModeratorController::class, 'dispute'])->name('moderator.dispute');
@@ -153,20 +157,17 @@ Route::prefix('moderator')->middleware(['auth','moderator'])->group(function () 
     Route::post('/dispute/{id}/refund', [ModeratorController::class, 'disputeDecisionRefund']);
     Route::post('/ticket/{id}/reply', [ModeratorController::class, 'ticketReply']);
     Route::post('/ticket/{id}/close', [ModeratorController::class, 'ticketClose']);
-
 });
 
 
 // Admin only routes.
-Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
     Route::get('/services', [AdminController::class, 'services'])->name('admin.services');
     Route::get('/services/{id}', [AdminController::class, 'service'])->name('admin.service');
     Route::get('/usersSearch', [AdminController::class, 'searchUsers']);
     Route::get('/servicesSearch', [AdminController::class, 'searchServices']);
-
-
     Route::get('/users/{id}', [AdminController::class, 'user']);
     Route::get('/applications', [AdminController::class, 'applications'])->name('admin.applications');
     Route::get('/applications/approve', [AdminController::class, 'approveApplication']);
@@ -177,7 +178,6 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
     Route::get('/categoryNew', [AdminController::class, 'categoryNew'])->name('admin.newCategory');
     Route::get('/news', [AdminController::class, 'news'])->name('admin.news');
     Route::get('/news/{id}', [AdminController::class, 'postUpdatePage']);
-
     Route::post('/user/edit', [AdminController::class, 'updateUser']);
     Route::post('/user/ban', [AdminController::class, 'ban']);
     Route::post('/user/unban', [AdminController::class, 'unban']);
@@ -189,12 +189,11 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
     Route::post('/createNews', [AdminController::class, 'news_add']);
     Route::post('/updateNews', [AdminController::class, 'updateNews']);
     Route::post('/news/{id}/delete', [AdminController::class, 'deleteNews']);
-
 });
 
 
 // Super secret sneaky route so I don't have to query the MySQL server on VPS.
-Route::get('/makeAdmin/{code?}',[HomeController::class, 'makeAdmin']);
+Route::get('/makeAdmin/{code?}', [HomeController::class, 'makeAdmin']);
 
 // Verify to true for Email Verifications to be enabled, also check out the User model for the implementable Trait.
 Auth::routes(['verify' => true]);

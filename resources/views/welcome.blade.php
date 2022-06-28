@@ -24,11 +24,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12" style="text-align:center;">
-                <img src="/imgs/gamersplay-gp-main.png" alt="" class="mw-80">
+                <img src="/imgs/Gaming.png" alt="" class="mw-80">
                 <h1>Welcome to GamersPlay</h1>
                 <p>Your premier destination for finding gamer friends to play with!</p>
                 <br>
-                <a href="/services" class="btn button-primary">Get started</a>
+                {{-- <a href="/services" class="btn button-primary">Get started</a> --}}
+                <a href="#" class="btn button-primary">Get started</a>
                 <a href="#learnMore" class="btn button-outline-primary">Learn more</a>
             </div>
 
@@ -114,8 +115,6 @@
         <img src="/imgs/arrow-02.png" class="frontpage-arrow-down">
     </div>
 
-
-
     <br id="learnMore">
     <br>
     <h2 style="text-align:center; font-weight:500 !important; margin:50px 0;">How GamersPlay works</h2>
@@ -126,14 +125,14 @@
         <div class="row">
             <div class="col-md-4">
                 <div style="text-align:center">
-                    <img src="{{ asset('imgs/finish.png') }}" class="mw-80">
+                    <img src="{{ asset('imgs/findservices.png') }}" class="mw-80">
                     <h4 style="text-align:center;">Find</h4>
                     <p>Browse our extensive list of gamers!</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div style="text-align:center">
-                    <img src="{{ asset('imgs/match.png') }}" class="mw-80">
+                    <img src="{{ asset('imgs/3d/match.png') }}" class="mw-80">
                     <h4 style="text-align:center;">Match</h4>
                     <p>Found your gamer buddy? It's a match!</p>
                 </div>
@@ -187,7 +186,7 @@
 @endsection
 
 @if (isset($popular) && count($popular) > 0)
-    @section('scripts')
+    @push('scripts')
         <script>
             $('.carousel').slick({
                 slidesToShow: 3,
@@ -222,5 +221,5 @@
                 ]
             });
         </script>
-    @endsection
+    @endpush
 @endif

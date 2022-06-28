@@ -228,7 +228,7 @@
 @endsection
 
 
-@section('scripts')
+@push('scripts')
 <script>
   var currentUsersIdAuth = {{Auth::id()}};
 </script>
@@ -365,4 +365,4 @@ setInterval(() => {
 </script>
 
 
-@endsection
+@endpush

@@ -52,7 +52,7 @@
 </div>    
 @endsection
 
-@section('scripts')
+@push('scripts')
 <script>
 
     $('.admin-service-image').click(function (e) { 
@@ -92,4 +92,4 @@
     {{\Session::forget('error')}}
     @endif
 </script>
-@endsection
+@endpush

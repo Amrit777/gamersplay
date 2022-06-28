@@ -26,7 +26,7 @@ $noFooter = true;
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{asset('css/style.css?v=').time()}}" rel="stylesheet">
+    <link href="{{ asset('css/style.css?v=') . time() }}" rel="stylesheet">
     <link href="{{ asset('css/mq.css?v=1.0.0') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -75,7 +75,7 @@ $noFooter = true;
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <div style="height:40px;">
-                        <img src="{{ asset('imgs/logo.svg') }}" alt="" style="height:40px; width:40px; padding:5px;">
+                        <img src="{{ asset('imgs/gplogopurple.svg') }}" alt="" style="height:40px; width:40px; padding:5px;">
                         {{ config('app.name', 'Laravel') }}
 
                     </div>
@@ -134,7 +134,7 @@ $noFooter = true;
                                     <a href="#loginPanel" class="btn login-btn" id="" style="cursor: pointer"
                                         data-toggle="modal" data-target="#loginModal" data-backdrop="static"
                                         data-keyboard="false">
-                                        <img src="{{ asset('temp-services/images/formslogo/login.png') }}"
+                                        <img src="{{ asset('temp-services/images/3d/circle.png') }}"
                                             style="height:20px;">
                                         {{ __('Login') }}
                                     </a>
@@ -146,7 +146,7 @@ $noFooter = true;
                                     <a href="#registerPanel" class="btn register-btn" id="" style="cursor: pointer;"
                                         data-toggle="modal" data-target="#loginModal" data-backdrop="static"
                                         data-keyboard="false">
-                                        <img src="{{ asset('temp-services/images/formslogo/triangle.png') }}"
+                                        <img src="{{ asset('temp-services/images/3d/triangle.png') }}"
                                             style="height:20px;">
                                         {{ __('Register') }}
                                     </a>
@@ -265,12 +265,10 @@ $noFooter = true;
         @endguest
         {{-- @include('partials.login2') --}}
         {{-- @include('partials.register') --}}
-        <main class="py-4 @if(Route::current()->getName() != "welcome") container @endif">
+        <main class="py-4 @if (Route::current()->getName() != 'welcome') container @endif">
             @yield('content')
         </main>
-
         @yield('footer')
-
         <script>
             $(document).ready(function() {
                 $("#loginModal").on('shown.bs.modal', function(e) {
@@ -279,10 +277,7 @@ $noFooter = true;
                 })
             });
         </script>
-        @yield('scripts')
-
     </div>
-
+    @stack('scripts')
 </body>
-
 </html>

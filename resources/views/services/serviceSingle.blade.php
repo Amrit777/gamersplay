@@ -1,17 +1,37 @@
 @extends('layouts.app')
 @section('style')
-    <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/slick-theme.css') }}">
-
-@endsection
-@section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{{asset('css/style-services.css?v=').time()}}" />
-    
+    <link rel="stylesheet" href="{{ asset('css/style-services.css?v=') . time() }}" />
+    <link rel="stylesheet" href="{{ asset('css/mdb.min.css?v=') . time() }}" />
+    <style>
+        .progress {
+            width: 100%;
+            background-color: white;
+        }
 
+        .progressBar {
+            width: 1%;
+            height: 40px;
+            background-color: white;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+        }
 
+        .progressBar.active {
+            width: 1%;
+            height: 40px;
+            background-color: green;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+        }
+
+    </style>
+@endsection
+@section('content')
     {{-- NEW CONTENT START --}}
     <div class="gamePlay" id="gamePlay">
         <!-- START: Service Section -->
@@ -170,7 +190,7 @@
                         </div>
                     </div>
                     <!-- END: Service Profile Side bar First Card -->
-                    <div <div class="card mt-4 mb-4 card-box-shadow">
+                    <div class="card mt-4 mb-4 card-box-shadow">
                         <div class="card table-card">
                             <h4 class="profile-name text-style-4 color-primary head-style-fst">
                                 Available Time
@@ -216,7 +236,6 @@
                                     <tr>
                                         <th>Thursday</th>
                                         @if (isset(explode(':', $service->thursday_from)[1]) && isset(explode(':', $service->thursday_to)[1]))
-
                                             <td>{{ explode(':', $service->thursday_from)[0] . ':' . explode(':', $service->thursday_from)[1] }}
                                             </td>
                                             <td>-</td>
@@ -229,7 +248,6 @@
                                     <tr>
                                         <th>Friday</th>
                                         @if (isset(explode(':', $service->friday_from)[1]) && isset(explode(':', $service->friday_to)[1]))
-
                                             <td>{{ explode(':', $service->friday_from)[0] . ':' . explode(':', $service->friday_from)[1] }}
                                             </td>
                                             <td>-</td>
@@ -242,7 +260,6 @@
                                     <tr>
                                         <th>Saturday</th>
                                         @if (isset(explode(':', $service->saturday_from)[1]) && isset(explode(':', $service->saturday_to)[1]))
-
                                             <td>{{ explode(':', $service->saturday_from)[0] . ':' . explode(':', $service->saturday_from)[1] }}
                                             </td>
                                             <td>-</td>
@@ -255,7 +272,6 @@
                                     <tr>
                                         <th>Sunday</th>
                                         @if (isset(explode(':', $service->sunday_from)[1]) && isset(explode(':', $service->sunday_to)[1]))
-
                                             <td>{{ explode(':', $service->sunday_from)[0] . ':' . explode(':', $service->sunday_from)[1] }}
                                             </td>
                                             <td>-</td>
@@ -289,25 +305,25 @@
                                                 <li class="nav-item" role="presentation">
                                                     <a class="nav-link active" id="home-tab" data-bs-toggle="tab"
                                                         data-bs-target="#home" type="button" role="tab" aria-controls="home"
-                                                        aria-selected="true">
+                                                        href="#home" aria-selected="true">
                                                         Service Details
                                                     </a>
                                                 </li>
-                                                {{-- <li class="nav-item" role="presentation">
+                                                <li class="nav-item" role="presentation">
                                                     <a class="nav-link" id="profile-tab" data-bs-toggle="tab"
                                                         data-bs-target="#profile" type="button" role="tab"
-                                                        aria-controls="profile" aria-selected="false">
+                                                        aria-controls="profile" aria-selected="false" href="#profile">
                                                         Timeline
-                                                    </a>
-                                                </li> --}}
-                                                {{-- <li class="nav-item" role="presentation">
-                                                    <a class="nav-link" id="contact-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#contact" type="button" role="tab"
-                                                        aria-controls="contact" aria-selected="false">
-                                                        Photos
                                                     </a>
                                                 </li>
                                                 <li class="nav-item" role="presentation">
+                                                    <a class="nav-link" id="gallery-tab" data-bs-toggle="tab"
+                                                        data-bs-target="#gallery" type="button" role="tab"
+                                                        aria-controls="gallery" aria-selected="false" href="#gallery">
+                                                        Photos
+                                                    </a>
+                                                </li>
+                                                {{-- <li class="nav-item" role="presentation">
                                                     <a class="nav-link" id="followers-tab" data-bs-toggle="tab"
                                                         data-bs-target="#followers" type="button" role="tab"
                                                         aria-controls="followers" aria-selected="false">
@@ -345,513 +361,33 @@
 
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="card mt-2 p-3">
-                                <div class="card-body ">
-                                    <div class="service-main-body-content">
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-6 font-weight-600 margin-bottom-1rem">
-                                                <h1>{{ $service->category->name ?: 'NA' }}</h1>
-                                            </div>
-                                            <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6 margin-bottom-1rem ">
-                                                <button id="buyBtn" class="btn btn-block btn-primary btn-right-50">Order
-                                                    ({{ $service->price ?: '0' }} GP)
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-4">
-                                            <div class="col-sm-12 col-md-7 mt-1 text-justify margin-bottom-1rem">
-                                                <p>{{ $service->instructions ?: 'NA' }}</p>
-                                            </div>
-                                            @if (!empty($service->images) && isset($service->images[0]) && !empty($service->images[0]))
-                                                <div class="col-12 col-md-5 text-right ">
-                                                    <a href="#" class="pop">
-                                                        <img id="img03" src='/{{ $service->images[0]->file_name }}'
-                                                            alt=""
-                                                            class="img-fluid border-radius-30 service-big-image zoom-clicked-img" />
-                                                    </a>
-                                                </div>
-                                            @endif
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card mt-2 p-3">
-                                <div class="card-body">
-                                    <div class="service-main-body-content">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <span class="d-flex review-header">
-                                                    <h5 class="color-primary fw-bold">Service Review(s)</h5>
-                                                    <span class="line"></span>
-                                                    <!-- <span class="number ms-5 fw-bold">133</span> -->
-                                                    <span class="number-row-card ms-2"><i class="fas fa-star"></i>
-                                                        4.5</span>
-                                                </span>
-                                                <ul class="review mt-3 mb-3">
-                                                    <li class="review-body mb-3">
-                                                        <div
-                                                            class="review-head border-bottom-2 d-flex justify-content-between">
-                                                            <span class="review-intro p-3">
-                                                                <img src="/temp-services/images/profile.jpg" alt="" />
-                                                                <span class="review-profile">
-                                                                    <p class="fw-bold">Dan Cortese</p>
-                                                                    <p class="color-gray-fst">February 24, 2021
-                                                                    </p>
-                                                                    <span class="review-star mobile-star">
-                                                                        <i class="fas fa-star"></i>
-                                                                        <i class="fas fa-star"></i>
-                                                                        <i class="fas fa-star"></i>
-                                                                        <i class="fas fa-star"></i>
-                                                                        <i class="fas fa-star"></i>
-                                                                    </span>
-                                                                </span>
-                                                            </span>
-                                                            <span class="review-star desktop-star">
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                            </span>
-                                                        </div>
-                                                        <div class="review-comment color-gray-fst p-3">
-                                                            Lorem ipsum dolor sit amet consectetur adipisicing
-                                                            elit.
-                                                            Molestiae aliquid quasi deleniti, nesciunt non
-                                                            perspiciatis
-                                                            magnam distinctio fugit tempora ut?
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @include('services.serviceDetails', [
+                                'service' => $service,
+                            ])
                         </div>
-
 
                         <!-- START: Timeline Tab Start here -->
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            @include('services.servicesPost', [
+                                'service' => $service,
+                            ])
+                        </div>
+                        <!-- END: Timeline Tab END here -->
 
-                            <div class="card mt-2 p-0">
-                                <div class="card-body">
+                        <!-- START: Gallery -->
+                        <div class="tab-pane fade" id="gallery" role="tabpanel" aria-labelledby="gallery-tab">
+                            <div class="card mt-2 p-3">
+                                <div class="card-body ">
                                     <div class="service-main-body-content">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <!-- START: Create Post -->
-                                                <div class="central-meta postbox">
-                                                    <span class="create-post">Create post</span>
-                                                    <div class="new-postbox">
-                                                        <figure>
-                                                            <img src="/temp-services/images/admin.jpg" alt="">
-                                                        </figure>
-                                                        <div class="newpst-input">
-                                                            <form method="post">
-                                                                <textarea rows="2"
-                                                                    placeholder="Share some what you are thinking?"></textarea>
-                                                            </form>
-                                                        </div>
-                                                        <div class="attachments">
-                                                            <ul>
-                                                                <li>
-                                                                    <span class="add-loc">
-                                                                        <i class="fa fa-map-marker"></i>
-                                                                    </span>
-                                                                </li>
-                                                                <li>
-                                                                    <i class="fa fa-music"></i>
-                                                                    <label class="fileContainer">
-                                                                        <input type="file">
-                                                                    </label>
-                                                                </li>
-                                                                <li>
-                                                                    <i class="fa fa-image"></i>
-                                                                    <label class="fileContainer">
-                                                                        <input type="file">
-                                                                    </label>
-                                                                </li>
-                                                                <li>
-                                                                    <i class="fa fa-video-camera"></i>
-                                                                    <label class="fileContainer">
-                                                                        <input type="file">
-                                                                    </label>
-                                                                </li>
-                                                                <li>
-                                                                    <i class="fa fa-camera"></i>
-                                                                    <label class="fileContainer">
-                                                                        <input type="file">
-                                                                    </label>
-                                                                </li>
-                                                                <li class="preview-btn">
-                                                                    <button class="post-btn-preview" type="submit"
-                                                                        data-ripple="">Preview</button>
-                                                                </li>
-                                                            </ul>
-                                                            <button class="post-btn" type="submit"
-                                                                data-ripple="">Post</button>
-                                                        </div>
-                                                        <div class="add-location-post">
-                                                            <span>Drag map point to selected area</span>
-                                                            <div class="row">
-
-                                                                <div class="col-lg-6">
-                                                                    <label class="control-label">Lat :</label>
-                                                                    <input type="text" class="" id="us3-lat">
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <label>Long :</label>
-                                                                    <input type="text" class="" id="us3-lon">
-                                                                </div>
-                                                            </div>
-                                                            <!-- map -->
-                                                            <div id="us3" style="position: relative; overflow: hidden;">
-                                                                <div
-                                                                    style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);">
-                                                                    <div style="overflow: hidden;"></div>
-                                                                    <div class="gm-style"
-                                                                        style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px;">
-                                                                        <div tabindex="0" aria-label="Map"
-                                                                            aria-roledescription="map" role="group"
-                                                                            style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;), default; touch-action: pan-x pan-y;">
-                                                                            <div
-                                                                                style="z-index: 1; position: absolute; left: 50%; top: 50%; width: 100%; transform: translate(0px, 0px);">
-                                                                                <div
-                                                                                    style="position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;">
-                                                                                    <div
-                                                                                        style="position: absolute; left: 0px; top: 0px; z-index: 0;">
-                                                                                        <div
-                                                                                            style="position: absolute; z-index: 985; transform: matrix(1, 0, 0, 1, -244, -53);">
-                                                                                            <div
-                                                                                                style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px;">
-                                                                                                <div
-                                                                                                    style="width: 256px; height: 256px;">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div
-                                                                                    style="position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;">
-                                                                                </div>
-                                                                                <div
-                                                                                    style="position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;">
-                                                                                </div>
-                                                                                <div
-                                                                                    style="position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;">
-                                                                                    <div
-                                                                                        style="position: absolute; left: 0px; top: 0px; z-index: -1;">
-                                                                                        <div
-                                                                                            style="position: absolute; z-index: 985; transform: matrix(1, 0, 0, 1, -244, -53);">
-                                                                                            <div
-                                                                                                style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 0px; top: 0px;">
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div
-                                                                                        style="width: 27px; height: 43px; overflow: hidden; position: absolute; left: -14px; top: -43px; z-index: 0;">
-                                                                                        <img alt=""
-                                                                                            src="https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png"
-                                                                                            draggable="false"
-                                                                                            style="position: absolute; left: 0px; top: 0px; width: 27px; height: 43px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div
-                                                                                    style="position: absolute; left: 0px; top: 0px; z-index: 0;">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div
-                                                                                style="z-index: 3; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px; touch-action: pan-x pan-y;">
-                                                                                <div
-                                                                                    style="z-index: 4; position: absolute; left: 50%; top: 50%; width: 100%; transform: translate(0px, 0px);">
-                                                                                    <div
-                                                                                        style="position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;">
-                                                                                    </div>
-                                                                                    <div
-                                                                                        style="position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;">
-                                                                                    </div>
-                                                                                    <div
-                                                                                        style="position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;">
-                                                                                        <div aria-label="Drag Me" role="img"
-                                                                                            tabindex="-1"
-                                                                                            style="width: 27px; height: 43px; overflow: hidden; position: absolute; touch-action: none; left: -14px; top: -43px; z-index: 0;">
-                                                                                            <img alt=""
-                                                                                                src="https://maps.gstatic.com/mapfiles/transparent.png"
-                                                                                                draggable="false"
-                                                                                                usemap="#gmimap0"
-                                                                                                style="width: 27px; height: 43px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"><map
-                                                                                                name="gmimap0"
-                                                                                                id="gmimap0"><area log="miw"
-                                                                                                    coords="13.5,0,4,3.75,0,13.5,13.5,43,27,13.5,23,3.75"
-                                                                                                    shape="poly"
-                                                                                                    tabindex="-1"
-                                                                                                    title="Drag Me"
-                                                                                                    style="cursor: pointer; touch-action: none;"></map>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div
-                                                                                        style="position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;">
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="gm-style-moc"
-                                                                                style="z-index: 4; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px; opacity: 0;">
-                                                                                <p class="gm-style-mot"></p>
-                                                                            </div>
-                                                                        </div><iframe aria-hidden="true" frameborder="0"
-                                                                            tabindex="-1"
-                                                                            style="z-index: -1; position: absolute; width: 100%; height: 100%; top: 0px; left: 0px; border: none;"></iframe>
-                                                                        <div
-                                                                            style="pointer-events: none; width: 100%; height: 100%; box-sizing: border-box; position: absolute; z-index: 1000002; opacity: 0; border: 2px solid rgb(26, 115, 232);">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-
-
-                                                <!-- END: Create post -->
-
-                                                <div class="loadMore">
-
-
-                                                    <!-- digital sponsors -->
-                                                    <div class="central-meta item" style="display: inline-block;">
-                                                        <div class="user-post">
-                                                            <div class="friend-info">
-                                                                <figure>
-                                                                    <img src="/temp-services/images/nearly1.jpg" alt="">
-                                                                </figure>
-                                                                <div class="friend-name">
-                                                                    <div class="more">
-                                                                        <div class="more-post-optns"><i
-                                                                                class="fas fa-ellipsis-h"></i>
-                                                                            <ul>
-                                                                                <li><i class="fas fa-edit"></i>Edit
-                                                                                    Post
-                                                                                </li>
-                                                                                <li><i class="fas fa-trash"></i>Delete
-                                                                                    Post</li>
-                                                                                <li class="bad-report"><i
-                                                                                        class="fa fa-flag"></i>Report
-                                                                                    Post</li>
-                                                                                <li><i
-                                                                                        class="fas fa-address-card"></i>Boost
-                                                                                    This Post</li>
-                                                                                <!-- <li><i class="fas fa-clock"></i>Schedule Post</li>
-                                                                                                                                                                                                                                                                                                                                                                                                                <li><i class="fab fa-wpexplorer"></i>Select as featured</li>
-                                                                                                                                                                                                                                                                                                                                                                                                                <li><i class="fas fa-bell-slash"></i>Turn off Notifications</li> -->
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div>
-                                                                    <ins><a href="time-line.html" title="">Jack
-                                                                            Carter</a>
-                                                                        share <a href="#" title="">link</a></ins>
-                                                                    <span><i class="fa fa-globe"></i> published:
-                                                                        january,5 2010 19:PM
-                                                                    </span>
-                                                                </div>
-                                                                <div class="post-meta">
-                                                                    <div class="description">
-                                                                        <p>
-                                                                            World's most beautiful car in Curabitur <a
-                                                                                href="#" title="">#test
-                                                                                drive booking !</a> the most beatuiful
-                                                                            car
-                                                                            available in america
-                                                                            and the saudia arabia, you can book your
-                                                                            test
-                                                                            drive by our official
-                                                                            website
-                                                                        </p>
-                                                                    </div>
-
-                                                                    {{-- <ul class="like-dislike">
-                                                                        <li><a href="#" title="Save to Pin Post"><i class="fa fa-thumb-tack"></i></a></li>
-                                                                        <li><a href="#" title="Like Post"><i class="fas fa-thumbs-up"></i></a></li>
-                                                                        <li><a href="#" title="dislike Post"><i class="fas fa-thumbs-down"></i></a></li>
-                                                                    </ul> --}}
-                                                                    <div class="we-video-info">
-                                                                        <ul>
-                                                                            <li>
-                                                                                <span class="views" title="views">
-                                                                                    <i class="fa fa-eye"></i>
-                                                                                    <ins>1.2k</ins>
-                                                                                </span>
-                                                                            </li>
-                                                                            <li>
-                                                                                <div class="likes heart"
-                                                                                    title="Like/Dislike"><i
-                                                                                        class="fas fa-heart"></i>
-                                                                                    <span>2K</span>
-                                                                                </div>
-                                                                            </li>
-                                                                            <li>
-                                                                                <span class="comment"
-                                                                                    title="Comments">
-                                                                                    <i class="fa fa-commenting"></i>
-                                                                                    <ins>52</ins>
-                                                                                </span>
-                                                                            </li>
-
-                                                                            <!-- <li>
-                                                                                                                                                                                                                                                                                                                                                                                                                <span>
-                                                                                                                                                                                                                                                                                                                                                                                                                  <a class="share-pst" href="#" title="Share">
-                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="fa fa-share-alt"></i>
-                                                                                                                                                                                                                                                                                                                                                                                                                  </a>
-                                                                                                                                                                                                                                                                                                                                                                                                                  <ins>20</ins>
-                                                                                                                                                                                                                                                                                                                                                                                                                </span>	
-                                                                                                                                                                                                                                                                                                                                                                                                              </li> -->
-                                                                        </ul>
-                                                                        <div class="users-thumb-list">
-                                                                            <a data-toggle="tooltip" title="Anderw" href="#"
-                                                                                data-original-title="Anderw">
-                                                                                <img alt=""
-                                                                                    src="/temp-services/images/userlist-1.jpg">
-                                                                            </a>
-                                                                            <a data-toggle="tooltip" title="frank" href="#"
-                                                                                data-original-title="frank">
-                                                                                <img alt=""
-                                                                                    src="/temp-services/images/userlist-2.jpg">
-                                                                            </a>
-                                                                            <a data-toggle="tooltip" title="Sara" href="#"
-                                                                                data-original-title="Sara">
-                                                                                <img alt=""
-                                                                                    src="/temp-services/images/userlist-3.jpg">
-                                                                            </a>
-                                                                            <a data-toggle="tooltip" title="Amy" href="#"
-                                                                                data-original-title="Amy">
-                                                                                <img alt=""
-                                                                                    src="/temp-services/images/userlist-1.jpg">
-                                                                            </a>
-                                                                            <a data-toggle="tooltip" title="Ema" href="#"
-                                                                                data-original-title="Ema">
-                                                                                <img alt=""
-                                                                                    src="/temp-services/images/userlist-2.jpg">
-                                                                            </a>
-                                                                            <span><strong>You</strong>, <b>Sarah</b> and
-                                                                                <a href="#" title="">24+ more</a>
-                                                                                liked</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="coment-area" style="">
-                                                                    <ul class="we-comet">
-                                                                        <li>
-                                                                            <div class="comet-avatar">
-                                                                                <img src="/temp-services/images/userlist-3.jpg"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="we-comment">
-                                                                                <h5><a href="time-line.html" title="">Jason
-                                                                                        borne</a></h5>
-                                                                                <p>we are working for the dance and sing
-                                                                                    songs. this video is
-                                                                                    very awesome for the youngster.
-                                                                                    please
-                                                                                    vote this video and
-                                                                                    like our channel</p>
-                                                                                <div class="inline-itms">
-                                                                                    <span>1 year ago</span>
-                                                                                    <a class="we-reply" href="#"
-                                                                                        title="Reply"><i
-                                                                                            class="fa fa-reply"></i></a>
-                                                                                    <a href="#" title=""><i
-                                                                                            class="fa fa-heart"></i><span>20</span></a>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="comet-avatar">
-                                                                                <img src="/temp-services/images/userlist-1.jpg"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="we-comment">
-                                                                                <h5><a href="time-line.html"
-                                                                                        title="">Sophia</a></h5>
-                                                                                <p>we are working for the dance and sing
-                                                                                    songs. this video is
-                                                                                    very awesome for the youngster.
-
-                                                                                    <i class="em em-smiley"></i>
-                                                                                </p>
-                                                                                <div class="inline-itms">
-                                                                                    <span>1 year ago</span>
-                                                                                    <a class="we-reply" href="#"
-                                                                                        title="Reply"><i
-                                                                                            class="fa fa-reply"></i></a>
-                                                                                    <a href="#" title=""><i
-                                                                                            class="fa fa-heart"></i><span>20</span></a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#" title=""
-                                                                                class="showmore underline">more
-                                                                                comments+</a>
-                                                                        </li>
-                                                                        <li class="post-comment">
-                                                                            <div class="comet-avatar">
-                                                                                <img src="/temp-services/images/userlist-2.jpg"
-                                                                                    alt="">
-                                                                            </div>
-                                                                            <div class="post-comt-box">
-                                                                                <form method="post">
-                                                                                    <textarea
-                                                                                        placeholder="Post your comment"></textarea>
-                                                                                    <div class="add-smiles">
-                                                                                        <div class="uploadimage">
-                                                                                            <i class="fa fa-image"></i>
-                                                                                            <label class="fileContainer">
-                                                                                                <input type="file">
-                                                                                            </label>
-                                                                                        </div>
-                                                                                        <span class="em em-expressionless"
-                                                                                            title="add icon"></span>
-                                                                                        <div class="smiles-bunch">
-                                                                                            <i class="em em---1"></i>
-                                                                                            <i class="em em-smiley"></i>
-                                                                                            <i class="em em-anguished"></i>
-                                                                                            <i class="em em-laughing"></i>
-                                                                                            <i class="em em-angry"></i>
-                                                                                            <i
-                                                                                                class="em em-astonished"></i>
-                                                                                            <i class="em em-blush"></i>
-                                                                                            <i
-                                                                                                class="em em-disappointed"></i>
-                                                                                            <i class="em em-worried"></i>
-                                                                                            <i
-                                                                                                class="em em-kissing_heart"></i>
-                                                                                            <i class="em em-rage"></i>
-                                                                                            <i
-                                                                                                class="em em-stuck_out_tongue"></i>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <button type="submit"></button>
-                                                                                </form>
-                                                                            </div>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @include('services.galleryImages', [
+                                            'service' => $service,
+                                        ])
                                     </div>
                                 </div>
                             </div>
 
                         </div>
-                        <!-- END: Timeline Tab END here -->
+                        <!-- END: Gallery -->
                     </div>
                     <!-- END: First Card mianbody -->
 
@@ -864,8 +400,8 @@
         </section>
         <!-- END: Service Section  -->
 
-        <div class="modal fade modal-body-custom" id="imagemodal" tabindex="-1" role="dialog"
-            aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade modal-body-custom" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog" data-dismiss="modal">
                 <div class="modal-content modal-content-custom">
                     <div class="modal-body">
@@ -876,13 +412,32 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade in" id="file_not_supported" role="dialog">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <p style="text-align: center;padding: 30px 20px;font-family: Hind,Arial;font-size: 14px;">
+                        <i class="fa fa-info-circle main" aria-hidden="true" style="color:#f2dede;"></i>
+                        <?php echo 'This file format is not supported'; ?>
+                    </p>
+                </div>
+
+            </div>
+        </div>
     </div>
+
+    {{-- NEW CONTENT END --}}
+@endsection
+
+
+@push('scripts')
+    <script src="{{ asset('js/mdb.min.js') }}"></script>
+
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8c55_YHLvDHGACkQscgbGLtLRdxBDCfI"></script> -->
-    <script src="{{ asset('js/slick.min.js') }}"></script>
 
     <script>
         jQuery(document).ready(function($) {
@@ -914,30 +469,52 @@
 
             /** Post a Comment **/
             jQuery(".post-comt-box textarea").on("keydown", function(event) {
-
                 if (event.keyCode == 13) {
-                    var comment = jQuery(this).val();
-                    var parent = jQuery(".showmore").parent("li");
-                    var comment_HTML =
-                        '<li><div class="comet-avatar"><img alt="" src="/temp-services/images/userlist-1.jpg"></div><div class="we-comment"><h5><a title="" href="time-line.html">Sophia</a></h5><p>' +
-                        comment +
-                        '</p><div class="inline-itms"><span>1 minut ago</span><a title="Reply" href="#" class="we-reply"><i class="fa fa-reply"></i></a><a title="" href="#"><i class="fa fa-heart"></i></a></div></div></li>';
-                    $(comment_HTML).insertBefore(parent);
-                    jQuery(this).val('');
+                    event.preventDefault();
+                    let comment = jQuery(this).val();
+                    let post_id = jQuery(this).attr("data-post-id");
+                    if (!post_id) {
+                        return false;
+                    }
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        url: "/post/comment",
+                        data: $('#' + event.target.form.id).serialize(),
+                        success: function(response) {
+                            if (response.status === true && response.code === 200) {
+                                let parent = jQuery("#post-comment_form_" + post_id).parent(
+                                    "li");
+                                let comment_HTML = response.data;
+                                $("#comment-box_"+post_id).prepend(comment_HTML);
+                                // $(comment_HTML).insertBefore("#post-comment_form_" + post_id);
+                                $("#commentable_content_" + post_id).val("");
+                                $("#comment_post_count_" + post_id).text(response.count);
+                            }
+                        },
+                        error: function(data) {
+                            data?.responseJSON?.error?.error ? Swal.fire(data.responseJSON.error
+                                .error) : ""
+                            data?.responseJSON?.message ? Swal.fire(data.responseJSON.message) :
+                                ""
+                            jQuery(this).val(' ');
+                        }
+                    });
                 }
             });
         });
-
-        //  function toggleComment(){
-        //     $('.coment-area').toggleClass('d-block');
-        //   }
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-            var showChar = 100;
-            var ellipsestext = "...";
-            var moretext = "more";
-            var lesstext = "less";
+            let showChar = 100;
+            let ellipsestext = "...";
+            let moretext = "more";
+            let lesstext = "less";
             $('.more-description').each(function() {
                 var content = $(this).html();
                 if (content.length > showChar) {
@@ -950,7 +527,6 @@
 
                     $(this).html(html);
                 }
-
             });
 
             $(".morelink").click(function() {
@@ -973,11 +549,617 @@
                 });
             });
 
+            // on click of photo upload icon
+            $("#publisher-photos").on('change', function(e) {
+                deleted_images = [];
+                //Get count of selected files
+                var countFiles = $(this)[0].files.length;
+                $("#postphotos_error").html("");
+                if (countFiles > 4) {
+                    $("#postphotos_error").html("Only 4 files allowed!!!");
+                    e.preventDefault();
+                } else {
+                    var imgPath = $(this)[0].value;
+                    var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+                    var image_holder = $("#image-holder");
+                    image_holder.empty();
+                    if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+                        if (typeof(FileReader) != "undefined") {
+                            //loop for each file selected for uploaded.
+                            for (var i = 0; i < countFiles; i++) {
+                                var reader = new FileReader();
+                                var ii = 0;
+                                reader.onload = function(e) {
+                                    name = "'" + $("#publisher-photos")[0].files[ii].name + "'";
+                                    image_holder.append(
+                                        '<span class="thumb-image-delete" id="image_to_' +
+                                        ii + '"><span onclick="DeleteImageById(' + name + ',' + ii +
+                                        ')" class="pointer thumb-image-delete-btn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg></span><img src="' +
+                                        e.target.result + '" class="thumb-image"></span>')
+                                    ii = ii + 1;
+                                }
+                                image_holder.show();
+                                reader.readAsDataURL($(this)[0].files[i]);
+                            }
+                        } else {
+                            image_holder.html("<p>This browser does not support FileReader.</p>");
+                        }
+                    }
 
+                }
+            });
 
+            var allowed = "jpg,png,jpeg,gif,mkv,docx,zip,rar,pdf,doc,mp3,mp4,flv,wav,txt,mov,avi,webm,wav,mpeg";
+
+            function isInArray(value, array) {
+                return array.indexOf(value) > -1;
+            }
+
+            function Wo_IsFileAllowedToUpload(filename, allowed) {
+                var extension = filename.replace(/^.*\./, '').toLowerCase();
+                var allowed_array = allowed.split(',');
+                if (isInArray(extension, allowed_array)) {
+                    return true;
+                }
+                return false;
+            }
+            var Wo_Delay = (function() {
+                var timer = 0;
+                return function(callback, ms) {
+                    clearTimeout(timer);
+                    timer = setTimeout(callback, ms);
+                };
+            })();
+            // on click of video upload icon
+            // $("#publisher-video").change(function() {
+            //     var filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+            //     $("#video-form").val(filename);
+            //     $("#video-holder").addClass("d-block").removeClass("d-none")
+            //     $("#videofilename").html(filename)
+            //     if (Wo_IsFileAllowedToUpload(filename, allowed) == false) {
+            //         $("#file_not_supported").modal('show');
+            //         Wo_Delay(function() {
+            //             $("#file_not_supported").modal('hide');
+            //         }, 3000);
+            //         $("#publisher-video").val('');
+            //         $("#video-form").val('');
+            //         return false;
+            //     }
+            // });
+
+            // $("#publisher-music").change(function() {
+            //     var filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+            //     $("#music-form").val(filename);
+            //     $("#music-form").val(filename);
+            //     $("#music-holder").addClass("d-block").removeClass("d-none")
+            //     $("#musicfilename").html(filename)
+            //     if (Wo_IsFileAllowedToUpload(filename, allowed) == false) {
+            //         $("#file_not_supported").modal('show');
+            //         Wo_Delay(function() {
+            //             $("#file_not_supported").modal('hide');
+            //         }, 3000);
+            //         $("#publisher-music").val('');
+            //         $("#music-form").val('');
+            //         return false;
+            //     }
+            // });
+            $('#add-blog-post-form').submit(function(e) {
+                e.preventDefault();
+                let i = 1;
+                $("#create-post-btn").attr('disabled', true);
+                $("#create-post-btn").text("Posting");
+                let formDataAddPost = new FormData($('#add-blog-post-form')[0]);
+                console.log(...formDataAddPost);
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    beforeSend: function() {
+                        $('.add-post-progress-bar').html(
+                            '<div class="progress"><div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div></div>'
+                        );
+                        setTimeout(function() {
+                            $('.progress-bar').animate({
+                                width: i + "%"
+                            }, 100);
+                        }, 10);
+                        i = i + Math.floor(Math.random() * 100);
+                    },
+                    type: 'POST',
+                    url: "/create/post",
+                    data: formDataAddPost,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: (data) => {
+                        console.log("success", data);
+                        $('.progress-bar').addClass("bg-success")
+                        $('.progress-bar').animate({
+                            width: "100%",
+                        }, 1);
+                        $("#create-post-btn").attr('disabled', false);
+                        $("#create-post-btn").text("Post");
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1000);
+                    },
+                    error: function(data) {
+                        console.log("error", data);
+                        $('.progress-bar').addClass("bg-danger")
+                        $('.progress-bar').animate({
+                            width: "100%"
+                        }, 1);
+                        $("#create-post-btn").attr('disabled', false);
+                        $("#create-post-btn").text("Post");
+                        data?.responseJSON?.error?.error ? Swal.fire(data.responseJSON.error
+                            .error) : ""
+                        data?.responseJSON?.message ? Swal.fire(data.responseJSON.message) : ""
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1000);
+                    }
+                });
+                // this.submit();
+            });
+
+            // load more comments
+            $(document).on("click", "[id^='showmore_']", function(e) {
+                e.preventDefault();
+                let loadMoreTarget = e.target;
+                let post_id = $(loadMoreTarget).attr("data-comment-post-id");
+                let page = $(loadMoreTarget).attr("data-comment-load_page");
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    method: 'post',
+                    url: `/comments/load`,
+                    data: {
+                        'id': post_id,
+                        'page': page
+                    },
+                    success: function(response) {
+                        if (response.status === true && response.code === 200) {
+                            $(".comment-section_" + post_id).last().after(response.data);
+                            $(loadMoreTarget).attr("data-comment-load_page", response.page)
+                            if (response.last_page === true) {
+                                $("#showmore_" + post_id).hide();
+                            }
+                        }
+                    },
+                    error: function(XMLHttpRequest) {
+                        Swal.fire('An error occured while attempting this action.');
+                    }
+                });
+            });
+            // load more posts
+            $(document).on("click", '.showmore-posts', function(e) {
+                e.preventDefault();
+                let loadMoreTargetPost = e.target;
+                let page = $(loadMoreTargetPost).attr('data-post-load_page');
+                let service = $(loadMoreTargetPost).attr('data-post-service');
+                if (!page && !service) return false;
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    method: 'post',
+                    url: `/posts/load`,
+                    data: {
+                        page,
+                        service
+                    },
+                    success: function(response) {
+                        if (response.status === true && response.code === 200) {
+                            $(".post-item-box").last().after(response.data);
+                            $(loadMoreTargetPost).attr("data-post-load_page", response.page)
+                            if (response.last_page === true) {
+                                $(".showmore-posts").hide();
+                            }
+                        }
+                    },
+                    error: function(XMLHttpRequest) {
+                        Swal.fire('An error occured while attempting this action.');
+                    }
+                });
+            });
+            // validate if description has links it should be youtube links only
+
+            let regexYoutubeURl = new RegExp(
+                "([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?"
+            );
+            let linksArray = [];
+            $(document).on("input paste", "#post-content", function() {
+                var urlDescription = $(this).val();
+                let geturl = new RegExp(
+                    "(^|[ \t\r\n])((http|https|Http|Https):(([A-Za-z0-9$_.+!*(),;/?:@&~=-])|%[A-Fa-f0-9]{2}){2,}(#([a-zA-Z0-9][a-zA-Z0-9$_.+!*(),;/?:@&~=%-]*))?([A-Za-z0-9$_+!*();/?:~-]))",
+                    "g"
+                );
+                if (urlDescription.match(geturl)) {
+                    console.log("length", urlDescription.match(geturl).length);
+                    console.log("marched", urlDescription.match(geturl));
+                    validateYouTubeUrl(urlDescription.match(geturl));
+                }
+                // console.log("hereeeee", url.match(regexYoutubeURl));
+                // if (regexYoutubeURl.test(urlDescription)) {
+                //     console.log("contains url", regexYoutubeURl.exec(urlDescription));
+                // }
+            });
+            // delete post
+            $(document).on("click", ".post-actions", function(e) {
+                if (e.currentTarget.classList.contains("post-actions")) {
+                    let post_id = $(e.currentTarget).attr('data-post');
+                    if (e.target.className === 'delete-post-action') {
+                        Swal.fire({
+                            title: "Are you sure you want to delete this Post?",
+                            text: "You will not be able to recover this post!",
+                            icon: "warning",
+                            buttons: [
+                                'No, cancel it!',
+                                'Yes, I am sure!'
+                            ],
+                            dangerMode: true,
+                            showCancelButton: true,
+                        }).then(function(isConfirm) {
+                            if (isConfirm.isConfirmed === true) {
+                                deletePost(post_id)
+                            } else {
+                                Swal.fire("Cancelled", "Your post is safe :)", "error");
+                            }
+                        })
+                    }
+                }
+            });
         });
-        $('#imageCarousel').slick();
+        // post delete function
+        function deletePost(postId, post_html) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                method: 'DELETE',
+                url: `/post/delete`,
+                data: {
+                    id: postId,
+                    type: 'delete'
+                },
+                success: function(response) {
+                    if (response.status === true && response.code === 200) {
+                        // $("#post-item-box-" + postId).remove();
+                        // Swal.fire('Success', response.message);
+                        window.location.reload();
+                    }
+                },
+                error: function(XMLHttpRequest) {
+                    Swal.fire('An error occured while attempting this action.');
+                }
+            });
+        }
+        // delete gallery image
+        function deleteGalleryImage(post_id) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                method: 'DELETE',
+                url: `/gallery/delete`,
+                data: {
+                    id: post_id,
+                    type: 'delete'
+                },
+                success: function(response) {
+                    if (response.status === true && response.code === 200) {
+                        // $("#post-item-box-" + postId).remove();
+                        // Swal.fire('Success', response.message);
+                        window.location.reload();
+                    }
+                },
+                error: function(XMLHttpRequest) {
+                    Swal.fire('An error occured while attempting this action.');
+                }
+            });
+        }
+        // youtube link validation starts here //
+        let youtubeLinks = [];
+        let existsYoutubeLinks = [];
+        let uniqueyoutubeLinks;
 
+        function validateYouTubeUrl(url) {
+            // let spliteurl = url.split(" ")
+            console.log("spliteurlspliteurl", url);
+            if (url != undefined || url != '') {
+                let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+                let filteraa = url.filter(function(m, i, self) {
+                    let match = m.match(regExp)
+                    if (match && match[2]) {
+                        if (existsYoutubeLinks.indexOf(match[2]) > -1) {} else {
+                            youtubeLinks.push({
+                                url: match[2],
+                                show: false
+                            })
+                            existsYoutubeLinks.push(match[2]);
+                        }
+                    }
+                });
+
+                const getUniqArrBy = (props = [], arrInp = [], objTmp = {}, arrTmp = []) => {
+                    if (arrInp.length > 0) {
+                        const lastItem = arrInp[arrInp.length - 1]
+                        const propStr = props.reduce((res, item) => (`${res}${lastItem[item]}`), '')
+                        if (!objTmp[propStr]) {
+                            objTmp[propStr] = true
+                            arrTmp = [...arrTmp, lastItem]
+                        }
+                        arrInp.pop()
+                        return getUniqArrBy(props, arrInp, objTmp, arrTmp)
+                    }
+                    return arrTmp
+                }
+                uniqueyoutubeLinks = getUniqArrBy(['url', 'show'], youtubeLinks)
+                uniqueyoutubeLinks.map((videoUrl, i) => {
+                    if (videoUrl.show === false) {
+                        let youtubeFrame = '<img src="https://img.youtube.com/vi/' + videoUrl.url +
+                            '/default.jpg">';
+                        // let youtubeIframe = '<div col-4><iframe src="https://www.youtube.com/embed/' + videoUrl +
+                        //     '" type="text/html" width="500" height="265" frameborder="0" allowfullscreen></iframe></div>';
+                        $(youtubeFrame).appendTo("#videoObject");
+                        // youtubeLinks[i].show = true
+                        videoUrl.show = true
+                    }
+                })
+            }
+        }
+
+        $(document).ready(() => {
+            let url = location.href.replace(/\/$/, "");
+
+            if (location.hash) {
+                const hash = url.split("#");
+                $('#myTab a[href="#' + hash[1] + '"]').tab("show");
+                url = location.href.replace(/\/#/, "#");
+                history.replaceState(null, null, url);
+                setTimeout(() => {
+                    $(window).scrollTop(0);
+                }, 400);
+            }
+
+            $('a[data-bs-toggle="tab"]').on("click", function() {
+                let newUrl;
+                const hash = $(this).attr("href");
+                if (hash == "#home") {
+                    newUrl = url.split("#")[0];
+                } else {
+                    newUrl = url.split("#")[0] + hash;
+                }
+                newUrl += "/";
+                history.replaceState(null, null, newUrl);
+            });
+            // like post
+            $(document).on("click", ".post-box", function(e) {
+                if (e.target.classList.contains("post-reaction")) {
+                    registerReaction(e.target)
+                }
+            })
+            // like and delete gallery images
+            $(document).on("click", ".lightbox-user-gallery", function(e) {
+                if (e.target.classList.contains("gallery-like-heart")) {
+                    registerGalleryReaction(e.target)
+                }
+                if (e.target.parentNode.classList.contains("delete-gallery")) {
+                    let post_id = e.target.parentNode.getAttribute("data-delete-post-id");
+                    if (!post_id) return false;
+                    Swal.fire({
+                        title: "Are you sure you want to delete this image?",
+                        text: "You will not be able to recover this image file!",
+                        icon: "warning",
+                        buttons: [
+                            'No, cancel it!',
+                            'Yes, I am sure!'
+                        ],
+                        dangerMode: true,
+                        showCancelButton: true,
+                    }).then(function(isConfirm) {
+                        if (isConfirm.isConfirmed === true) {
+                            deleteGalleryImage(post_id);
+                        } else {
+                            Swal.fire("Cancelled", "Your imaginary file is safe :)", "error");
+                        }
+                    })
+                }
+            })
+            // like comments
+            $(document).on("click", ".comment-action-box", function(e) {
+                if (e.target.classList.contains("comment-reaction")) {
+                    registerCommentReaction(e.target)
+                }
+            })
+        });
+
+        function registerReaction(element) {
+            let post_id = $(element).attr('data-post-id');
+            let liked = $(element).attr('data-reaction-id');
+            let type = "post";
+            let userReaction;
+            if (liked === '1') {
+                userReaction = 0;
+            } else {
+                userReaction = 1;
+            }
+            if (!post_id) {
+                return false;
+            }
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                method: 'post',
+                url: `/post/like`,
+                data: {
+                    'id': post_id,
+                    'liked': userReaction,
+                    'type': type
+                },
+                success: function(response) {
+                    let msg;
+                    if (response.status === true && response.code === 200) {
+                        if (response.liked === '1') {
+                            $(element).addClass('active-heart');
+                        } else {
+                            $(element).removeClass('active-heart');
+                        }
+                        $(element).attr('data-reaction-id', response.liked);
+                        $(element.lastElementChild).text(response.likes_count)
+                        $("#people-liked-post-" + post_id).html(response.liked_html);
+                    }
+
+                    if (response.status === false && response.code === 400) {
+                        Swal.fire(response.message);
+                    }
+                    if (response.status === false && response.code === 500) {
+                        Swal.fire(response.message);
+                    }
+                    setTimeout(() => {
+                        Swal.close();
+                    }, 800);
+                },
+                error: function(XMLHttpRequest) {
+                    Swal.fire('An error occured while attempting this action.');
+                }
+            });
+        }
+
+        function registerGalleryReaction(element) {
+            let post_id = $(element).parent().attr('data-gallery-image-id');
+            let liked = $(element).parent().attr('data-gallery-reaction-id');
+            let type = "gallery";
+            let userReaction;
+            if (liked === '1') {
+                userReaction = 0;
+            } else {
+                userReaction = 1;
+            }
+            if (!post_id) {
+                return false;
+            }
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                method: 'post',
+                url: `/gallery/like`,
+                data: {
+                    'id': post_id,
+                    'liked': userReaction,
+                    'type': type
+                },
+                success: function(response) {
+                    let msg;
+                    if (response.status === true && response.code === 200) {
+                        if (response.liked === '1') {
+                            $(element).addClass('active-heart');
+                        } else {
+                            $(element).removeClass('active-heart');
+                        }
+                        $(element).parent().attr('data-gallery-reaction-id', response.liked);
+                        $("#liked_gallery_count-" + post_id).text(response.likes_count)
+                        // Swal.fire(response.message);
+                    }
+
+                    if (response.status === false && response.code === 400) {
+                        Swal.fire(response.message);
+                    }
+                    if (response.status === false && response.code === 500) {
+                        Swal.fire(response.message);
+                    }
+                    setTimeout(() => {
+                        Swal.close();
+                    }, 800);
+                },
+                error: function(XMLHttpRequest) {
+                    Swal.fire('An error occured while attempting this action.');
+                }
+            });
+
+        }
+
+        function registerCommentReaction(element) {
+            let post_id = $(element).attr('data-comment-post-id');
+            let liked = $(element).attr('data-comment-reaction-id');
+            let type = "comment";
+            let userReaction;
+            if (liked === '1') {
+                userReaction = 0;
+            } else {
+                userReaction = 1;
+            }
+            if (!post_id) {
+                return false;
+            }
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                method: 'post',
+                url: `/comment/like`,
+                data: {
+                    'id': post_id,
+                    'liked': userReaction,
+                    'type': type
+                },
+                success: function(response) {
+                    let msg;
+                    if (response.status === true && response.code === 200) {
+                        if (response.liked === '1') {
+                            $(element).addClass('active-heart');
+                        } else {
+                            $(element).removeClass('active-heart');
+                        }
+                        $(element).attr('data-comment-reaction-id', response.liked);
+                        $("#liked_comment_count_" + post_id).text(response.likes_count)
+                        // Swal.fire(response.message);
+                    }
+
+                    if (response.status === false && response.code === 400) {
+                        Swal.fire(response.message);
+                    }
+                    if (response.status === false && response.code === 500) {
+                        Swal.fire(response.message);
+                    }
+                    setTimeout(() => {
+                        Swal.close();
+                    }, 800);
+                },
+                error: function(XMLHttpRequest) {
+                    Swal.fire('An error occured while attempting this action.');
+                }
+            });
+
+        }
+
+        // delete image preview
+        var deleted_images = [];
+
+        function DeleteImageById(name, id) {
+            deleted_images.push(name);
+            $('#image_to_' + id).remove();
+        }
         $('#buyBtn').click(function(e) {
             var userBalance = @json(Auth::user()->points);
             var serviceCost = parseFloat('{{ $service->price }}');
@@ -997,10 +1179,17 @@
         @endif
     </script>
 
-    {{-- NEW CONTENT END --}}
-@endsection
+    <script>
+        // lightbox gallery
+        $(document).on("ready", function() {
+            let lightbox = document.getElementById('lightbox');
+            let lightboxInstance = mdb.Lightbox.getInstance(lightbox);
+            let lightboxToggler = document.getElementById('lightboxToggler');
+            lightboxToggler.addEventListener('click', function() {
+                lightboxInstance.open(1);
+                lightboxInstance.allowfullscreen(true)
+            });
 
-
-@section('scripts')
-
-@endsection
+        });
+    </script>
+@endpush

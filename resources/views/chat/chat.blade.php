@@ -69,7 +69,7 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
 <script>
   var currentUsersIdAuth = {{Auth::id()}};
 </script>
@@ -101,7 +101,6 @@
           url: "/messages/fetch/new",
           data: {id: e.data.conversation_id},
           success: function (response) {
-            // console.log(response);
             var HTML = generateConversationHTML(JSON.parse(response),currentUsersIdAuth);
                     $('#conversations').prepend(HTML);
                     loadedConversationIDs.push(e.data.conversation_id);
@@ -117,7 +116,7 @@
 </script>
 
 
-@endsection
+@endpush
 
 
 

@@ -87,7 +87,7 @@
     </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
 
 <script src="{{asset('/js/apexcharts.min.js')}}"></script>
 <script>
@@ -201,4 +201,4 @@
     });
       
 </script>
-@endsection
+@endpush

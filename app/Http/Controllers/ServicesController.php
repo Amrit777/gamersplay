@@ -53,8 +53,8 @@ class ServicesController extends Controller
         }
 
         // dd($data['category_id']);
-        $services =  DB::table('services')
-            ->distinct()
+        // $services =  DB::table('services')
+        $services =  Service::distinct()
             ->leftJoin('users', 'services.user_id', '=', 'users.id')
             // ->leftJoin('service_images', 'services.id', '=', 'service_images.service_id')
             ->select('services.*', 'users.name as users_name', 'users.primary_language', 'users.secondary_language', 'users.gender', 'users.profile_picture', 'users.seller_audio_link as audio_link')
@@ -218,13 +218,11 @@ class ServicesController extends Controller
     public function service($id)
     {
         $id = intVal($id);
-        $service = Service::with('images', 'category', 'user')->whereId($id)->first();
+        $service = Service::with('images', 'category', 'user', 'ratings', 'posts')->whereId($id)->first();
 
         if ($service == null) {
             return redirect('/');
         }
-        // print_r($service);
-        // exit();
         return view('services.serviceSingle', compact('service'));
     }
 }

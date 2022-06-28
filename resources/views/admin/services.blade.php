@@ -47,7 +47,7 @@
 
 
 
-@section('scripts')
+@push('scripts')
     <script>
         var servicesOld = $('#servicesTbl').html();
 
@@ -94,4 +94,4 @@
 
     
     </script>
-@endsection
+@endpush
